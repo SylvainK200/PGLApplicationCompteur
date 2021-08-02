@@ -1,0 +1,111 @@
+package Gui.ModelTabs;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class AllContract {
+    private String nom_client;
+    private String num_contrat;
+    private String type_contrat;
+    private  String debut_contrat;
+    private String fin_contrat;
+    private String compteur;
+    private String typeEnergie;
+    private String etat_compteur;
+    private double meter_rate;
+    private double network_manager_cost;
+    private double over_tax_rate;
+    private double tax_rate;
+
+    public AllContract (JSONObject client , JSONObject contract_supply_point){
+        nom_client = client.getString("identifiant");
+        meter_rate = contract_supply_point.getDouble("meter_rate");
+        network_manager_cost = contract_supply_point.getDouble("network_manager_cost");
+        over_tax_rate = contract_supply_point.getDouble("over_tax_rate");
+        tax_rate = contract_supply_point.getDouble("tax_rate");
+        Object json = contract_supply_point.get("contract");
+        if (json instanceof  JSONObject){
+            num_contrat = ((JSONObject)json).getString("numero_contract");
+
+            Object deb = ((JSONObject)json).get("date_begin");
+            Object fin = ((JSONObject)json).get("date_end");
+
+            if ( deb instanceof JSONArray && fin instanceof JSONArray ) {
+                debut_contrat = "" + ((JSONArray) deb).optInt(0) + "/" +  ((JSONArray) deb).optInt(1) + "/" + ((JSONArray) deb).optInt(2) + "";
+                fin_contrat = "" + ((JSONArray) fin).optInt(0) + "/" + ((JSONArray) fin).optInt(1) + "/" + ((JSONArray) fin).optInt(2) + "";
+                System.out.println(debut_contrat);
+                System.out.println(fin_contrat);
+            }
+
+        }
+        json = contract_supply_point.get("supplyPoint");
+        if (json instanceof  JSONObject){
+            compteur = ((((JSONObject) json).getString("ean_18")));
+            typeEnergie = ((JSONObject)json).getString("energy");
+            etat_compteur = getEtat_compteur(contract_supply_point);
+        }
+
+    }
+
+        private String getEtat_compteur(JSONObject contract_supply_point){
+            Object json  = contract_supply_point.get("wallet");
+            if (json instanceof  JSONObject){
+                if (((JSONObject) json).isEmpty()){
+                    return "Non alloué";
+                }
+                else
+                {
+                    return "Alloué";
+                }
+            }
+            return "Non alloué";
+        }
+
+    public String getNom_client() {
+        return nom_client;
+    }
+
+    public String getNum_contrat() {
+        return num_contrat;
+    }
+
+    public String getType_contrat() {
+        return type_contrat;
+    }
+
+    public String getDebut_contrat() {
+        return debut_contrat;
+    }
+
+    public String getFin_contrat() {
+        return fin_contrat;
+    }
+
+    public String getCompteur() {
+        return compteur;
+    }
+
+    public String getTypeEnergie() {
+        return typeEnergie;
+    }
+
+    public String getEtat_compteur() {
+        return etat_compteur;
+    }
+
+    public double getMeter_rate() {
+        return meter_rate;
+    }
+
+    public double getNetwork_manager_cost() {
+        return network_manager_cost;
+    }
+
+    public double getOver_tax_rate() {
+        return over_tax_rate;
+    }
+
+    public double getTax_rate() {
+        return tax_rate;
+    }
+}

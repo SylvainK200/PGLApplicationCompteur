@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="266.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.Exportation">
+    <Label fx:id="lblEAN" layoutX="10" layoutY="50" text="EAN :   " />
+    <ComboBox fx:id="compteur" layoutX="110.0" layoutY="45.0" prefWidth="300.0" promptText="EAN" />
+    <TextField fx:id="textEAN" disable="false" layoutX="110.0" layoutY="85" prefHeight="26.0" prefWidth="300.0" text="Consommation Du Mois" />
+    <Button fx:id="ajouter_compteur_button" layoutX="33.0" layoutY="145.0" mnemonicParsing="false" onAction="#AjouterCompteur" prefHeight="26.0" prefWidth="154.0" text="Ajouter Au Compteur" />
+    <Button fx:id="exporter_donnee" layoutX="216.0" layoutY="145.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="146.0" text="Exporer Données" />
+   <Button fx:id="quitter" layoutX="392.0" layoutY="146.0" mnemonicParsing="false" onAction="#quitterPage" prefHeight="26.0" prefWidth="96.0" text="Quitter" />
+    
+</AnchorPane>

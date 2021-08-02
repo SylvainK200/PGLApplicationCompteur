@@ -1,0 +1,26 @@
+plugins{
+	id 'application'
+	id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+javafx{
+	version = "15.0.1"
+	modules = ['javafx.controls', 'javafx.fxml']
+}
+
+repositories{
+	mavenCentral()
+}
+
+test {
+	useJUnitPlatform()
+}
+
+dependencies {
+	testImplementation 'org.json:json:20210307'
+	implementation 'org.json:json:20210307'
+	implementation 'com.squareup.okhttp3:okhttp:3.14.6'
+}
+
+mainClassName = 'Gui.PortfolioManagementClient'
+
