@@ -18,13 +18,13 @@ public class ModificationDonnees {
     private Label labelConsommationActuel;
 
     @FXML
-    private TextField textConsommationActuel;
+    private TextField textConsommationActuel = new TextField();
 
     @FXML
     private Label labelConsommationCorriges;
 
     @FXML
-    private TextField textConsommationCorriges;
+    private TextField textConsommationCorriges =new TextField();
 
     @FXML
     private Button annuler_button;
@@ -37,8 +37,11 @@ public class ModificationDonnees {
     public void initialize(){
         current = current_supply_point;
         JSONArray consommations = current.getJSONArray("consommationValues");
-        consommation = consommations.getJSONObject(consommations.length()-1);
-        textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
+        if (consommations.length()>0){
+            consommation = consommations.getJSONObject(consommations.length()-1);
+            textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
+        }
+
     }
     @FXML
     void annuler(ActionEvent event) {

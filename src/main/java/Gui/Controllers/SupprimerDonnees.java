@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import java.util.Collection;
+import java.util.Objects;
 
 import static Gui.Controllers.NouveauContrat.*;
 import static Gui.PortfolioManagementClient.currentprovider;
@@ -39,9 +40,13 @@ public class SupprimerDonnees {
     JSONObject selectedCompteur = new JSONObject();
     public void initialize(){
         JSONArray compteurs = find("supplyPoint");
-        for (int i = 0 ; i<compteurs.length();i++){
-            JSONObject compt = compteurs.getJSONObject(i);
-            compteur.getItems().add(compt.getString("ean_18"));
+        if (Objects.nonNull(compteurs))
+        {
+            for (int i = 0 ; i<compteurs.length();i++){
+                JSONObject compt = compteurs.getJSONObject(i);
+
+                compteur.getItems().add(compt.getString("ean_18"));
+            }
         }
 
     }
@@ -49,7 +54,7 @@ public class SupprimerDonnees {
     void cloturerCompteurDonnee(ActionEvent event) {
         selectedCompteur = findUnique("supplyPoint/ean_18/"+compteur.getValue());
         selectedCompteur.remove("home");
-        selectedCompteur.put("home", (Collection<?>) null);
+       // selectedCompteur.put("home", (Collection<?>) null);
 
         updateObject(selectedCompteur,"supplyPoint");
 
@@ -64,10 +69,22 @@ public class SupprimerDonnees {
     @FXML
     void supprimerHistorique(ActionEvent event) {
         JSONObject notification  = new JSONObject();
-
-        for (int i = 0 ; i < selectedCompteur.getJSONArray("consommationValues").length();i++){
+        JSONObject selected = findUnique("supplyPoint/ean_18/"+compteur.getValue());
+        long idSupplyPoint = selected.getLong("id");
+        JSONArray arrays = find("consommationValue");
+        for (int i = 0 ; i < arrays.length();i++){
+            JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
+            long idCons = arrays.getJSONObject(i).getLong("id");
+            long id = o.getLong("id");
+            System.out.println(" id : "+id + " idCons : "+idSupplyPoint);
+            if (id == idSupplyPoint )
+            {
+                JSONObject deleted = deleteObject("consommationValue/"+idCons);
+                System.out.println("element numero : "+i);
+            }
 
         }
+        selectedCompteur = selected;
 
         notification.put("content",notification_suppression.getText());
         notification.put("supplyPoint",selectedCompteur);
@@ -76,6 +93,8 @@ public class SupprimerDonnees {
         if (!res.isEmpty()){
             JOptionPane.showMessageDialog(null,"Notification cree");
 
+        }else {
+            JOptionPane.showMessageDialog(null,"resultat vide ");
         }
 
     }

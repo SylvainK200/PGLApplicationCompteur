@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import javax.swing.*;
 
 import static Gui.Controllers.NouveauContrat.*;
+import static Gui.PortfolioManagementClient.current_supply_point;
 import static Gui.PortfolioManagementClient.currentprovider;
 
 import java.io.File;
@@ -210,12 +211,14 @@ public class MenuPrincipale  {
 
     @FXML
     public void goToModifierDonnee(){
+        current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
         PortfolioManagementClient.stage.close();
         PortfolioManagementClient.showPages("ModificationDonnees.fxml");
     }
     @FXML
     public void goToSupprimerDonnee(){
-
+        //current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
+//        System.out.println("current supply point to supprimer : " +current_supply_point.toString());
         PortfolioManagementClient.stage.close();
         PortfolioManagementClient.showPages("SupprimerDonnes.fxml");
     }
@@ -239,8 +242,8 @@ public class MenuPrincipale  {
     @FXML
     public void goToExporter(){
         save();
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("Exportation.fxml");
+        //PortfolioManagementClient.stage.close();
+        //PortfolioManagementClient.showPages("Exportation.fxml");
     }
     @FXML
     public void goToAfficherContrat() {

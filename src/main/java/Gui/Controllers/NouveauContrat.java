@@ -319,14 +319,12 @@ public class NouveauContrat {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url(url)
+                .url(API_URL+"/"+url)
                 .method("DELETE", null)
                 .build();
 
         try {
             Response response = client.newCall(request).execute();
-            JSONObject user = new JSONObject(response.body().string());
-            return user;
         }catch (Exception e){
             e.printStackTrace();
         }
