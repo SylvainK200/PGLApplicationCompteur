@@ -13,6 +13,7 @@ import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static Gui.PortfolioManagementClient.currentprovider;
 public class Login {
 
     @FXML
@@ -46,6 +47,8 @@ public class Login {
             if (!user.isEmpty())
             {
                 PortfolioManagementClient.stage.close();
+                currentprovider = user;
+                System.out.println("current provider :" +currentprovider.toString());
                 PortfolioManagementClient.showPages("MenuPrincipale.fxml");
                 response.close();
             }

@@ -1,5 +1,7 @@
 package Gui.Controllers;
 
+
+import static Gui.PortfolioManagementClient.currentprovider;
 import Gui.ModelTabs.NewContractTable;
 import Gui.PortfolioManagementClient;
 import javafx.beans.value.ObservableValue;
@@ -158,8 +160,8 @@ public class NouveauContrat {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println(res);
-            if (res !=null)
+            //System.out.println("resultat "+res);
+            if (response.isSuccessful())
             {
                 result= new JSONObject(res);
             }
@@ -235,7 +237,7 @@ public class NouveauContrat {
         NumeroClient.getItems().addAll(clientsList);
         combEAN.getItems().addAll(eansList);
         NumeroClient.valueProperty().addListener((ObservableValue<? extends  String>observable,String oldvalue,String newValue)->{
-            if (combEAN.getValue()!=null && NumeroClient.getValue()!=null)
+            if (combEAN.getValue()!=null)
             {
                 System.out.println("Execution de la fonction inittable");
                 initTable();
@@ -253,20 +255,29 @@ public class NouveauContrat {
         //colTypeEnergie.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("typeEnergie"));
         colNomClient.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("nom_client"));
         JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
-        JSONArray contract_supply = this.find("contractSupplyPoint");
+        JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
+        table.getItems().removeAll(table.getItems());
+
         for (int i =0;i<contract_supply.length();i++){
-            table.getItems().add(new NewContractTable(client,contract_supply.getJSONObject(i)));
+            System.out.println("Dans la boucle for");
+            JSONObject current = contract_supply.getJSONObject(i);
+            if (current.get("contract") instanceof JSONObject){
+                if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
+                    table.getItems().add(new NewContractTable(client,contract_supply.getJSONObject(i)));
+                }
+            }
+
         }
         System.out.println("remplissage termine");
     }
 
-    public JSONObject createObject(JSONObject contract,String url) {
+    public static JSONObject createObject(JSONObject contract,String url) {
         JSONObject resp = new JSONObject();
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
             RequestBody formBody = RequestBody.create(JSON, contract.toString());
             Request request = new Request.Builder()
-                    .url(API_URL + url)
+                    .url(API_URL +"/"+ url)
                     .post(formBody)
                     .build();
             try {
@@ -281,6 +292,47 @@ public class NouveauContrat {
                 e.printStackTrace();}
             return resp;
     }
+
+    public static JSONObject updateObject(JSONObject contract,String url) {
+        JSONObject resp = new JSONObject();
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        RequestBody formBody = RequestBody.create(JSON, contract.toString());
+        Request request = new Request.Builder()
+                .url(API_URL +"/"+ url)
+                .put(formBody)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()){
+                JOptionPane.showMessageDialog(null,"Operation d'enregistrement reussie");
+                return new JSONObject(response.body().string());
+            }
+            response.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();}
+        return resp;
+    }
+
+    public static JSONObject deleteObject (String url) {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .method("DELETE", null)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            JSONObject user = new JSONObject(response.body().string());
+            return user;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  new JSONObject();
+
+    }
     @FXML
     void confirmerAjout(ActionEvent event) {
         int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
@@ -293,9 +345,10 @@ public class NouveauContrat {
         contract.put("date_end",date_fin.getValue());
         contract.put("numero_contract","num"+aleatoire);
         contract.put("client",NumeroClient.getValue());
+        contract.put("provider",currentprovider);
+        contract = createObject(contract,"contract");
 
-        contract = createObject(contract,"/contract");
-
+        System.out.println("contrat cree");
 
         contract_supply.put("meter_type",meter_type.getValue());
         contract_supply.put("meter_rate",meter_rate.getText());
@@ -304,10 +357,10 @@ public class NouveauContrat {
         contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
         contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
         contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
-
         contract_supply.put("wallet",wallet);
 
         JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
+        createObject(contract_supply,"contractSupplyPoint");
         table.getItems().add(new NewContractTable(client,contract_supply));
 
     }
@@ -316,9 +369,6 @@ public class NouveauContrat {
         JSONObject compteur = new JSONObject();
         compteur.put("ean_18",newEAN.getText());
         compteur.put("energy",newEnergy.getValue());
-        compteur.put("budget",Integer.parseInt(budget.getText()));
-        compteur.put("budgetType",budgetType.getText());
-
         try{
             JSONObject res = this.createObject(compteur,"/supplyPoint");
             if (!res.isEmpty()){

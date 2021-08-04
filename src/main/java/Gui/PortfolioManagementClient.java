@@ -1,5 +1,6 @@
 package Gui;
 
+import Gui.ModelTabs.MenuPrincipalTable;
 import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +22,10 @@ import portfolioManagement.Portfolio;
 import portfolioManagement.SupplyPoint;
 import portfolioManagement.User;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 /**
@@ -38,7 +39,8 @@ public class PortfolioManagementClient extends Application {
     private ArrayList<Portfolio> portfolios = new ArrayList<>();
     private Portfolio currentPortfolio;
     private BorderPane layout = new BorderPane();
-    private JSONObject currentprovider;
+    public static JSONObject currentprovider;
+    public static JSONObject current_supply_point;
     public static Stage primaryStage;
     public static Stage  stage = new Stage();
     public static void main(String[] args){
@@ -115,7 +117,43 @@ public class PortfolioManagementClient extends Application {
 
     }
 
+    public static void eportToCSV(File file, List<MenuPrincipalTable> elts) {
+         final String DELIMITER = ";";
+         final String SEPARATOR = "\n";
 
+        //En-tête de fichier
+         final String HEADER = "EAN;Consommation;cout;compteur;date_affectation;date_cloture;name_wallet";
+        try{
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.append(HEADER);
+            fileWriter.append(SEPARATOR);
+            Iterator it = elts.iterator();
+
+            while (it.hasNext()){
+                MenuPrincipalTable elt =(MenuPrincipalTable) it.next();
+
+                fileWriter.append(elt.getEan_18());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getConsommation());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getCout());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getType_compteur());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getDate_affectation());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getDate_cloture());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getNameWallet());
+                fileWriter.append(SEPARATOR);
+
+            }
+            fileWriter.close();
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
+    }
     /**
      * Display the window which contain the list of all the portfolio that the user has access
      */

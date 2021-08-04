@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NewContractTable {
@@ -16,23 +17,21 @@ public class NewContractTable {
     public String compteur;
     public String typeEnergie;
     public String etat_compteur;
+    public DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     public NewContractTable(JSONObject client,JSONObject contract_supply_point){
         nom_client = client.getString("identifiant");
         Object json = contract_supply_point.get("contract");
         if (json instanceof  JSONObject){
+            System.out.println(((JSONObject) json).toString());
             num_contrat = ((JSONObject)json).getString("numero_contract");
 
-            Object deb = ((JSONObject)json).get("date_begin");
-            Object fin = ((JSONObject)json).get("date_end");
+            String deb = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
+            String fin = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
 
-            if ( deb instanceof JSONArray && fin instanceof JSONArray ) {
-                debut_contrat = "" + ((JSONArray) deb).optInt(0) + "/" +  ((JSONArray) deb).optInt(1) + "/" + ((JSONArray) deb).optInt(2) + "";
-                fin_contrat = "" + ((JSONArray) fin).optInt(0) + "/" + ((JSONArray) fin).optInt(1) + "/" + ((JSONArray) fin).optInt(2) + "";
-                System.out.println(debut_contrat);
-                System.out.println(fin_contrat);
-            }
+            debut_contrat = deb;
+            fin_contrat = fin;
 
         }
         json = contract_supply_point.get("supplyPoint");
@@ -44,6 +43,7 @@ public class NewContractTable {
 
     }
     private String getEtat_compteur(JSONObject contract_supply_point){
+        System.out.println(contract_supply_point.toString());
         Object json  = contract_supply_point.get("wallet");
         if (json instanceof  JSONObject){
             if (((JSONObject) json).isEmpty()){

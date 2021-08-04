@@ -3,6 +3,9 @@ package Gui.ModelTabs;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class AllContract {
     private String nom_client;
     private String num_contrat;
@@ -16,6 +19,7 @@ public class AllContract {
     private double network_manager_cost;
     private double over_tax_rate;
     private double tax_rate;
+    private DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
     public AllContract (JSONObject client , JSONObject contract_supply_point){
         nom_client = client.getString("identifiant");
@@ -27,15 +31,11 @@ public class AllContract {
         if (json instanceof  JSONObject){
             num_contrat = ((JSONObject)json).getString("numero_contract");
 
-            Object deb = ((JSONObject)json).get("date_begin");
-            Object fin = ((JSONObject)json).get("date_end");
+            String deb = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
+            String fin = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
 
-            if ( deb instanceof JSONArray && fin instanceof JSONArray ) {
-                debut_contrat = "" + ((JSONArray) deb).optInt(0) + "/" +  ((JSONArray) deb).optInt(1) + "/" + ((JSONArray) deb).optInt(2) + "";
-                fin_contrat = "" + ((JSONArray) fin).optInt(0) + "/" + ((JSONArray) fin).optInt(1) + "/" + ((JSONArray) fin).optInt(2) + "";
-                System.out.println(debut_contrat);
-                System.out.println(fin_contrat);
-            }
+            debut_contrat = deb;
+            fin_contrat = fin;
 
         }
         json = contract_supply_point.get("supplyPoint");

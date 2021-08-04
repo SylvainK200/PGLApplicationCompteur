@@ -12,8 +12,6 @@ public class Exportation {
     @FXML
     private Label lblEAN;
 
-    @FXML
-    private ComboBox<?> compteur;
 
     @FXML
     private TextField textEAN;

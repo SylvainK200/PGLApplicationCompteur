@@ -1,5 +1,23 @@
 portfolioManagement/User.java
  portfolioManagement.User
+Gui/ModelTabs/MenuPrincipalTable.java
+ Gui.ModelTabs.MenuPrincipalTable
+Gui/InfoWindow.java
+ Gui.InfoWindow
+portfolioManagement/Portfolio.java
+ portfolioManagement.Portfolio
+Gui/ModelTabs/NewContractTable.java
+ Gui.ModelTabs.NewContractTable
+portfolioManagement/Energy.java
+ portfolioManagement.Energy
+portfolioManagement/SupplyPoint.java
+ portfolioManagement.SupplyPoint
+Gui/CreateAccountWindow.java
+ Gui.CreateAccountWindow
+portfolioManagement/Meter.java
+ portfolioManagement.Meter
+Gui/ModelTabs/AllContract.java
+ Gui.ModelTabs.AllContract
 Gui/Controllers/SupprimerDonnees.java
  Gui.Controllers.SupprimerDonnees
 Gui/Controllers/RetrouverCompte.java
@@ -10,34 +28,20 @@ Gui/PortfolioManagementClient.java
  Gui.PortfolioManagementClient
 Gui/Controllers/SeConnecter.java
  Gui.Controllers.SeConnecter
-Gui/Controllers/AffichierContrats.java
- Gui.Controllers.AffichierContrats
-Gui/CreateAccountWindow.java
- Gui.CreateAccountWindow
-portfolioManagement/Meter.java
- portfolioManagement.Meter
+Gui/Controllers/NouveauContrat.java
+ Gui.Controllers.NouveauContrat
+ Gui.Controllers.NouveauContrat$MeterType
 Gui/Controllers/CreerCompte.java
  Gui.Controllers.CreerCompte
 Gui/Controllers/ModificationDonnees.java
  Gui.Controllers.ModificationDonnees
-Gui/InfoWindow.java
- Gui.InfoWindow
-Gui/Controllers/Affectation.java
- Gui.Controllers.Affectation
 Gui/LoginWindow.java
  Gui.LoginWindow
-portfolioManagement/SupplyPoint.java
- portfolioManagement.SupplyPoint
-Gui/Controllers/MenuPrincipale.java
- Gui.Controllers.MenuPrincipale
-portfolioManagement/Energy.java
- portfolioManagement.Energy
+Gui/Controllers/AffichierContrats.java
+ Gui.Controllers.AffichierContrats
 Gui/Controllers/Exportation.java
  Gui.Controllers.Exportation
-portfolioManagement/Portfolio.java
- portfolioManagement.Portfolio
-Gui/ModelTabs/NewContractTable.java
- Gui.ModelTabs.NewContractTable
-Gui/Controllers/NouveauContrat.java
- Gui.Controllers.NouveauContrat
- Gui.Controllers.NouveauContrat$MeterType
+Gui/Controllers/Affectation.java
+ Gui.Controllers.Affectation
+Gui/Controllers/MenuPrincipale.java
+ Gui.Controllers.MenuPrincipale
