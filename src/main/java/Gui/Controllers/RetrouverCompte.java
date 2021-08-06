@@ -1,6 +1,6 @@
 package Gui.Controllers;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,8 +48,8 @@ public class RetrouverCompte {
     }
     @FXML
     void quitterPage(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("login.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("login.fxml");
 
     }
 
@@ -71,8 +71,8 @@ public class RetrouverCompte {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()){
                     System.out.println("Enregistrement termine");
-                    PortfolioManagementClient.stage.close();
-                    PortfolioManagementClient.showPages("login.fxml");
+                    FacilitatorProviderLinkClient.stage.close();
+                    FacilitatorProviderLinkClient.showPages("login.fxml");
 
                 }
                 response.close();

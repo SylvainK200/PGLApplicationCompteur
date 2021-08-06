@@ -1,47 +1,39 @@
-portfolioManagement/User.java
- portfolioManagement.User
-portfolioManagement/Meter.java
- portfolioManagement.Meter
-Gui/InfoWindow.java
- Gui.InfoWindow
-portfolioManagement/Portfolio.java
- portfolioManagement.Portfolio
-portfolioManagement/SupplyPoint.java
- portfolioManagement.SupplyPoint
-portfolioManagement/Energy.java
- portfolioManagement.Energy
-Gui/ModelTabs/AllContract.java
- Gui.ModelTabs.AllContract
-Gui/CreateAccountWindow.java
- Gui.CreateAccountWindow
-Gui/Controllers/Exportation.java
- Gui.Controllers.Exportation
-Gui/Controllers/RetrouverCompte.java
- Gui.Controllers.RetrouverCompte
-Gui/Controllers/Login.java
- Gui.Controllers.Login
-Gui/PortfolioManagementClient.java
- Gui.PortfolioManagementClient
-Gui/Controllers/SeConnecter.java
- Gui.Controllers.SeConnecter
-Gui/LoginWindow.java
- Gui.LoginWindow
-Gui/Controllers/CreerCompte.java
- Gui.Controllers.CreerCompte
-Gui/Controllers/Affectation.java
- Gui.Controllers.Affectation
-Gui/ModelTabs/NewContractTable.java
- Gui.ModelTabs.NewContractTable
-Gui/Controllers/ModificationDonnees.java
- Gui.Controllers.ModificationDonnees
-Gui/ModelTabs/MenuPrincipalTable.java
- Gui.ModelTabs.MenuPrincipalTable
 Gui/Controllers/SupprimerDonnees.java
  Gui.Controllers.SupprimerDonnees
-Gui/Controllers/MenuPrincipale.java
- Gui.Controllers.MenuPrincipale
+Gui/FacilitatorProviderLinkClient.java
+ Gui.FacilitatorProviderLinkClient
+Gui/Controllers/client/AfficherContrats.java
+ Gui.Controllers.client.AfficherContrats
+Gui/ModelTabs/MenuPrincipalConsommateurTable.java
+ Gui.ModelTabs.MenuPrincipalConsommateurTable
+Gui/Controllers/RetrouverCompte.java
+ Gui.Controllers.RetrouverCompte
+Gui/Controllers/client/MenuPrincipaleConsommateur.java
+ Gui.Controllers.client.MenuPrincipaleConsommateur
+Gui/Controllers/Login.java
+ Gui.Controllers.Login
+Gui/Controllers/client/HistoriqueCompteur.java
+ Gui.Controllers.client.HistoriqueCompteur
+Gui/Controllers/SeConnecter.java
+ Gui.Controllers.SeConnecter
 Gui/Controllers/NouveauContrat.java
  Gui.Controllers.NouveauContrat
  Gui.Controllers.NouveauContrat$MeterType
+Gui/Controllers/CreerCompte.java
+ Gui.Controllers.CreerCompte
+Gui/Controllers/ModificationDonnees.java
+ Gui.Controllers.ModificationDonnees
+Gui/ModelTabs/NewContractTable.java
+ Gui.ModelTabs.NewContractTable
+Gui/ModelTabs/MenuPrincipalTable.java
+ Gui.ModelTabs.MenuPrincipalTable
+Gui/ModelTabs/AllContract.java
+ Gui.ModelTabs.AllContract
+Gui/Controllers/MenuPrincipale.java
+ Gui.Controllers.MenuPrincipale
+Gui/Controllers/Exportation.java
+ Gui.Controllers.Exportation
+Gui/Controllers/Affectation.java
+ Gui.Controllers.Affectation
 Gui/Controllers/AffichierContrats.java
  Gui.Controllers.AffichierContrats

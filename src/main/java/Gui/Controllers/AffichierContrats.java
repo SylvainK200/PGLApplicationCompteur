@@ -1,9 +1,7 @@
 package Gui.Controllers;
 
 import Gui.ModelTabs.AllContract;
-import Gui.ModelTabs.MenuPrincipalTable;
-import Gui.ModelTabs.NewContractTable;
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.findUnique;
-import static Gui.PortfolioManagementClient.currentprovider;
+import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 public class AffichierContrats {
     @FXML
@@ -74,8 +68,8 @@ public class AffichierContrats {
     private FilteredList<AllContract> contratsList;
     @FXML
     void quitterPage(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
     public void initialize(){

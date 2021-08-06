@@ -1,6 +1,6 @@
 package Gui.Controllers;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,8 +14,8 @@ import java.util.List;
 
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.updateObject;
-import static Gui.PortfolioManagementClient.current_supply_point;
-import static Gui.PortfolioManagementClient.extractConsommations;
+import static Gui.FacilitatorProviderLinkClient.current_supply_point;
+import static Gui.FacilitatorProviderLinkClient.extractConsommations;
 
 public class ModificationDonnees {
     @FXML
@@ -66,8 +66,8 @@ public class ModificationDonnees {
     }
     @FXML
     void quitterPage(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
 
     }
 }

@@ -1,6 +1,6 @@
 package Gui.Controllers;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.util.Objects;
 
 import static Gui.Controllers.RetrouverCompte.API_URL;
-import static Gui.PortfolioManagementClient.*;
+import static Gui.FacilitatorProviderLinkClient.*;
 public class Login {
 
     @FXML
@@ -61,17 +61,17 @@ public class Login {
 
                 JSONObject user = new JSONObject(response.body().string());
                 if (!user.isEmpty()) {
-                    PortfolioManagementClient.stage.close();
+                    FacilitatorProviderLinkClient.stage.close();
                     if (this.type_utilisateur.getValue().equals("Fournisseur"))
                     {
                         currentprovider = user;
                         System.out.println("current provider :" + currentprovider.toString());
-                        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+                        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
                         response.close();
                     }else {
                         currentClient = user;
                         System.out.println("current provider :" + currentClient.toString());
-                        PortfolioManagementClient.showPages("MenuPrincipaleConsommateur.fxml");
+                        FacilitatorProviderLinkClient.showPages("MenuPrincipaleConsommateur.fxml");
                         response.close();
                     }
 
@@ -90,14 +90,14 @@ public class Login {
         }
     @FXML
     void creerCompte(MouseEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("creer_compte.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("creer_compte.fxml");
     }
 
     @FXML
     void retrouverCompte(MouseEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("retrouverCompte.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("retrouverCompte.fxml");
     }
 
 }

@@ -1,9 +1,9 @@
 package Gui.Controllers;
 
 
-import static Gui.PortfolioManagementClient.currentprovider;
+import static Gui.FacilitatorProviderLinkClient.currentprovider;
 import Gui.ModelTabs.NewContractTable;
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import portfolioManagement.SupplyPoint;
 
 import javax.swing.*;
 
@@ -382,8 +381,8 @@ public class NouveauContrat {
 
     @FXML
     void quitterpage(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
 }

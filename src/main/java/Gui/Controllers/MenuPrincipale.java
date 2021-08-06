@@ -1,15 +1,10 @@
 package Gui.Controllers;
 
 
-import Gui.ModelTabs.AllContract;
 import Gui.ModelTabs.MenuPrincipalTable;
-import Gui.ModelTabs.NewContractTable;
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
@@ -19,10 +14,9 @@ import org.json.JSONObject;
 import javax.swing.*;
 
 import static Gui.Controllers.NouveauContrat.*;
-import static Gui.PortfolioManagementClient.*;
+import static Gui.FacilitatorProviderLinkClient.*;
 
 import java.io.File;
-import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -232,15 +226,15 @@ public class MenuPrincipale  {
     @FXML
     public void goToModifierDonnee(){
         current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("ModificationDonnees.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("ModificationDonnees.fxml");
     }
     @FXML
     public void goToSupprimerDonnee(){
         //current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
 //        System.out.println("current supply point to supprimer : " +current_supply_point.toString());
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("SupprimerDonnes.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("SupprimerDonnes.fxml");
     }
     @FXML
     public void goToImporter(){
@@ -267,18 +261,18 @@ public class MenuPrincipale  {
     }
     @FXML
     public void goToAfficherContrat() {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("AffichierContrats.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("AffichierContrats.fxml");
     }
     @FXML
     public void goToEtablirContrat(){
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("NouveauContrat.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("NouveauContrat.fxml");
     }
     @FXML
     public void seDeconnecter(){
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("login.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("login.fxml");
     }
 
     public void save()
@@ -289,7 +283,7 @@ public class MenuPrincipale  {
         File result = js.showSaveDialog(null);
         if (result!=null)
         {
-            PortfolioManagementClient.eportToCSV(result,currentList);
+            FacilitatorProviderLinkClient.eportToCSV(result,currentList);
         }
     }
     public static void importerFileCSV(File file,String typeCompteur){

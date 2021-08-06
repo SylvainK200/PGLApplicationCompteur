@@ -1,6 +1,6 @@
 package Gui.Controllers;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,11 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import java.util.Collection;
 import java.util.Objects;
 
 import static Gui.Controllers.NouveauContrat.*;
-import static Gui.PortfolioManagementClient.currentprovider;
+import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 public class SupprimerDonnees {
     @FXML
@@ -63,8 +62,8 @@ public class SupprimerDonnees {
     }
     @FXML
     void quitter(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
     @FXML
     void supprimerHistorique(ActionEvent event) {

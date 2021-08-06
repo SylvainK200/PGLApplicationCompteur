@@ -1,27 +1,15 @@
 package Gui;
 
 import Gui.ModelTabs.MenuPrincipalTable;
-import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import portfolioManagement.Portfolio;
-import portfolioManagement.SupplyPoint;
-import portfolioManagement.User;
 
 import javax.swing.*;
 import java.io.File;
@@ -30,13 +18,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.*;
 
-import static Gui.Controllers.MenuPrincipale.importerFileCSV;
-
 
 /**
  * This class implement the main window of the portfolio management application
  */
-public class PortfolioManagementClient extends Application {
+public class FacilitatorProviderLinkClient extends Application {
     public static BorderPane rootLayout;
     public static JSONObject currentClient ;
     public static JSONObject currentprovider;
@@ -50,7 +36,7 @@ public class PortfolioManagementClient extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(PortfolioManagementClient.class.getResource(""+file));
+            loader.setLocation(FacilitatorProviderLinkClient.class.getResource(""+file));
             AnchorPane journal = (AnchorPane) loader.load();
             // Set person overview into the center of root layout.
             rootLayout.setCenter(journal);
@@ -68,7 +54,7 @@ public class PortfolioManagementClient extends Application {
     public static void showPages (String page ){
 
         try {
-            Parent root = FXMLLoader.load(PortfolioManagementClient.class.getResource("" + page));
+            Parent root = FXMLLoader.load(FacilitatorProviderLinkClient.class.getResource("" + page));
             //stage.setTitle(titre);
             stage.setScene(new Scene(root));
             stage.show();
@@ -154,5 +140,41 @@ public class PortfolioManagementClient extends Application {
         supplyPoint.put("supplier",supplierName);
         return supplyPoint;
     }
+    public static void eportToCSV(File file, List<MenuPrincipalTable> elts) {
+        final String DELIMITER = ";";
+        final String SEPARATOR = "\n";
 
+        //En-tête de fichier
+        final String HEADER = "EAN;Consommation;cout;compteur;date_affectation;date_cloture;name_wallet";
+        try{
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.append(HEADER);
+            fileWriter.append(SEPARATOR);
+            Iterator it = elts.iterator();
+
+            while (it.hasNext()){
+                MenuPrincipalTable elt =(MenuPrincipalTable) it.next();
+
+                fileWriter.append(elt.getEan_18());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getConsommation());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getCout());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getType_compteur());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getDate_affectation());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getDate_cloture());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(""+elt.getNameWallet());
+                fileWriter.append(SEPARATOR);
+
+            }
+            fileWriter.close();
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
+    }
 }

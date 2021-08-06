@@ -1,13 +1,12 @@
 package Gui.Controllers;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,8 +32,8 @@ public class SeConnecter implements Initializable {
         }
     }
     public void Quitter(ActionEvent event){
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("SupprimerDonnes.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("SupprimerDonnes.fxml");
 
     }
 

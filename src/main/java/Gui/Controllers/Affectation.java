@@ -1,5 +1,5 @@
 package Gui.Controllers;
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,20 +31,20 @@ public class Affectation {
 
     @FXML
     void affecterConsommation(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
     @FXML
     void desaffecterConsommation(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
     @FXML
     void reaffecterConsomation(ActionEvent event) {
-        PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
 }

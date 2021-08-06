@@ -1,6 +1,6 @@
 package Gui.Controllers.client;
 
-import Gui.PortfolioManagementClient;
+import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -96,9 +96,9 @@ public class MenuPrincipaleConsommateur {
     @FXML
     private ComboBox<String> wallets;
     public void initialize(){
-        utilisateur.setText(Gui.PortfolioManagementClient.currentClient.getString("identifiant"));
-        nom.setText(PortfolioManagementClient.currentClient.getString("name"));
-        JSONArray walets = find ("/wallet/user"+ PortfolioManagementClient.currentClient.getLong("id"));
+        utilisateur.setText(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        nom.setText(FacilitatorProviderLinkClient.currentClient.getString("name"));
+        JSONArray walets = find ("/wallet/user"+ FacilitatorProviderLinkClient.currentClient.getLong("id"));
 
         for (Object wal : walets){
             if (wal instanceof JSONObject){

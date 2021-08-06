@@ -6,11 +6,10 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 import static Gui.Controllers.NouveauContrat.find;
-import static Gui.PortfolioManagementClient.extractConsommations;
+import static Gui.FacilitatorProviderLinkClient.extractConsommations;
 
 public class MenuPrincipalTable {
     private String ean_18;
