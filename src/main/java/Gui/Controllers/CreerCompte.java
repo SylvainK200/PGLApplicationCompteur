@@ -4,11 +4,14 @@ import Gui.PortfolioManagementClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import okhttp3.*;
 import org.json.JSONObject;
 
 import javax.swing.*;
+
+import static Gui.Controllers.RetrouverCompte.API_URL;
 
 public class CreerCompte {
     @FXML
@@ -45,7 +48,11 @@ public class CreerCompte {
 
     @FXML
     private Button creer_compte;
-
+    @FXML
+    private ComboBox<String> type_utilisateur;
+    public void initialize(){
+        type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
+    }
     @FXML
     private Button retour;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -57,7 +64,7 @@ public class CreerCompte {
                 .put("question_secrete",question_secrete.getText())
                 .put("reponse_secrete",reponse_question_secrete.getText())
                 .put("identifiant",identifiant.getText())
-                .put("company_name",nom.getText())
+                .put("name",nom.getText())
                 .put("street",street.getText())
                 .put("number",number.getText())
                 .put("city",city.getText())
@@ -71,24 +78,36 @@ public class CreerCompte {
         { OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
             JSONObject jsonObject= this.fabriquerJson();
-            RequestBody formBody = RequestBody.create(JSON, jsonObject.toString());
-            Request request = new Request.Builder()
-                    .url("http://localhost:8085/energy-management" + "/provider")
-                    .post(formBody)
-                    .build();
-        try {
-            Response response = client.newCall(request).execute();
-            if (response.isSuccessful()){
-                System.out.println("Enregistrement termine");
-                PortfolioManagementClient.stage.close();
-                PortfolioManagementClient.showPages("login.fxml");
+            if (this.type_utilisateur.getValue() !=null){
 
+                String url = "/user";
+                if (this.type_utilisateur.getValue() == "Fournisseur"){
+                    jsonObject.remove("name");
+                    jsonObject.put("company_name",nom.getText());
+                    url  = "/provider";
+                }
+                RequestBody formBody = RequestBody.create(JSON, jsonObject.toString());
+                Request request = new Request.Builder()
+                        .url(API_URL +url)
+                        .post(formBody)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()){
+                        System.out.println("Enregistrement termine");
+                        PortfolioManagementClient.stage.close();
+                        PortfolioManagementClient.showPages("login.fxml");
+
+                    }
+                    response.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }else {
+                JOptionPane.showMessageDialog(null,"Choisissez le type d'utilisateur \n que vous etes");
             }
-            response.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
          }
         else{

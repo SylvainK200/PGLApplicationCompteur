@@ -76,7 +76,7 @@ public class SupprimerDonnees {
             JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
             long idCons = arrays.getJSONObject(i).getLong("id");
             long id = o.getLong("id");
-            System.out.println(" id : "+id + " idCons : "+idSupplyPoint);
+            //System.out.println(" id : "+id + " idCons : "+idSupplyPoint);
             if (id == idSupplyPoint )
             {
                 JSONObject deleted = deleteObject("consommationValue/"+idCons);

@@ -1,4 +1,4 @@
-package Gui.Controllers;
+package Gui.Controllers.client;
 
 import Gui.ModelTabs.AllContract;
 import Gui.ModelTabs.MenuPrincipalTable;
@@ -26,7 +26,7 @@ import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.findUnique;
 import static Gui.PortfolioManagementClient.currentprovider;
 
-public class AffichierContrats {
+public class AfficherContrats {
     @FXML
     private TableView<AllContract> table_contrat;
 
@@ -75,7 +75,7 @@ public class AffichierContrats {
     @FXML
     void quitterPage(ActionEvent event) {
         PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+        PortfolioManagementClient.showPages("MenuPrincipaleConsommateur.fxml");
     }
 
     public void initialize(){
@@ -88,10 +88,10 @@ public class AffichierContrats {
                             return true;
                         }
                         if (contrat.getNum_contrat().toLowerCase().contains(newValue.toLowerCase()) ||
-                            contrat.getNom_client().toLowerCase().contains(newValue.toLowerCase()) ||
+                                contrat.getNom_client().toLowerCase().contains(newValue.toLowerCase()) ||
                                 contrat.getEnergy().toLowerCase().contains(newValue.toLowerCase()) ||
-                                        contrat.getCompteur().toLowerCase().toLowerCase().contains((newValue.toLowerCase())) ||
-                        contrat.getEtat_compteur().toLowerCase().contains(newValue.toLowerCase())) {
+                                contrat.getCompteur().toLowerCase().toLowerCase().contains((newValue.toLowerCase())) ||
+                                contrat.getEtat_compteur().toLowerCase().contains(newValue.toLowerCase())) {
                             return true;
                         }
                         return false;
@@ -140,4 +140,5 @@ public class AffichierContrats {
     }
 
 }
+
 

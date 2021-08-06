@@ -10,8 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import java.util.List;
+
+import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.updateObject;
 import static Gui.PortfolioManagementClient.current_supply_point;
+import static Gui.PortfolioManagementClient.extractConsommations;
 
 public class ModificationDonnees {
     @FXML
@@ -36,9 +40,10 @@ public class ModificationDonnees {
     JSONObject consommation ;
     public void initialize(){
         current = current_supply_point;
-        JSONArray consommations = current.getJSONArray("consommationValues");
-        if (consommations.length()>0){
-            consommation = consommations.getJSONObject(consommations.length()-1);
+        JSONArray consommationsValues =  find("supplyPoint");
+        List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
+        if (consommations.size()>0){
+            consommation = consommations.get(consommations.size()-1);
             textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
         }
 

@@ -19,14 +19,14 @@ import org.json.JSONObject;
 import javax.swing.*;
 
 import static Gui.Controllers.NouveauContrat.*;
-import static Gui.PortfolioManagementClient.current_supply_point;
-import static Gui.PortfolioManagementClient.currentprovider;
+import static Gui.PortfolioManagementClient.*;
 
 import java.io.File;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class MenuPrincipale  {
     @FXML
@@ -116,14 +116,15 @@ public class MenuPrincipale  {
     public void onclickrechercher(){
         JSONObject result = findUnique("supplyPoint/ean_18/"+textEAN.getText());
         JSONObject contract = findUnique("contract/ean/"+result.getInt("id"));
+        JSONArray consommations = find("supplyPoint");
         //JSONObject user = findUnique("user/identifiant/"+contract.getString("client"));
 
         resultEAN.setText(result.getString("ean_18"));
         resultConsommateur.setText(contract.getString("client"));
-        JSONArray consommations = result.getJSONArray("consommationValues");
-        if (consommations.length()>1)
+        ArrayList<JSONObject> consommationValues = extractConsommations(consommations,result.getLong("id"));
+        if (consommationValues.size()>1)
         {
-            JSONObject derniereConsommation = consommations.getJSONObject(consommations.length()-1);
+            JSONObject derniereConsommation = consommationValues.get(consommationValues.size()-1);
             resultConsommation.setText(derniereConsommation.getString("value"));
         }
 
@@ -137,22 +138,30 @@ public class MenuPrincipale  {
     }
 
     @FXML
-    private void initialize()
+    public void initialize()
     {
         type_compteur.getItems().addAll("Electricite","Eau","Gaz");
+        compteur.getItems().removeAll(compteur.getItems());
+        compteur.getItems().addAll("Non Alloue","Alloue");
         JSONArray clients = find("user");
         for (Object client : clients){
             if (client instanceof  JSONObject){
                 combClient.getItems().add(((JSONObject) client).getString("identifiant"));
             }
         }
-
+        JSONArray array = find("supplyPoint");
+        for (Object obj : array) {
+            if (obj instanceof  JSONObject){
+                compteur_importer.getItems().add(((JSONObject)obj).getString("ean_18"));
+            }
+        }
         combClient.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
            System.out.println("client modifie");
             if (combClient.getValue()!=null)
             {
                 System.out.println("Execution de la fonction inittable");
                 initTable();
+                compteur_importer.getItems().removeAll(compteur_importer.getItems());
                 for (MenuPrincipalTable elt : principalList) {
                     compteur_importer.getItems().add(elt.getEan_18());
                 }
@@ -176,6 +185,17 @@ public class MenuPrincipale  {
             }
 
         });
+        compteur.valueProperty().addListener(
+                (ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
+                    table.getItems().removeAll(table.getItems());
+                    JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
+                    for (Object elt : contract_supply){
+                        if (elt instanceof  JSONObject){
+
+                        }
+                    }
+                });
+
     }
 
     void initTable(){
@@ -186,7 +206,7 @@ public class MenuPrincipale  {
         colDateAffectation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_affectation"));
         colDateClotur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_cloture"));
         JSONObject client  = findUnique("user/identifiant/"+combClient.getValue());
-        System.out.println("currentprovider 2 : "+currentprovider.getInt("id"));
+        //System.out.println("currentprovider 2 : "+currentprovider.getInt("id"));
         JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
         combPortefeuille.getItems().removeAll(combPortefeuille.getItems());
         table.getItems().removeAll(table.getItems());
@@ -272,7 +292,7 @@ public class MenuPrincipale  {
             PortfolioManagementClient.eportToCSV(result,currentList);
         }
     }
-    public void importerFileCSV(File file,String typeCompteur){
+    public static void importerFileCSV(File file,String typeCompteur){
         //JSONObject compteur = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
         try {
             JSONObject result = new JSONObject() ;
@@ -314,17 +334,18 @@ public class MenuPrincipale  {
         }
 
     }
-    public void enregistrer(JSONObject result,String date,long index){
+    public static void enregistrer(JSONObject result,String date,long index){
 
         JSONObject consommationValue = new JSONObject();
 
 
         consommationValue.put("value",index);
         try{
-            consommationValue.put("date",new SimpleDateFormat("yyyy-mm-dd").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            consommationValue.put("date", Date.valueOf(date));
         }catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(" result : " + result.toString());
         consommationValue.put("supplyPoint",result);
         JSONObject result2 = createObject(consommationValue,"consommationValue");
 

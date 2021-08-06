@@ -160,7 +160,7 @@ public class NouveauContrat {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            //System.out.println("resultat "+res);
+            System.out.println("resultat "+res);
             if (response.isSuccessful())
             {
                 result= new JSONObject(res);
@@ -237,11 +237,10 @@ public class NouveauContrat {
         NumeroClient.getItems().addAll(clientsList);
         combEAN.getItems().addAll(eansList);
         NumeroClient.valueProperty().addListener((ObservableValue<? extends  String>observable,String oldvalue,String newValue)->{
-            if (combEAN.getValue()!=null)
-            {
-                System.out.println("Execution de la fonction inittable");
+
+
+               // System.out.println("Execution de la fonction inittable");
                 initTable();
-            }
 
         });
     }
@@ -250,9 +249,9 @@ public class NouveauContrat {
         colDebutContrat.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("debut_contrat"));
         colFinContrat.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("fin_contrat"));
         colNumeroContrat.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("num_contrat"));
-        colTypeContart.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("type_contrat"));
+        //colTypeContart.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("type_contrat"));
         colEtatCompteur.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("etat_compteur"));
-        //colTypeEnergie.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("typeEnergie"));
+        colTypeEnergie.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("typeEnergie"));
         colNomClient.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("nom_client"));
         JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
         JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
@@ -283,7 +282,7 @@ public class NouveauContrat {
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()){
-                    JOptionPane.showMessageDialog(null,"Operation de creation de contrat reussie");
+                    //JOptionPane.showMessageDialog(null,"Operation de creation de contrat reussie");
                     return new JSONObject(response.body().string());
                 }
                 response.close();

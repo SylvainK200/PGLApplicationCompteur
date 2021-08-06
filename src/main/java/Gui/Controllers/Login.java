@@ -4,6 +4,7 @@ import Gui.PortfolioManagementClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -13,7 +14,11 @@ import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static Gui.PortfolioManagementClient.currentprovider;
+import javax.swing.*;
+import java.util.Objects;
+
+import static Gui.Controllers.RetrouverCompte.API_URL;
+import static Gui.PortfolioManagementClient.*;
 public class Login {
 
     @FXML
@@ -24,44 +29,64 @@ public class Login {
 
     @FXML
     private Button connect_button;
-
+    @FXML
+    private ComboBox<String> type_utilisateur;
     @FXML
     private Text mot_de_passe_perdu;
 
     @FXML
     private Text creer_compte;
+    public void initialize(){
+        type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
+    }
     @FXML
     void connect(ActionEvent event) {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        Request request = new Request.Builder()
-                .url("http://localhost:8085/energy-management/provider/identifiant/"
-                        +identifiant.getText()+
-                        "/"+mot_de_passe.getText())
-                .method("GET", null)
-                .build();
-        try {
-            Response response = client.newCall(request).execute();
+        if (Objects.nonNull(type_utilisateur.getValue()) && type_utilisateur.getValue()!="") {
+           String url = "" ;
+           if (type_utilisateur.getValue().equals("Consommateur")){
+               url = API_URL+"/user/identifiant/"+identifiant.getText()+"/"+mot_de_passe.getText();
+           }
+           else {
+               url = API_URL + "/provider/identifiant/"+identifiant.getText()+"/"+mot_de_passe.getText();
+           }
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
 
-            JSONObject user = new JSONObject(response.body().string());
-            if (!user.isEmpty())
-            {
-                PortfolioManagementClient.stage.close();
-                currentprovider = user;
-                System.out.println("current provider :" +currentprovider.toString());
-                PortfolioManagementClient.showPages("MenuPrincipale.fxml");
-                response.close();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .method("GET", null)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+
+                JSONObject user = new JSONObject(response.body().string());
+                if (!user.isEmpty()) {
+                    PortfolioManagementClient.stage.close();
+                    if (this.type_utilisateur.getValue().equals("Fournisseur"))
+                    {
+                        currentprovider = user;
+                        System.out.println("current provider :" + currentprovider.toString());
+                        PortfolioManagementClient.showPages("MenuPrincipale.fxml");
+                        response.close();
+                    }else {
+                        currentClient = user;
+                        System.out.println("current provider :" + currentClient.toString());
+                        PortfolioManagementClient.showPages("MenuPrincipaleConsommateur.fxml");
+                        response.close();
+                    }
+
+                }
+
+
+            } catch (JSONException e) {
+                System.out.println("reponse vide");
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-
-        }catch (JSONException e ){
-            System.out.println("reponse vide");
-
+        }else{
+            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur \n que vous etes");
         }
-        catch (Exception e ){
-            e.printStackTrace();
-        }
-
         }
     @FXML
     void creerCompte(MouseEvent event) {

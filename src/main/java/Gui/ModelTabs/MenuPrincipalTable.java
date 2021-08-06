@@ -5,8 +5,12 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+
+import static Gui.Controllers.NouveauContrat.find;
+import static Gui.PortfolioManagementClient.extractConsommations;
 
 public class MenuPrincipalTable {
     private String ean_18;
@@ -24,7 +28,7 @@ public class MenuPrincipalTable {
     public MenuPrincipalTable (JSONObject contract_supply) {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
-        type_compteur = contract_supply.getString("meter_type");
+        type_compteur = contract_supply.getJSONObject("supplyPoint").getString("energy");
         String deb = df.format(contract_supply.getJSONObject("contract").getLong("date_begin"));
         String fin = df.format(contract_supply.getJSONObject("contract").getLong("date_end"));
         cout = contract_supply.getDouble("meter_rate");
@@ -34,11 +38,16 @@ public class MenuPrincipalTable {
         if (Objects.isNull(json)){
             nameWallet = contract_supply.getJSONObject("wallet").getString("name");
         }
-        JSONArray consommations = contract_supply.getJSONObject("supplyPoint").getJSONArray("consommationValues");
-        if (consommations.length()>0){
-            consommation = consommations.getJSONObject(consommations.length()-1).getDouble("value");
+        JSONArray consommationValues = find("supplyPoint");
+        if (contract_supply.get("supplyPoint") instanceof  JSONObject)
+        {
+            ArrayList<JSONObject> consommations = extractConsommations(consommationValues,contract_supply.getJSONObject("supplyPoint").getLong("id")) ;
+            if (consommations.size()>0){
+                consommation = consommations.get(consommations.size()-1).getDouble("value");
+            }
+            ean_18 = contract_supply.getJSONObject("supplyPoint").getString("ean_18");
+
         }
-        ean_18 = contract_supply.getJSONObject("supplyPoint").getString("ean_18");
 
 
             date_affectation = deb;

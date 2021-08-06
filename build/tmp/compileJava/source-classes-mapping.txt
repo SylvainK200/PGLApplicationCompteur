@@ -1,25 +1,21 @@
 portfolioManagement/User.java
  portfolioManagement.User
-Gui/ModelTabs/MenuPrincipalTable.java
- Gui.ModelTabs.MenuPrincipalTable
+portfolioManagement/Meter.java
+ portfolioManagement.Meter
 Gui/InfoWindow.java
  Gui.InfoWindow
 portfolioManagement/Portfolio.java
  portfolioManagement.Portfolio
-Gui/ModelTabs/NewContractTable.java
- Gui.ModelTabs.NewContractTable
-portfolioManagement/Energy.java
- portfolioManagement.Energy
 portfolioManagement/SupplyPoint.java
  portfolioManagement.SupplyPoint
-Gui/CreateAccountWindow.java
- Gui.CreateAccountWindow
-portfolioManagement/Meter.java
- portfolioManagement.Meter
+portfolioManagement/Energy.java
+ portfolioManagement.Energy
 Gui/ModelTabs/AllContract.java
  Gui.ModelTabs.AllContract
-Gui/Controllers/Affectation.java
- Gui.Controllers.Affectation
+Gui/CreateAccountWindow.java
+ Gui.CreateAccountWindow
+Gui/Controllers/Exportation.java
+ Gui.Controllers.Exportation
 Gui/Controllers/RetrouverCompte.java
  Gui.Controllers.RetrouverCompte
 Gui/Controllers/Login.java
@@ -32,16 +28,20 @@ Gui/LoginWindow.java
  Gui.LoginWindow
 Gui/Controllers/CreerCompte.java
  Gui.Controllers.CreerCompte
-Gui/Controllers/Exportation.java
- Gui.Controllers.Exportation
+Gui/Controllers/Affectation.java
+ Gui.Controllers.Affectation
+Gui/ModelTabs/NewContractTable.java
+ Gui.ModelTabs.NewContractTable
 Gui/Controllers/ModificationDonnees.java
  Gui.Controllers.ModificationDonnees
-Gui/Controllers/AffichierContrats.java
- Gui.Controllers.AffichierContrats
+Gui/ModelTabs/MenuPrincipalTable.java
+ Gui.ModelTabs.MenuPrincipalTable
+Gui/Controllers/SupprimerDonnees.java
+ Gui.Controllers.SupprimerDonnees
 Gui/Controllers/MenuPrincipale.java
  Gui.Controllers.MenuPrincipale
 Gui/Controllers/NouveauContrat.java
  Gui.Controllers.NouveauContrat
  Gui.Controllers.NouveauContrat$MeterType
-Gui/Controllers/SupprimerDonnees.java
- Gui.Controllers.SupprimerDonnees
+Gui/Controllers/AffichierContrats.java
+ Gui.Controllers.AffichierContrats

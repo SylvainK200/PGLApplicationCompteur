@@ -2,6 +2,7 @@ package Gui.ModelTabs;
 
 import okhttp3.MediaType;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -24,7 +25,7 @@ public class NewContractTable {
         nom_client = client.getString("identifiant");
         Object json = contract_supply_point.get("contract");
         if (json instanceof  JSONObject){
-            System.out.println(((JSONObject) json).toString());
+           // System.out.println(((JSONObject) json).toString());
             num_contrat = ((JSONObject)json).getString("numero_contract");
 
             String deb = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
@@ -36,25 +37,30 @@ public class NewContractTable {
         }
         json = contract_supply_point.get("supplyPoint");
         if (json instanceof  JSONObject){
+            System.out.println(((JSONObject)json).getString("energy").toString());
             compteur = ((((JSONObject) json).getString("ean_18")));
             typeEnergie = ((JSONObject)json).getString("energy");
             etat_compteur = getEtat_compteur(contract_supply_point);
         }
 
     }
-    private String getEtat_compteur(JSONObject contract_supply_point){
-        System.out.println(contract_supply_point.toString());
-        Object json  = contract_supply_point.get("wallet");
-        if (json instanceof  JSONObject){
-            if (((JSONObject) json).isEmpty()){
-                return "Non alloué";
-            }
-            else
-            {
-                return "Alloué";
+    public static String getEtat_compteur(JSONObject contract_supply_point){
+        System.out.println("etat du compteur : "+contract_supply_point.toString());
+        Object json = null;
+        if (contract_supply_point.has("wallet"))
+        {
+            json = contract_supply_point.get("wallet");
+            if (json instanceof  JSONObject){
+                if (((JSONObject) json).isEmpty()){
+                    return "Non Alloue";
+                }
+                else
+                {
+                    return "Alloue";
+                }
             }
         }
-        return "Non alloué";
+        return "Non Alloue";
     }
 
     public String getNom_client() {

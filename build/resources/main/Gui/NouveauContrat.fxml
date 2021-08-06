@@ -21,7 +21,6 @@
         <columns>
             <TableColumn fx:id="colNomClient" prefWidth="123.0" text="Nom Client" />
             <TableColumn fx:id="colNumeroContrat" prefWidth="110.0" text="Numéro Contrat" />
-            <TableColumn fx:id="colTypeContart" prefWidth="104.0" text="Type Contrat" />
             <TableColumn fx:id="colDebutContrat" prefWidth="97.0" text="Début Contrat" />
             <TableColumn fx:id="colFinContrat" prefWidth="90.0" text="Fin Contrat" />
             <TableColumn fx:id="colCompteur" prefWidth="85.0" text=" Compteur" />

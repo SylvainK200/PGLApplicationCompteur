@@ -13,7 +13,7 @@ public class AllContract {
     private  String debut_contrat;
     private String fin_contrat;
     private String compteur;
-    private String typeEnergie;
+    private String energy;
     private String etat_compteur;
     private double meter_rate;
     private double network_manager_cost;
@@ -41,7 +41,7 @@ public class AllContract {
         json = contract_supply_point.get("supplyPoint");
         if (json instanceof  JSONObject){
             compteur = ((((JSONObject) json).getString("ean_18")));
-            typeEnergie = ((JSONObject)json).getString("energy");
+            energy = ((JSONObject)json).getString("energy");
             etat_compteur = getEtat_compteur(contract_supply_point);
         }
 
@@ -51,14 +51,14 @@ public class AllContract {
             Object json  = contract_supply_point.get("wallet");
             if (json instanceof  JSONObject){
                 if (((JSONObject) json).isEmpty()){
-                    return "Non alloué";
+                    return "Non alloue";
                 }
                 else
                 {
-                    return "Alloué";
+                    return "Alloue";
                 }
             }
-            return "Non alloué";
+            return "Non alloue";
         }
 
     public String getNom_client() {
@@ -85,8 +85,8 @@ public class AllContract {
         return compteur;
     }
 
-    public String getTypeEnergie() {
-        return typeEnergie;
+    public String getEnergy() {
+        return energy;
     }
 
     public String getEtat_compteur() {
