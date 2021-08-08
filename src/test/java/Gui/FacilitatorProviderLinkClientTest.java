@@ -28,22 +28,15 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     @Override public void start(Stage stage) throws Exception{
         FacilitatorProviderLinkClient.startForTests(stage);
     }
-    
-    @Test
-    public void t1_should_contain_button() {
-        // expect:
-        verifyThat("#connect_button", hasText("Se connecter"));
-    }
 
     @Test 
     public void t2_login_should_work() {
         //when set username
-        clickOn("#identifiant").write("isaac");
+        clickOn("#identifiant").write("test");
         //and set password
-        clickOn("#mot_de_passe").write("pass");
+        clickOn("#mot_de_passe").write("test");
         //and select user type
         clickOn("#type_utilisateur");
-        type(KeyCode.DOWN);
         type(KeyCode.DOWN);
         type(KeyCode.ENTER);
         clickOn("#connect_button");
@@ -51,6 +44,40 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         // expect:
         verifyThat("#Buttonrecherche", hasText("Recherche"));
     }
+    
+    @Test
+    public void t1_should_contain_button() {
+        // expect:
+        verifyThat("#connect_button", hasText("Se connecter"));
+    }
+
+
+    @Test 
+    public void t0_signup_should_work() {
+        //Loading page
+        clickOn("#creer_compte");
+        WaitForAsyncUtils.waitForFxEvents();
+        
+        clickOn("#nom").write("test");        
+        clickOn("#number").write("690909090");
+        clickOn("#identifiant").write("test");
+        clickOn("#adresse_mail").write("mail@example.com");
+        clickOn("#mot_de_passe").write("test");
+        clickOn("#confirmation_mot_de_passe").write("test");
+        clickOn("#question_secrete").write("test");
+        clickOn("#reponse_question_secrete").write("test");
+        clickOn("#street").write("test");
+        clickOn("#city").write("test");
+        clickOn("#postal_code").write("012");
+        clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#creer_compte");
+        WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#Buttonrecherche", hasText("Recherche"));
+    }
+
     /*
         @Test public void should_click_on_button() {
             // when:
