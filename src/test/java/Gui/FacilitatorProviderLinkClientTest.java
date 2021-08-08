@@ -30,11 +30,27 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     }
 
     @Test 
-    public void t2_login_should_work() {
+    public void t2_login_conso_should_work() {
         //when set username
-        clickOn("#identifiant").write("isaac");
+        clickOn("#identifiant").write("test0conso");
         //and set password
-        clickOn("#mot_de_passe").write("pass");
+        clickOn("#mot_de_passe").write("test");
+        //and select user type
+        clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#connect_button");
+        WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#exporter_button", hasText("Exporter"));
+    }
+
+    @Test 
+    public void t2_login_provider_should_work() {
+        //when set username
+        clickOn("#identifiant").write("test0pro");
+        //and set password
+        clickOn("#mot_de_passe").write("test");
         //and select user type
         clickOn("#type_utilisateur");
         type(KeyCode.DOWN);
@@ -45,23 +61,44 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         // expect:
         verifyThat("#Buttonrecherche", hasText("Recherche"));
     }
-    
-    @Test
-    public void t1_should_contain_button() {
-        // expect:
-        verifyThat("#connect_button", hasText("Se connecter"));
-    }
 
 
     @Test 
-    public void t0_signup_should_work() {
+    public void t1_signup_provider_should_work() {
         //Loading page
         clickOn("#creer_compte");
         WaitForAsyncUtils.waitForFxEvents();
         
-        clickOn("#nom").write("test");        
+        clickOn("#nom").write("test0pro");        
         clickOn("#number").write("690909090");
-        clickOn("#identifiant").write("test");
+        clickOn("#identifiant").write("test0pro");
+        clickOn("#adresse_mail").write("mail@example.com");
+        clickOn("#mot_de_passe").write("test");
+        clickOn("#confirmation_mot_de_passe").write("test");
+        clickOn("#question_secrete").write("test");
+        clickOn("#reponse_question_secrete").write("test");
+        clickOn("#street").write("test");
+        clickOn("#city").write("test");
+        clickOn("#postal_code").write("012");
+        clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#creer_compte");
+        WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#connect_button", hasText("Se connecter"));
+    }
+
+    @Test 
+    public void t1_signup_conso_should_work() {
+        //Loading page
+        clickOn("#creer_compte");
+        WaitForAsyncUtils.waitForFxEvents();
+        
+        clickOn("#nom").write("test0conso");        
+        clickOn("#number").write("690909090");
+        clickOn("#identifiant").write("test0conso");
         clickOn("#adresse_mail").write("mail@example.com");
         clickOn("#mot_de_passe").write("test");
         clickOn("#confirmation_mot_de_passe").write("test");
@@ -75,6 +112,12 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         type(KeyCode.ENTER);
         clickOn("#creer_compte");
         WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#connect_button", hasText("Se connecter"));
+    }
+
+    @Test
+    public void t0_should_contain_button() {
         // expect:
         verifyThat("#connect_button", hasText("Se connecter"));
     }
