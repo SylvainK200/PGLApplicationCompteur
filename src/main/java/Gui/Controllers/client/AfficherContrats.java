@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.findUnique;
+import static Gui.FacilitatorProviderLinkClient.currentClient;
 import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 public class AfficherContrats {
@@ -107,7 +108,7 @@ public class AfficherContrats {
         col_network_manager_cost.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("network_manager_cost"));
         col_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("tax_rate"));
         col_over_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("over_tax_rate"));
-        JSONArray contract_supply = find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
+        JSONArray contract_supply = find("contractSupplyPoint/client/identifiant/"+currentClient.getString("identifiant"));
         for (int i =0;i<contract_supply.length();i++){
             // formation de chaque ligne du tableau a remplir
             JSONObject client = this.findClientOfContract(contract_supply.getJSONObject(i));

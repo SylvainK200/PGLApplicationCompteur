@@ -2,18 +2,18 @@ Gui/Controllers/SupprimerDonnees.java
  Gui.Controllers.SupprimerDonnees
 Gui/FacilitatorProviderLinkClient.java
  Gui.FacilitatorProviderLinkClient
-Gui/Controllers/client/AfficherContrats.java
- Gui.Controllers.client.AfficherContrats
-Gui/ModelTabs/MenuPrincipalConsommateurTable.java
- Gui.ModelTabs.MenuPrincipalConsommateurTable
+Gui/ModelTabs/AllContract.java
+ Gui.ModelTabs.AllContract
+Gui/Controllers/Affectation.java
+ Gui.Controllers.Affectation
 Gui/Controllers/RetrouverCompte.java
  Gui.Controllers.RetrouverCompte
-Gui/Controllers/client/MenuPrincipaleConsommateur.java
- Gui.Controllers.client.MenuPrincipaleConsommateur
 Gui/Controllers/Login.java
  Gui.Controllers.Login
-Gui/Controllers/client/HistoriqueCompteur.java
- Gui.Controllers.client.HistoriqueCompteur
+Gui/Controllers/Exportation.java
+ Gui.Controllers.Exportation
+Gui/Controllers/client/AfficherContrats.java
+ Gui.Controllers.client.AfficherContrats
 Gui/Controllers/SeConnecter.java
  Gui.Controllers.SeConnecter
 Gui/Controllers/NouveauContrat.java
@@ -27,13 +27,15 @@ Gui/ModelTabs/NewContractTable.java
  Gui.ModelTabs.NewContractTable
 Gui/ModelTabs/MenuPrincipalTable.java
  Gui.ModelTabs.MenuPrincipalTable
-Gui/ModelTabs/AllContract.java
- Gui.ModelTabs.AllContract
-Gui/Controllers/MenuPrincipale.java
- Gui.Controllers.MenuPrincipale
-Gui/Controllers/Exportation.java
- Gui.Controllers.Exportation
-Gui/Controllers/Affectation.java
- Gui.Controllers.Affectation
 Gui/Controllers/AffichierContrats.java
  Gui.Controllers.AffichierContrats
+Gui/ModelTabs/MenuPrincipalConsommateurTable.java
+ Gui.ModelTabs.MenuPrincipalConsommateurTable
+Gui/Controllers/MenuPrincipale.java
+ Gui.Controllers.MenuPrincipale
+Gui/Controllers/client/MenuPrincipaleConsommateur.java
+ Gui.Controllers.client.MenuPrincipaleConsommateur
+Gui/ModelTabs/HistoriqueTable.java
+ Gui.ModelTabs.HistoriqueTable
+Gui/Controllers/client/HistoriqueCompteur.java
+ Gui.Controllers.client.HistoriqueCompteur

@@ -1,6 +1,14 @@
 package Gui.ModelTabs;
 
+import javafx.fxml.FXML;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
+
+import static Gui.Controllers.NouveauContrat.find;
 
 public class MenuPrincipalConsommateurTable {
     public String ean_18;
@@ -10,9 +18,39 @@ public class MenuPrincipalConsommateurTable {
     public String date_affectation;
     public String date_cloture;
     public String wallet;
-
+    public String consommation;
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
+        System.out.println("debut ligne");
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        ean_18 = contract_supply_point.getJSONObject("supplyPoint").getString("ean_18");
+        type_energie = contract_supply_point.getJSONObject("supplyPoint").getString("energy");
+        type_compteur = contract_supply_point.getString("meter_type");
+        Fournisseur = contract_supply_point.getJSONObject("contract").getJSONObject("provider").getString("company_name");
+        System.out.println("date");
+        date_affectation = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
+        date_cloture = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
+        System.out.println("contract ; "+contract_supply_point.get("wallet"));
+        if (!Objects.nonNull(contract_supply_point.get("wallet"))){
+            wallet = contract_supply_point.getJSONObject("wallet").getString("name");
+        }
+        else{
+            wallet = "Pas defini";
+        }
+        long id = contract_supply_point.getJSONObject("supplyPoint").getLong("id");
 
+        JSONArray consommations = find("consommationValue/historiqueRecent/"+id);
+        if (!Objects.nonNull(consommations)){
+            System.out.println("identifiant numerique "+id);
+            consommation = consommations.getJSONObject(0).getDouble("value")+"";
+        }else {
+            System.out.println("consommation : ");
+            consommation = "0";
+            System.out.println(consommation);
+        }
+
+    }
+    public String getConsommation(){
+        return consommation;
     }
     public String getWallet(){
         return wallet;

@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.client.HistoriqueCompteur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.client.HistoriqueCompteur">
    <children>
-      <Label layoutX="472.0" layoutY="32.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
-      <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="28.0" prefHeight="26.0" prefWidth="197.0" promptText="choisir EAN" />
-      <TableView fx:id="table" layoutX="14.0" layoutY="147.0" prefHeight="322.0" prefWidth="631.0">
+      <Label layoutX="472.0" layoutY="52.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
+      <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="48.0" prefHeight="26.0" prefWidth="197.0" promptText="afficher information  EAN" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="116.0" prefHeight="322.0" prefWidth="631.0">
         <columns>
             <TableColumn fx:id="colEAN" prefWidth="120.79998207092285" text="EAN" />
             <TableColumn fx:id="type_energy" prefWidth="136.00003051757812" text="Type d'énergie" />
@@ -22,9 +22,9 @@
             <TableColumn fx:id="fournisseur" prefWidth="127.20000000000005" text="Fournisseur" />
         </columns>
       </TableView>
-      <Button fx:id="boutton_retour" layoutX="586.0" layoutY="479.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="116.0" text="Retour" />
+      <Button fx:id="boutton_retour" layoutX="779.0" layoutY="47.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="116.0" text="Retour" />
        <AnchorPane fx:id="exportation" layoutX="1265.0" layoutY="-3.0" prefHeight="665.0" prefWidth="1060.0" />
-      <AnchorPane layoutX="654.0" layoutY="147.0" prefHeight="275.0" prefWidth="250.0">
+      <AnchorPane layoutX="657.0" layoutY="96.0" prefHeight="275.0" prefWidth="250.0">
          <children>
             <Label layoutX="17.0" layoutY="22.0" text="Exporter les donnees ">
                <font>
@@ -34,7 +34,7 @@
             <ComboBox fx:id="ean_exporter" layoutX="15.0" layoutY="62.0" prefHeight="26.0" prefWidth="200.0" promptText="Choisir EAN" />
             <DatePicker fx:id="date_debut_importation" layoutX="16.0" layoutY="101.0" prefHeight="26.0" prefWidth="200.0" promptText="date minimale" />
             <DatePicker fx:id="date_maximale" layoutX="16.0" layoutY="140.0" prefHeight="26.0" prefWidth="200.0" promptText="date maximale" />
-            <Button fx:id="exporter_button" layoutX="2.0" layoutY="188.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="100.0" text="Exporter" />
+            <Button fx:id="exporter_button" layoutX="7.0" layoutY="188.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="100.0" text="Exporter" />
             <Button fx:id="annuler" layoutX="126.0" layoutY="188.0" mnemonicParsing="false" onAction="#annuler_button" prefHeight="26.0" prefWidth="113.0" text="Annuler" />
          </children>
       </AnchorPane>
