@@ -67,13 +67,10 @@ public class FacilitatorProviderLinkClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        stage=primaryStage;
+       stage=primaryStage;
        showPages("login.fxml");
-
-
-
-
     }
+    
     public void iporterFileCSV(File file,String typeCompteur){
         //JSONObject compteur = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
         try {
