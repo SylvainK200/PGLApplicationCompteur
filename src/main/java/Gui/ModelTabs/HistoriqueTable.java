@@ -10,8 +10,12 @@ public class HistoriqueTable {
     private String consommation;
     private String fournisseur;
 
-    public HistoriqueTable (JSONObject consommation, String fournisseur){
-
+    public HistoriqueTable (JSONObject consommationelt, String fournis){
+        ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");
+        type_energy= consommationelt.getJSONObject("supplyPoint").getString("energy");
+        date = consommationelt.getDouble("date")+"";
+        consommation = consommationelt.getDouble("value")+"";
+        fournisseur = fournis;
     }
     public String getEan() {
         return ean;
