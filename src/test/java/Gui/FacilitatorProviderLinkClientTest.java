@@ -32,11 +32,12 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     @Test 
     public void t2_login_should_work() {
         //when set username
-        clickOn("#identifiant").write("test");
+        clickOn("#identifiant").write("isaac");
         //and set password
-        clickOn("#mot_de_passe").write("test");
+        clickOn("#mot_de_passe").write("pass");
         //and select user type
         clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
         type(KeyCode.DOWN);
         type(KeyCode.ENTER);
         clickOn("#connect_button");
@@ -75,7 +76,7 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         clickOn("#creer_compte");
         WaitForAsyncUtils.waitForFxEvents();
         // expect:
-        verifyThat("#Buttonrecherche", hasText("Recherche"));
+        verifyThat("#connect_button", hasText("Se connecter"));
     }
 
     /*

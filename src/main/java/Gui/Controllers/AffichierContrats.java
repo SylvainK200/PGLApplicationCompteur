@@ -79,6 +79,7 @@ public class AffichierContrats {
             contratsList.setPredicate(
                     contrat->{
                         if (newValue==null|| newValue.isEmpty()){
+
                             return true;
                         }
                         if (contrat.getNum_contrat().toLowerCase().contains(newValue.toLowerCase()) ||
@@ -86,11 +87,15 @@ public class AffichierContrats {
                                 contrat.getEnergy().toLowerCase().contains(newValue.toLowerCase()) ||
                                         contrat.getCompteur().toLowerCase().toLowerCase().contains((newValue.toLowerCase())) ||
                         contrat.getEtat_compteur().toLowerCase().contains(newValue.toLowerCase())) {
+
                             return true;
                         }
+
                         return false;
                     }
             );
+            table_contrat.getItems().clear();
+            table_contrat.getItems().addAll(contratsList);
         });
 
     }

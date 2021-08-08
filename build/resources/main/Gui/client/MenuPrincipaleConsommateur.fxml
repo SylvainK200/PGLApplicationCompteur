@@ -104,7 +104,7 @@
                      <Font name="Algerian" size="19.0" />
                   </font>
                </Label>
-               <Button fx:id="valider" layoutX="907.0" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="valider" />
+               <Button fx:id="valider" layoutX="907.0" onAction="#registerConsommation" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="valider" />
                <Label layoutX="803.0" layoutY="437.0" text="Exporter les donnees ">
                   <font>
                      <Font name="Algerian" size="19.0" />

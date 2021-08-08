@@ -240,7 +240,7 @@ public class MenuPrincipale  {
     public void goToImporter(){
        if (type_compteur.getValue()!=null ){
         FileChooser js = new FileChooser();
-        js.setTitle("Export to a csv file");
+        js.setTitle("Import an CSV file");
 
            File result = js.showOpenDialog(null);
         if (result!=null)

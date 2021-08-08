@@ -31,6 +31,8 @@ Gui/ModelTabs/AllContract.java
  Gui.ModelTabs.AllContract
 Gui/Controllers/MenuPrincipale.java
  Gui.Controllers.MenuPrincipale
+Gui/ModelTabs/HistoriqueTable.java
+ Gui.ModelTabs.HistoriqueTable
 Gui/Controllers/Exportation.java
  Gui.Controllers.Exportation
 Gui/Controllers/Affectation.java

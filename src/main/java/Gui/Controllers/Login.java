@@ -71,7 +71,7 @@ public class Login {
                     }else {
                         currentClient = user;
                         System.out.println("current provider :" + currentClient.toString());
-                        FacilitatorProviderLinkClient.showPages("MenuPrincipaleConsommateur.fxml");
+                        FacilitatorProviderLinkClient.showPages("client/MenuPrincipaleConsommateur.fxml");
                         response.close();
                     }
 
