@@ -18,6 +18,11 @@ ext {
 
 test {
 	useJUnitPlatform()
+	testLogging {
+        exceptionFormat = 'full'
+        events = ["passed", "failed", "skipped"]
+        //showStandardStreams = true
+    }
 }
 
 dependencies {
@@ -32,7 +37,7 @@ dependencies {
     implementation 'org.loadui:testFx:3.1.2'
 
     implementation ("org.testfx:testfx-junit5:4.0.16-alpha") 
-    testCompile("org.hamcrest:hamcrest-junit:2.0.0.0")		
+    testImplementation "org.hamcrest:hamcrest-junit:2.0.0.0"
 }
 
 mainClassName = 'Gui.FacilitatorProviderLinkClient'

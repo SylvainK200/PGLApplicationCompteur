@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.MenuPrincipale">
+
+    <style>
+        -fx-padding: 10;
+        -fx-border-style: solid inside;
+        -fx-border-width: 2;
+        -fx-border-insets: 5;
+        -fx-border-radius: 5;
+        -fx-border-color: blue;
+    </style>
+    <children>
+        <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+
+                <Menu mnemonicParsing="false" text="Gérer  des données">
+                    <items>
+                        <MenuItem fx:id="modifier_donnee" mnemonicParsing="false" onAction="#goToModifierDonnee" text="Modifier des données" />
+                    </items>
+                    <items>
+
+                        <MenuItem fx:id="supprimer_donnee" mnemonicParsing="false" onAction="#goToSupprimerDonnee" text="Supprimer des données" />
+
+                    </items>
+                    <items>
+                        <MenuItem fx:id="importer" mnemonicParsing="false" onAction="#goToImporter" text="Importation" />
+                    </items>
+                    <items>
+                        <MenuItem fx:id="exporter" mnemonicParsing="false" onAction="#goToExporter" text="Exportation" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestion Contrat">
+                    <items>
+                        <MenuItem fx:id="afficher_contrat" mnemonicParsing="false" onAction="#goToAfficherContrat" text="Afficher Les  Contrats" />
+                    </items>
+                    <items>
+                        <MenuItem fx:id="etablir_contrat" mnemonicParsing="false" onAction="#goToEtablirContrat" text=" Etablir Nouveau Contrat" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Se déconnecter">
+                    <items>
+                        <MenuItem fx:id="se_deconnecter" mnemonicParsing="false" onAction="#seDeconnecter" text="deconnexion" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </children>
+    <children>
+
+            <Label fx:id="lblEAN" layoutX="600" layoutY="54" text="EAN :   " />
+            <TextField fx:id="textEAN" layoutX="650" layoutY="48" promptText="ean a rechercher" />
+           <Button fx:id="Buttonrecherche" layoutX="820.0" layoutY="46.0" mnemonicParsing="false" onAction="#onclickrechercher" text="Recherche" />
+
+        <Label fx:id="labelEAN" layoutX="600.0" layoutY="107.0" text="EAN :   " />
+        <TextField fx:id="resultEAN" disable="true" layoutX="750.0" layoutY="107.0" />
+
+        <Label fx:id="lblConsommation" layoutX="600.0" layoutY="148.0" text="Consommation  :   " />
+        <TextField fx:id="resultConsommation" disable="true" layoutX="750.0" layoutY="148.0" />
+        <Label fx:id="lblConsommateur" layoutX="600.0" layoutY="188.0" text="Consommateur  :   " />
+        <TextField fx:id="resultConsommateur" disable="true" layoutX="750.0" layoutY="188.0" />
+
+        <Label fx:id="lblClient" layoutX="10.0" layoutY="93.0" text="Client :   " />
+        <ComboBox fx:id="combClient" layoutX="110.0" layoutY="88.0" prefWidth="150.0" promptText="client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label fx:id="lblPortefeuille" layoutX="10.0" layoutY="148.0" text="Portefeuille :   " />
+        <ComboBox fx:id="combPortefeuille" layoutX="110.0" layoutY="148.0" prefWidth="150.0" promptText="portefeuille" GridPane.columnIndex="2" GridPane.rowIndex="5">
+
+        </ComboBox>
+        <Label fx:id="lblCompteur" layoutX="10.0" layoutY="208.0" text="Compteur :   " />
+        <ComboBox fx:id="compteur" layoutX="110.0" layoutY="203.0" prefWidth="150.0" promptText="Compteurs">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Compteurs affectés " />
+                    <String fx:value="Compteurs inactifs" />
+
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TableView fx:id="table" layoutX="79.0" layoutY="300.0" prefHeight="400.0" prefWidth="720.0">
+            <columns>
+                <TableColumn fx:id="colEAN" prefWidth="123.0" text="EAN" />
+                <TableColumn fx:id="colConsommation" prefWidth="147.00001525878906" text="Cosommation" />
+                <TableColumn fx:id="colCout" prefWidth="64.33331298828125" text="Coût" />
+                <TableColumn fx:id="colCompteur" prefWidth="128.99996948242188" text="Type Compteur" />
+                <TableColumn fx:id="colDateAffectation" prefWidth="111.33331298828125" text="Date Affectation" />
+                <TableColumn fx:id="colDateClotur" prefWidth="118.3333740234375" text="Date de clôlur" />
+            </columns>
+        </TableView>
+      <ComboBox fx:id="compteur_importer" layoutX="325.0" layoutY="88.0" prefHeight="26.0" prefWidth="180.0" promptText="compteurs a importer" />
+      <Text layoutX="332.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="importer donnees compteurs" wrappingWidth="165.5999755859375" />
+      <ComboBox fx:id="type_compteur" layoutX="327.0" layoutY="146.0" prefHeight="37.0" prefWidth="180.0" promptText="type compteur" />
+    </children>
+
+</AnchorPane>

@@ -70,6 +70,11 @@ public class FacilitatorProviderLinkClient extends Application {
        stage=primaryStage;
        showPages("login.fxml");
     }
+
+    public static void startForTests(Stage primaryStage) throws Exception{
+        stage=primaryStage;
+        showPages("login.fxml");
+     }
     
     public void iporterFileCSV(File file,String typeCompteur){
         //JSONObject compteur = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
