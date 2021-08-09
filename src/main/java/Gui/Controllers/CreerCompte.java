@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import okhttp3.*;
 import org.json.JSONObject;
@@ -35,10 +36,10 @@ public class CreerCompte {
     private TextField adresse_mail;
 
     @FXML
-    private TextField mot_de_passe;
+    private PasswordField mot_de_passe;
 
     @FXML
-    private TextField confirmation_mot_de_passe;
+    private PasswordField confirmation_mot_de_passe;
 
     @FXML
     private TextField question_secrete;
