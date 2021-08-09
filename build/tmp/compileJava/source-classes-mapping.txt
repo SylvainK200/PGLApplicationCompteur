@@ -6,14 +6,14 @@ Gui/ModelTabs/AllContract.java
  Gui.ModelTabs.AllContract
 Gui/Controllers/Affectation.java
  Gui.Controllers.Affectation
-Gui/Controllers/RetrouverCompte.java
- Gui.Controllers.RetrouverCompte
-Gui/Controllers/Login.java
- Gui.Controllers.Login
+Gui/ModelTabs/MenuPrincipalConsommateurTable.java
+ Gui.ModelTabs.MenuPrincipalConsommateurTable
+Gui/Controllers/client/HistoriqueCompteur.java
+ Gui.Controllers.client.HistoriqueCompteur
 Gui/Controllers/Exportation.java
  Gui.Controllers.Exportation
-Gui/Controllers/CreerCompte.java
- Gui.Controllers.CreerCompte
+Gui/Controllers/client/MenuPrincipaleConsommateur.java
+ Gui.Controllers.client.MenuPrincipaleConsommateur
 Gui/Controllers/SeConnecter.java
  Gui.Controllers.SeConnecter
 Gui/ModelTabs/NewContractTable.java
@@ -30,12 +30,12 @@ Gui/Controllers/AffichierContrats.java
  Gui.Controllers.AffichierContrats
 Gui/Controllers/MenuPrincipale.java
  Gui.Controllers.MenuPrincipale
+Gui/Controllers/CreerCompte.java
+ Gui.Controllers.CreerCompte
+Gui/Controllers/RetrouverCompte.java
+ Gui.Controllers.RetrouverCompte
+Gui/Controllers/Login.java
+ Gui.Controllers.Login
 Gui/Controllers/NouveauContrat.java
  Gui.Controllers.NouveauContrat
  Gui.Controllers.NouveauContrat$MeterType
-Gui/Controllers/client/HistoriqueCompteur.java
- Gui.Controllers.client.HistoriqueCompteur
-Gui/ModelTabs/MenuPrincipalConsommateurTable.java
- Gui.ModelTabs.MenuPrincipalConsommateurTable
-Gui/Controllers/client/MenuPrincipaleConsommateur.java
- Gui.Controllers.client.MenuPrincipaleConsommateur

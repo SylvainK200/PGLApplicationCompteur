@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -25,7 +26,7 @@ public class Login {
     private TextField identifiant;
 
     @FXML
-    private TextField mot_de_passe;
+    private PasswordField mot_de_passe;
 
     @FXML
     private Button connect_button;

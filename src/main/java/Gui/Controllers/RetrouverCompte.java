@@ -4,6 +4,7 @@ import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import okhttp3.OkHttpClient;
@@ -33,10 +34,10 @@ public class RetrouverCompte {
     private TextArea reponse_secrete;
 
     @FXML
-    private TextField new_password;
+    private PasswordField new_password;
 
     @FXML
-    private TextField confirm_password;
+    private PasswordField confirm_password;
 
     @FXML
     private Button valider;
