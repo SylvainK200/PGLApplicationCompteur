@@ -19,6 +19,7 @@ public class MenuPrincipalConsommateurTable {
     public String date_cloture;
     public String wallet;
     public String consommation;
+    public boolean allocated;
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
         System.out.println("debut ligne");
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -47,8 +48,12 @@ public class MenuPrincipalConsommateurTable {
             consommation = "0";
             System.out.println(consommation);
         }
-
     }
+
+    public boolean isAllocated() {
+        return allocated;
+    }
+
     public String getConsommation(){
         return consommation;
     }

@@ -12,8 +12,8 @@ Gui/Controllers/Login.java
  Gui.Controllers.Login
 Gui/Controllers/Exportation.java
  Gui.Controllers.Exportation
-Gui/Controllers/client/AfficherContrats.java
- Gui.Controllers.client.AfficherContrats
+Gui/Controllers/MenuPrincipale.java
+ Gui.Controllers.MenuPrincipale
 Gui/Controllers/SeConnecter.java
  Gui.Controllers.SeConnecter
 Gui/Controllers/NouveauContrat.java
@@ -29,10 +29,10 @@ Gui/ModelTabs/MenuPrincipalTable.java
  Gui.ModelTabs.MenuPrincipalTable
 Gui/Controllers/AffichierContrats.java
  Gui.Controllers.AffichierContrats
+Gui/Controllers/client/AfficherContrats.java
+ Gui.Controllers.client.AfficherContrats
 Gui/ModelTabs/MenuPrincipalConsommateurTable.java
  Gui.ModelTabs.MenuPrincipalConsommateurTable
-Gui/Controllers/MenuPrincipale.java
- Gui.Controllers.MenuPrincipale
 Gui/Controllers/client/MenuPrincipaleConsommateur.java
  Gui.Controllers.client.MenuPrincipaleConsommateur
 Gui/ModelTabs/HistoriqueTable.java

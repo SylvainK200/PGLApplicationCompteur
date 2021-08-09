@@ -31,8 +31,14 @@
                      <MenuItem fx:id="contrats_button" mnemonicParsing="false" onAction="#goToContrats" text="contrats" />
             </items>
           </Menu>
-          <Menu fx:id="historique" mnemonicParsing="false" onAction="#goToHistorique" text="Historique d'un compteur" />
-            <Menu fx:id="deconnecter" mnemonicParsing="false" onAction="#deconnecter" text="Deconnecter" />
+          <Menu fx:id="historique" mnemonicParsing="false" onAction="#goToHistorique" text="Historique d'un compteur">
+                  <items>
+                     <MenuItem mnemonicParsing="false" onAction="#goToHistorique" text="historique" />
+                  </items></Menu>
+            <Menu fx:id="deconnecter" mnemonicParsing="false" onAction="#deconnecter" text="Deconnecter">
+                  <items>
+                     <MenuItem fx:id="deconnec" mnemonicParsing="false" onAction="#deconnecter" text="deconnecter" />
+                  </items></Menu>
         </menus>
       </MenuBar>
       <AnchorPane prefHeight="667.0" prefWidth="1098.0">
@@ -104,7 +110,7 @@
                      <Font name="Algerian" size="19.0" />
                   </font>
                </Label>
-               <Button fx:id="valider" layoutX="907.0" onAction="#registerConsommation" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="valider" />
+               <Button fx:id="valider" layoutX="907.0" layoutY="382.0" mnemonicParsing="false" onAction="#registerConsommation" prefHeight="26.0" prefWidth="100.0" text="valider" />
                <Label layoutX="803.0" layoutY="437.0" text="Exporter les donnees ">
                   <font>
                      <Font name="Algerian" size="19.0" />

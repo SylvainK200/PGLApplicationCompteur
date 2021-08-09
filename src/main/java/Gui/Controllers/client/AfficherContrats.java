@@ -70,7 +70,7 @@ public class AfficherContrats {
     @FXML
     void quitterPage(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();
-        FacilitatorProviderLinkClient.showPages("MenuPrincipaleConsommateur.fxml");
+        FacilitatorProviderLinkClient.showPages("client/MenuPrincipaleConsommateur.fxml");
     }
 
     public void initialize(){
