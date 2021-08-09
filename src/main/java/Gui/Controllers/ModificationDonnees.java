@@ -14,8 +14,7 @@ import java.util.List;
 
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.updateObject;
-import static Gui.FacilitatorProviderLinkClient.current_supply_point;
-import static Gui.FacilitatorProviderLinkClient.extractConsommations;
+import static Gui.FacilitatorProviderLinkClient.*;
 
 public class ModificationDonnees {
     @FXML
@@ -40,10 +39,10 @@ public class ModificationDonnees {
     JSONObject consommation ;
     public void initialize(){
         current = current_supply_point;
-        JSONArray consommationsValues =  find("supplyPoint");
+        JSONArray consommationsValues =  find("consommationValue/historiqueRecent/"+current_supply_point.getLong("id"));
         List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
-        if (consommations.size()>0){
-            consommation = consommations.get(consommations.size()-1);
+        if (consommationsValues.length()>0){
+            consommation = consommationsValues.getJSONObject(0);
             textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
         }
 

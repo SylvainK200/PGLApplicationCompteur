@@ -1,5 +1,5 @@
-Gui/Controllers/SupprimerDonnees.java
- Gui.Controllers.SupprimerDonnees
+Gui/ModelTabs/HistoriqueTable.java
+ Gui.ModelTabs.HistoriqueTable
 Gui/FacilitatorProviderLinkClient.java
  Gui.FacilitatorProviderLinkClient
 Gui/ModelTabs/AllContract.java
@@ -12,30 +12,30 @@ Gui/Controllers/Login.java
  Gui.Controllers.Login
 Gui/Controllers/Exportation.java
  Gui.Controllers.Exportation
-Gui/Controllers/MenuPrincipale.java
- Gui.Controllers.MenuPrincipale
+Gui/Controllers/CreerCompte.java
+ Gui.Controllers.CreerCompte
 Gui/Controllers/SeConnecter.java
  Gui.Controllers.SeConnecter
+Gui/ModelTabs/NewContractTable.java
+ Gui.ModelTabs.NewContractTable
+Gui/Controllers/ModificationDonnees.java
+ Gui.Controllers.ModificationDonnees
+Gui/ModelTabs/MenuPrincipalTable.java
+ Gui.ModelTabs.MenuPrincipalTable
+Gui/Controllers/SupprimerDonnees.java
+ Gui.Controllers.SupprimerDonnees
+Gui/Controllers/client/AfficherContrats.java
+ Gui.Controllers.client.AfficherContrats
+Gui/Controllers/AffichierContrats.java
+ Gui.Controllers.AffichierContrats
+Gui/Controllers/MenuPrincipale.java
+ Gui.Controllers.MenuPrincipale
 Gui/Controllers/NouveauContrat.java
  Gui.Controllers.NouveauContrat
  Gui.Controllers.NouveauContrat$MeterType
-Gui/Controllers/CreerCompte.java
- Gui.Controllers.CreerCompte
-Gui/Controllers/ModificationDonnees.java
- Gui.Controllers.ModificationDonnees
-Gui/ModelTabs/NewContractTable.java
- Gui.ModelTabs.NewContractTable
-Gui/ModelTabs/MenuPrincipalTable.java
- Gui.ModelTabs.MenuPrincipalTable
-Gui/Controllers/AffichierContrats.java
- Gui.Controllers.AffichierContrats
-Gui/Controllers/client/AfficherContrats.java
- Gui.Controllers.client.AfficherContrats
+Gui/Controllers/client/HistoriqueCompteur.java
+ Gui.Controllers.client.HistoriqueCompteur
 Gui/ModelTabs/MenuPrincipalConsommateurTable.java
  Gui.ModelTabs.MenuPrincipalConsommateurTable
 Gui/Controllers/client/MenuPrincipaleConsommateur.java
  Gui.Controllers.client.MenuPrincipaleConsommateur
-Gui/ModelTabs/HistoriqueTable.java
- Gui.ModelTabs.HistoriqueTable
-Gui/Controllers/client/HistoriqueCompteur.java
- Gui.Controllers.client.HistoriqueCompteur
