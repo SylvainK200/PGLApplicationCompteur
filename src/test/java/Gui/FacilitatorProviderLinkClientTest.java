@@ -30,6 +30,87 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     }
 
     @Test 
+    public void t4_create_contract() {
+        //when set username
+        clickOn("#identifiant").write("test0pro");
+        //and set password
+        clickOn("#mot_de_passe").write("test");
+        //and select user type
+        clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#connect_button");
+        WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#Buttonrecherche", hasText("Recherche"));
+        
+        clickOn("#manage_contract");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#NumeroClient");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#combEAN");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        
+        clickOn("#date_debut").write("8/9/2021");
+        clickOn("#date_fin").write("11/9/2021");
+        clickOn("#meter_rate").write("2");
+        clickOn("#network_manager_cost").write("10000");
+        clickOn("#tax_rate").write("33");
+        clickOn("#over_tax_rate").write("40");
+        clickOn("#portefeuille");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#meter_type");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#confirmation_ajout");
+        WaitForAsyncUtils.waitForFxEvents();
+        //verifyThat("#connect_button", hasText("Se connecter"));
+    }
+
+    @Test 
+    public void t3_create_ean() {
+        //when set username
+        clickOn("#identifiant").write("test0pro");
+        //and set password
+        clickOn("#mot_de_passe").write("test");
+        //and select user type
+        clickOn("#type_utilisateur");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#connect_button");
+        WaitForAsyncUtils.waitForFxEvents();
+        // expect:
+        verifyThat("#Buttonrecherche", hasText("Recherche"));
+        
+        clickOn("#manage_contract");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        clickOn("#newEAN").write("eantest0");
+
+        clickOn("#newEnergy");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#budget").write("10000");
+        clickOn("#budgetType").write("Standart");
+        clickOn("#creer_compteur");
+        WaitForAsyncUtils.waitForFxEvents();
+    }
+
+    @Test 
     public void t2_login_conso_should_work() {
         //when set username
         clickOn("#identifiant").write("test0conso");

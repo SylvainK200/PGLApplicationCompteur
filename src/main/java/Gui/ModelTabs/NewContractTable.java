@@ -28,8 +28,8 @@ public class NewContractTable {
            // System.out.println(((JSONObject) json).toString());
             num_contrat = ((JSONObject)json).getString("numero_contract");
 
-            String deb = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
-            String fin = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
+            String deb = df.format(contract_supply_point.getJSONObject("contract").getString("date_begin"));
+            String fin = df.format(contract_supply_point.getJSONObject("contract").getString("date_end"));
 
             debut_contrat = deb;
             fin_contrat = fin;
