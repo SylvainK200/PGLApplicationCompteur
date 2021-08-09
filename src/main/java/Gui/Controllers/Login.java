@@ -76,8 +76,6 @@ public class Login {
                     }
 
                 }
-
-
             } catch (JSONException e) {
                 System.out.println("reponse vide");
 

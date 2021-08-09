@@ -60,6 +60,31 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents();
         // expect:
         verifyThat("#Buttonrecherche", hasText("Recherche"));
+        
+        clickOn("#combClient");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#combPortefeuille");
+
+        clickOn("#compteur");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#compteur_importer");
+
+        clickOn("#type_compteur");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        clickOn("#manage_donnee");
+        type(KeyCode.RIGHT);
+        type(KeyCode.RIGHT);
+        //clickOn("#menu_deconnecter");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        WaitForAsyncUtils.waitForFxEvents();
+        verifyThat("#connect_button", hasText("Se connecter"));
     }
 
 
@@ -102,11 +127,11 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         clickOn("#adresse_mail").write("mail@example.com");
         clickOn("#mot_de_passe").write("test");
         clickOn("#confirmation_mot_de_passe").write("test");
-        clickOn("#question_secrete").write("test");
-        clickOn("#reponse_question_secrete").write("test");
-        clickOn("#street").write("test");
-        clickOn("#city").write("test");
-        clickOn("#postal_code").write("012");
+        clickOn("#question_secrete").write("Who");
+        clickOn("#reponse_question_secrete").write("is");
+        clickOn("#street").write("R0");
+        clickOn("#city").write("Doul");
+        clickOn("#postal_code").write("102");
         clickOn("#type_utilisateur");
         type(KeyCode.DOWN);
         type(KeyCode.ENTER);

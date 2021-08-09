@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import java.util.List;
+import java.lang.Exception;
 
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.updateObject;
@@ -39,12 +40,16 @@ public class ModificationDonnees {
     JSONObject current ;
     JSONObject consommation ;
     public void initialize(){
-        current = current_supply_point;
-        JSONArray consommationsValues =  find("supplyPoint");
-        List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
-        if (consommations.size()>0){
-            consommation = consommations.get(consommations.size()-1);
-            textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
+        try{
+            current = current_supply_point;
+            JSONArray consommationsValues =  find("supplyPoint");
+            List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
+            if (consommations.size()>0){
+                consommation = consommations.get(consommations.size()-1);
+                textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
+            }
+        }catch(Exception e){
+
         }
 
     }
