@@ -29,7 +29,7 @@
         <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
 
-                <Menu mnemonicParsing="false" text="Gérer  des données">
+                <Menu fx:id="manage_donnee" mnemonicParsing="false" text="Gérer  des données">
                     <items>
                         <MenuItem fx:id="modifier_donnee" mnemonicParsing="false" onAction="#goToModifierDonnee" text="Modifier des données" />
                     </items>
@@ -53,7 +53,7 @@
                         <MenuItem fx:id="etablir_contrat" mnemonicParsing="false" onAction="#goToEtablirContrat" text=" Etablir Nouveau Contrat" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Se déconnecter">
+                <Menu fx:id="menu_deconnecter" mnemonicParsing="false" text="Se déconnecter">
                     <items>
                         <MenuItem fx:id="se_deconnecter" mnemonicParsing="false" onAction="#seDeconnecter" text="deconnexion" />
                     </items>

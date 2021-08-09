@@ -135,6 +135,7 @@ public class MenuPrincipaleConsommateur{
         initTable();
         initConsommation();
     }
+    
     void initConsommation(){
         JSONArray supply_points = find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0 ; i<supply_points.length();i++){
