@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1m29.03s</div>
+<div class="counter">1m35.72s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">80%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,16 +61,102 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Standard output</a>
+<a href="#tab1">Tests</a>
 </li>
 <li>
-<a href="#tab2">Standard error</a>
+<a href="#tab2">Standard output</a>
+</li>
+<li>
+<a href="#tab3">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="t2_login_conso_should_work()"></a>
+<h3 class="failures">t2_login_conso_should_work()</h3>
+<span class="code">
+<pre>org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$830/0x000000010048e440@7d6cd235&quot;,
+lookup by selector: &quot;#exporter_button&quot;
+	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
+	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
+	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
+	at tests.FacilitatorProviderLinkClientTest.t2_login_conso_should_work(FacilitatorProviderLinkClientTest.java:45)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:515)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:171)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:167)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:114)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:59)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:105)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -82,94 +168,181 @@
 </thead>
 <tr>
 <td class="success">t0_should_contain_button()</td>
-<td class="success">0.747s</td>
+<td class="success">0.942s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">t1_signup_conso_should_work()</td>
-<td class="success">45.116s</td>
+<td class="success">44.704s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">t1_signup_provider_should_work()</td>
-<td class="success">19.091s</td>
+<td class="success">23.708s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">t2_login_conso_should_work()</td>
-<td class="success">8.983s</td>
-<td class="success">passed</td>
+<td class="failures">t2_login_conso_should_work()</td>
+<td class="failures">8.459s</td>
+<td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">t2_login_provider_should_work()</td>
-<td class="success">15.097s</td>
+<td class="success">17.907s</td>
 <td class="success">passed</td>
 </tr>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
 <pre>Enregistrement termine
 Enregistrement termine
-current provider :{&quot;password&quot;:&quot;test&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;id&quot;:32,&quot;invite&quot;:null,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;address_mail&quot;:&quot;mail@example.com&quot;}
+current provider :{&quot;password&quot;:&quot;test&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;id&quot;:38,&quot;invite&quot;:null,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;address_mail&quot;:&quot;mail@example.com&quot;}
 []
-test0conso
-[]
-[]
-current provider :{&quot;number&quot;:690909090,&quot;password&quot;:&quot;test&quot;,&quot;reponse_secrete&quot;:&quot;test&quot;,&quot;city&quot;:&quot;test&quot;,&quot;street&quot;:&quot;test&quot;,&quot;company_name&quot;:&quot;test0pro&quot;,&quot;identifiant&quot;:&quot;test0pro&quot;,&quot;id&quot;:33,&quot;postal_code&quot;:12,&quot;question_secrete&quot;:&quot;test&quot;,&quot;address_mail&quot;:&quot;mail@example.com&quot;}
-[{&quot;id&quot;:32,&quot;address_mail&quot;:&quot;mail@example.com&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;password&quot;:&quot;test&quot;,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;invite&quot;:null}]
+current provider :{&quot;number&quot;:690909090,&quot;password&quot;:&quot;test&quot;,&quot;reponse_secrete&quot;:&quot;test&quot;,&quot;city&quot;:&quot;test&quot;,&quot;street&quot;:&quot;test&quot;,&quot;company_name&quot;:&quot;test0pro&quot;,&quot;identifiant&quot;:&quot;test0pro&quot;,&quot;id&quot;:39,&quot;postal_code&quot;:12,&quot;question_secrete&quot;:&quot;test&quot;,&quot;address_mail&quot;:&quot;mail@example.com&quot;}
+[{&quot;id&quot;:38,&quot;address_mail&quot;:&quot;mail@example.com&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;password&quot;:&quot;test&quot;,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;invite&quot;:null}]
 []
 client modifie
 Execution de la fonction inittable
-resultat {&quot;id&quot;:32,&quot;address_mail&quot;:&quot;mail@example.com&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;password&quot;:&quot;test&quot;,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;invite&quot;:null}
+resultat {&quot;id&quot;:38,&quot;address_mail&quot;:&quot;mail@example.com&quot;,&quot;name&quot;:&quot;test0conso&quot;,&quot;password&quot;:&quot;test&quot;,&quot;question_secrete&quot;:&quot;Who&quot;,&quot;reponse_secrete&quot;:&quot;is&quot;,&quot;identifiant&quot;:&quot;test0conso&quot;,&quot;wallets&quot;:[],&quot;invite&quot;:null}
 []
 remplissage termine
 </pre>
 </span>
 </div>
-<div id="tab2" class="tab">
+<div id="tab3" class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>Aug 09, 2021 9:45:59 AM javafx.fxml.FXMLLoader$ValueElement processValue
+<pre>Aug 09, 2021 10:32:25 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:06 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:32:30 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:46:13 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:32:36 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:35 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:32:59 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:36 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:32:59 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:46:37 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:00 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:37 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:00 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:46:38 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:02 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:55 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:23 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:55 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:23 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:46:56 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:24 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:56 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:24 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:46:56 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:25 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:46:56 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:25 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:47:01 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:31 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:47:05 AM javafx.fxml.FXMLLoader$ValueElement processValue
+javafx.fxml.LoadException: 
+/media/isaac/Academy/Academie/personal_documents/codes/PGLSecondApplication/build/resources/main/Gui/client/MenuPrincipaleConsommateur.fxml
+
+	at javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2707)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2677)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2548)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3323)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3280)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3249)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3222)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3199)
+	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:3192)
+	at Gui.FacilitatorProviderLinkClient.showPages(FacilitatorProviderLinkClient.java:57)
+	at Gui.Controllers.Login.connect(Login.java:74)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1857)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1729)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8886)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:208)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3856)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1851)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2584)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:409)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:299)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:447)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:412)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:446)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:556)
+	at com.sun.glass.ui.View.notifyMouse(View.java:942)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2673)
+	... 67 more
+Caused by: java.lang.NullPointerException
+	at Gui.Controllers.client.MenuPrincipaleConsommateur.initTable(MenuPrincipaleConsommateur.java:159)
+	at Gui.Controllers.client.MenuPrincipaleConsommateur.initialize(MenuPrincipaleConsommateur.java:135)
+	... 79 more
+Aug 09, 2021 10:33:34 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:47:05 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:34 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 9:47:10 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:38 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:47:20 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Aug 09, 2021 10:33:51 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 9:47:20 AM javafx.css.CssParser declaration
+Aug 09, 2021 10:33:51 AM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '&lt;font-style&gt;' while parsing '-fx-font-style' at [1,34]
 </pre>
 </span>
@@ -182,7 +355,7 @@ WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expec
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1.1</a> at Aug 9, 2021, 9:47:22 AM</p>
+<a href="http://www.gradle.org">Gradle 7.1.1</a> at Aug 9, 2021, 10:33:54 AM</p>
 </div>
 </div>
 </body>

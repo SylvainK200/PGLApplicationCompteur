@@ -217,7 +217,7 @@ public class NouveauContrat {
         newEnergy.getItems().addAll("Electricite","Eau","Gaz");
         System.out.println("Execution de initialize");
         JSONArray clients = findUsers();
-        JSONArray supplies = findSupplyPoints();
+        JSONArray supplies = find("supplyPoint/free");
         JSONObject client = new JSONObject();
         JSONObject supply = new JSONObject();
         ObservableList<String> clientsList = FXCollections.observableArrayList();

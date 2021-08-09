@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import java.sql.Date;
 import java.util.Objects;
 
 import static Gui.Controllers.NouveauContrat.*;
@@ -52,10 +53,12 @@ public class SupprimerDonnees {
     @FXML
     void cloturerCompteurDonnee(ActionEvent event) {
         selectedCompteur = findUnique("supplyPoint/ean_18/"+compteur.getValue());
-        selectedCompteur.remove("home");
+        //selectedCompteur.remove("home");
        // selectedCompteur.put("home", (Collection<?>) null);
-
-        updateObject(selectedCompteur,"supplyPoint");
+        JSONObject currentContract = findUnique("contractSupplyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
+        currentContract.remove("date_cloture");
+        currentContract.put("date_cloture",new Date(System.currentTimeMillis()));
+        updateObject(currentContract,"contractSupplyPoint");
 
         /*PortfolioManagementClient.stage.close();
         PortfolioManagementClient.showPages("MenuPrincipale.fxml");*/

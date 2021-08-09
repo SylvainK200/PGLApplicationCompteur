@@ -53,6 +53,8 @@ public class MenuPrincipaleConsommateur{
 
     @FXML
     private Label utilisateur;
+    @FXML
+    private ComboBox<String> etat_compteur;
 
     @FXML
     private Label nom;
@@ -94,6 +96,8 @@ public class MenuPrincipaleConsommateur{
 
     @FXML
     private Button valider;
+    @FXML
+    private TableColumn<MenuPrincipalConsommateurTable, String> cloture;
 
     @FXML
     private ComboBox<String> ean_exporter;
@@ -117,6 +121,7 @@ public class MenuPrincipaleConsommateur{
     private JSONObject currentSupplyPoint;
 
     public void initialize(){
+        etat_compteur.getItems().addAll("cloture","ouvert");
         utilisateur.setText(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         nom.setText(FacilitatorProviderLinkClient.currentClient.getString("name"));
         JSONArray walets = find ("wallet/user/"+ FacilitatorProviderLinkClient.currentClient.getLong("id"));
@@ -130,6 +135,7 @@ public class MenuPrincipaleConsommateur{
         initTable();
         initConsommation();
     }
+    
     void initConsommation(){
         JSONArray supply_points = find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0 ; i<supply_points.length();i++){
@@ -150,6 +156,7 @@ public class MenuPrincipaleConsommateur{
         });
     }
     void initTable(){
+        cloture.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("cloture"));
         ean.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("ean_18"));
         type_energie.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("type_energie"));
         type_compteur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("type_compteur"));
@@ -185,7 +192,25 @@ public class MenuPrincipaleConsommateur{
             table.getItems().clear();
             table.getItems().addAll(filteredList);
         });
+        etat_compteur.valueProperty().addListener((ObservableValue<? extends  String> observable,String oldValue,String newValue)->{
+            filteredList.setPredicate(
+                    contrat->{
+                        if (newValue=="cloture" && contrat.getCloture().contains("non")){
+                            return true;
+                        }
+                        if (newValue=="ouvert" && !contrat.getCloture().contains("non")) {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+            );
+            table.getItems().clear();
+            table.getItems().addAll(filteredList);
 
+        });
     }
     @FXML
     public void registerConsommation(ActionEvent event){

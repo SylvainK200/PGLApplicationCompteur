@@ -3,6 +3,9 @@ package Gui.ModelTabs;
 import Gui.Controllers.client.HistoriqueCompteur;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class HistoriqueTable {
     private String ean;
     private String type_energy;
@@ -11,9 +14,12 @@ public class HistoriqueTable {
     private String fournisseur;
 
     public HistoriqueTable (JSONObject consommationelt, String fournis){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
+
         ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");
         type_energy= consommationelt.getJSONObject("supplyPoint").getString("energy");
-        date = consommationelt.getDouble("date")+"";
+        date = df.format(consommationelt.getLong("date"))+"";
         consommation = consommationelt.getDouble("value")+"";
         fournisseur = fournis;
     }

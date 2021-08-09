@@ -19,15 +19,24 @@ public class MenuPrincipalConsommateurTable {
     public String date_cloture;
     public String wallet;
     public String consommation;
-
+    public boolean allocated;
+    public String cloture;
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
         System.out.println("debut ligne");
+
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println(Objects.isNull(contract_supply_point.get("dateCloture")));
+        if (!Objects.nonNull(contract_supply_point.get("dateCloture"))){
+            cloture  = df.format(contract_supply_point.getLong("dateCloture"));
+
+        }else {
+            cloture = "non defini";
+        }
         ean_18 = contract_supply_point.getJSONObject("supplyPoint").getString("ean_18");
         type_energie = contract_supply_point.getJSONObject("supplyPoint").getString("energy");
         type_compteur = contract_supply_point.getString("meter_type");
         Fournisseur = contract_supply_point.getJSONObject("contract").getJSONObject("provider").getString("company_name");
-        System.out.println("date");
+        //System.out.println("date");
         date_affectation = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
         date_cloture = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
         System.out.println("contract ; "+contract_supply_point.get("wallet"));
@@ -41,15 +50,22 @@ public class MenuPrincipalConsommateurTable {
 
         JSONArray consommations = find("consommationValue/historiqueRecent/"+id);
         if (!Objects.nonNull(consommations)){
-            System.out.println("identifiant numerique "+id);
+            //System.out.println("identifiant numerique "+id);
             consommation = consommations.getJSONObject(0).getDouble("value")+"";
         }else {
-            System.out.println("consommation : ");
+            //System.out.println("consommation : ");
             consommation = "0";
-            System.out.println(consommation);
+           // System.out.println(consommation);
         }
-
     }
+
+    public String getCloture(){
+        return cloture;
+    }
+    public boolean isAllocated() {
+        return allocated;
+    }
+
     public String getConsommation(){
         return consommation;
     }

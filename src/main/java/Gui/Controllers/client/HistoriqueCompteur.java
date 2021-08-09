@@ -64,10 +64,11 @@ public class HistoriqueCompteur {
         dateConsommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("date"));
         fournisseur.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
         consommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
-        JSONArray suppliesPoint = find("supplyPoint/client/identifiant"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        JSONArray suppliesPoint = find("supplyPoint/client/identifiant/"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0; i<suppliesPoint.length();i++){
             JSONObject currentObject = suppliesPoint.getJSONObject(i);
             JSONArray consommationSupplyPoint = find("consommationValue/historiqueRecent/"+currentObject.getLong("id"));
+            combEAN.getItems().add(currentObject.getString("ean_18"));
             for (int j =0;j<consommationSupplyPoint.length();j++){
                 JSONObject current_consommation = consommationSupplyPoint.getJSONObject(j);
                 JSONObject provider = findUnique("provider/ean/"+currentObject.getString("ean_18"));

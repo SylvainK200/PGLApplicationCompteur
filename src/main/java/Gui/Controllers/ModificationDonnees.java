@@ -15,8 +15,7 @@ import java.lang.Exception;
 
 import static Gui.Controllers.NouveauContrat.find;
 import static Gui.Controllers.NouveauContrat.updateObject;
-import static Gui.FacilitatorProviderLinkClient.current_supply_point;
-import static Gui.FacilitatorProviderLinkClient.extractConsommations;
+import static Gui.FacilitatorProviderLinkClient.*;
 
 public class ModificationDonnees {
     @FXML
