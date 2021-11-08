@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.client.HistoriqueCompteur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.HistoriqueCompteur">
    <children>
       <Label layoutX="472.0" layoutY="52.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
       <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="48.0" prefHeight="26.0" prefWidth="197.0" promptText="afficher information  EAN" />

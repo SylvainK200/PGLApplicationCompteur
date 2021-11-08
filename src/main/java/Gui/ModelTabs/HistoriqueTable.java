@@ -1,6 +1,5 @@
 package Gui.ModelTabs;
 
-import Gui.Controllers.client.HistoriqueCompteur;
 import org.json.JSONObject;
 
 import java.text.DateFormat;

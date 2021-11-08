@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 
-import static Gui.Controllers.CreerCompte.JSON;
-import static Gui.Controllers.RetrouverCompte.API_URL;
+import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
+import static Gui.Controllers.ApplicationProvider.RetrouverCompte.API_URL;
 
 public class GeneralMethodsImpl implements GeneralMethods{
     @Override
