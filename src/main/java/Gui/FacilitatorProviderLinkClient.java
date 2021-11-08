@@ -142,41 +142,5 @@ public class FacilitatorProviderLinkClient extends Application {
         supplyPoint.put("supplier",supplierName);
         return supplyPoint;
     }
-    public static void eportToCSV(File file, List<MenuPrincipalTable> elts) {
-        final String DELIMITER = ";";
-        final String SEPARATOR = "\n";
 
-        //En-tête de fichier
-        final String HEADER = "EAN;Consommation;cout;compteur;date_affectation;date_cloture;name_wallet";
-        try{
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.append(HEADER);
-            fileWriter.append(SEPARATOR);
-            Iterator it = elts.iterator();
-
-            while (it.hasNext()){
-                MenuPrincipalTable elt =(MenuPrincipalTable) it.next();
-
-                fileWriter.append(elt.getEan_18());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getConsommation());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getCout());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getType_compteur());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getDate_affectation());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getDate_cloture());
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getNameWallet());
-                fileWriter.append(SEPARATOR);
-
-            }
-            fileWriter.close();
-        }catch (Exception e ){
-            e.printStackTrace();
-        }
-
-    }
 }

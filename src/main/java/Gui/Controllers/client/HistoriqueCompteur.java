@@ -1,5 +1,7 @@
 package Gui.Controllers.client;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import Gui.FacilitatorProviderLinkClient;
 import Gui.ModelTabs.HistoriqueTable;
 import javafx.beans.value.ObservableValue;
@@ -19,11 +21,9 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import static Gui.Controllers.NouveauContrat.find;
-import static Gui.Controllers.NouveauContrat.findUnique;
-
 public class HistoriqueCompteur {
 
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
     @FXML
     private ComboBox<String> combEAN;
 
@@ -64,14 +64,14 @@ public class HistoriqueCompteur {
         dateConsommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("date"));
         fournisseur.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
         consommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
-        JSONArray suppliesPoint = find("supplyPoint/client/identifiant/"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        JSONArray suppliesPoint = generalMethods.find("supplyPoint/client/identifiant/"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0; i<suppliesPoint.length();i++){
             JSONObject currentObject = suppliesPoint.getJSONObject(i);
-            JSONArray consommationSupplyPoint = find("consommationValue/historiqueRecent/"+currentObject.getLong("id"));
+            JSONArray consommationSupplyPoint = generalMethods.find("consommationValue/historiqueRecent/"+currentObject.getLong("id"));
             combEAN.getItems().add(currentObject.getString("ean_18"));
             for (int j =0;j<consommationSupplyPoint.length();j++){
                 JSONObject current_consommation = consommationSupplyPoint.getJSONObject(j);
-                JSONObject provider = findUnique("provider/ean/"+currentObject.getString("ean_18"));
+                JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("ean_18"));
 
                 table.getItems().add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
                 //listPrincipal.add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
@@ -113,13 +113,13 @@ public class HistoriqueCompteur {
         String date_fin = date_maximale.getValue() + "";
         String ean = ean_exporter.getValue();
 
-        JSONObject supply = findUnique("supplyPoint/ean_18/" + ean);
-        JSONArray consommations = find("consommationValue/consommations/" + supply.getString("id") +
+        JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/" + ean);
+        JSONArray consommations = generalMethods.find("consommationValue/consommations/" + supply.getString("id") +
                 "/" + date_deb + "/" + date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
         final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur;";
-        final String FOURNISSEUR = findUnique("provider/ean" + ean).getString("company_name");
+        final String FOURNISSEUR = generalMethods.findUnique("provider/ean" + ean).getString("company_name");
         FileChooser js = new FileChooser();
         js.setTitle("Export to a csv file");
 //        js.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(".sim"));

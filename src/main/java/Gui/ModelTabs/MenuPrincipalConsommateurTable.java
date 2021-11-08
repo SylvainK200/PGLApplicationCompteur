@@ -1,5 +1,7 @@
 package Gui.ModelTabs;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import javafx.fxml.FXML;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,8 +9,6 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
-
-import static Gui.Controllers.NouveauContrat.find;
 
 public class MenuPrincipalConsommateurTable {
     public String ean_18;
@@ -21,6 +21,7 @@ public class MenuPrincipalConsommateurTable {
     public String consommation;
     public boolean allocated;
     public String cloture;
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
         System.out.println("debut ligne");
 
@@ -48,7 +49,7 @@ public class MenuPrincipalConsommateurTable {
         }
         long id = contract_supply_point.getJSONObject("supplyPoint").getLong("id");
 
-        JSONArray consommations = find("consommationValue/historiqueRecent/"+id);
+        JSONArray consommations = generalMethods.find("consommationValue/historiqueRecent/"+id);
         if (!Objects.nonNull(consommations)){
             //System.out.println("identifiant numerique "+id);
             consommation = consommations.getJSONObject(0).getDouble("value")+"";

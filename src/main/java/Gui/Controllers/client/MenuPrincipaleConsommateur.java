@@ -1,8 +1,9 @@
 package Gui.Controllers.client;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import Gui.FacilitatorProviderLinkClient;
 import Gui.ModelTabs.MenuPrincipalConsommateurTable;
-import Gui.ModelTabs.MenuPrincipalTable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,8 +23,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
-
-import static Gui.Controllers.NouveauContrat.*;
 
 public class MenuPrincipaleConsommateur{
 
@@ -119,12 +118,12 @@ public class MenuPrincipaleConsommateur{
     private ObservableList researchList = FXCollections.observableArrayList();
     private FilteredList<MenuPrincipalConsommateurTable> filteredList;
     private JSONObject currentSupplyPoint;
-
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
     public void initialize(){
         etat_compteur.getItems().addAll("cloture","ouvert");
         utilisateur.setText(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         nom.setText(FacilitatorProviderLinkClient.currentClient.getString("name"));
-        JSONArray walets = find ("wallet/user/"+ FacilitatorProviderLinkClient.currentClient.getLong("id"));
+        JSONArray walets = generalMethods.find ("wallet/user/"+ FacilitatorProviderLinkClient.currentClient.getLong("id"));
 
         for (Object wal : walets){
             if (wal instanceof JSONObject){
@@ -137,14 +136,14 @@ public class MenuPrincipaleConsommateur{
     }
     
     void initConsommation(){
-        JSONArray supply_points = find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        JSONArray supply_points = generalMethods.find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0 ; i<supply_points.length();i++){
             ean_18.getItems().add(supply_points.getJSONObject(i).getString("ean_18"));
         }
         ean_18.valueProperty().addListener((ObservableValue<?extends String>observable,String oldValue,String newValue)->{
-            JSONObject currentSupp = findUnique("supplyPoint/ean_18/"+newValue);
+            JSONObject currentSupp = generalMethods.findUnique("supplyPoint/ean_18/"+newValue);
             currentSupplyPoint = currentSupp;
-            JSONArray historique = find("consommationValue/historiqueRecent/"+currentSupp.getLong("id"));
+            JSONArray historique = generalMethods.find("consommationValue/historiqueRecent/"+currentSupp.getLong("id"));
             if (historique.length()>0){
                 JSONObject current = historique.getJSONObject(0);
                 consommation_recente.setText(current.getLong("value")+"");
@@ -165,7 +164,7 @@ public class MenuPrincipaleConsommateur{
         fournisseur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("fournisseur"));
         consommation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("consommation"));
         System.out.println(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
-        JSONArray contract_supply_points = find("contractSupplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        JSONArray contract_supply_points = generalMethods.find("contractSupplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for (int i = 0;i<contract_supply_points.length();i++){
             JSONObject contract_supply_point = contract_supply_points.getJSONObject(i);
             table.getItems().add(new MenuPrincipalConsommateurTable(contract_supply_point));
@@ -225,7 +224,7 @@ public class MenuPrincipaleConsommateur{
             newConsommation.put("date",date_lect);
             newConsommation.put("supplyPoint",currentSupplyPoint);
 
-            JSONObject created = createObject(newConsommation,"consommationValue");
+            JSONObject created = generalMethods.createObject(newConsommation,"consommationValue");
             if (created.isEmpty()){
                 JOptionPane.showMessageDialog(null,"Echec lors de l'ajout de la nouvelle consommation");
             }else {
@@ -246,13 +245,13 @@ public class MenuPrincipaleConsommateur{
         String date_fin = date_maximale.getValue()+"";
         String ean = ean_exporter.getValue();
 
-        JSONObject supply = findUnique("supplyPoint/ean_18/"+ean);
-        JSONArray consommations = find("consommationValue/consommations/"+supply.getString("id")+
+        JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/"+ean);
+        JSONArray consommations = generalMethods.find("consommationValue/consommations/"+supply.getString("id")+
                 "/"+date_deb+"/"+date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
         final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur;";
-        final String FOURNISSEUR = findUnique("provider/ean"+ean).getString("company_name");
+        final String FOURNISSEUR = generalMethods.findUnique("provider/ean"+ean).getString("company_name");
         FileChooser js = new FileChooser();
         js.setTitle("Export to a csv file");
 //        js.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(".sim"));

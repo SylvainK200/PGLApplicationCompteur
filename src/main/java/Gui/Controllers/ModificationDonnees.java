@@ -1,5 +1,7 @@
 package Gui.Controllers;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +14,6 @@ import org.json.JSONObject;
 import javax.swing.*;
 import java.util.List;
 import java.lang.Exception;
-
-import static Gui.Controllers.NouveauContrat.find;
-import static Gui.Controllers.NouveauContrat.updateObject;
 import static Gui.FacilitatorProviderLinkClient.*;
 
 public class ModificationDonnees {
@@ -35,13 +34,13 @@ public class ModificationDonnees {
 
     @FXML
     private Button valider;
-
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
     JSONObject current ;
     JSONObject consommation ;
     public void initialize(){
         try{
             current = current_supply_point;
-            JSONArray consommationsValues =  find("supplyPoint");
+            JSONArray consommationsValues =  generalMethods.find("supplyPoint");
             List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
             if (consommations.size()>0){
                 consommation = consommations.get(consommations.size()-1);
@@ -64,7 +63,7 @@ public class ModificationDonnees {
                 if (retour == 0) {
                     consommation.remove("value");
                     consommation.put("value",Double.parseDouble(textConsommationCorriges.getText()));
-                    updateObject(consommation,"consommationValue");
+                    generalMethods.updateObject(consommation,"consommationValue");
                 }
         }
     }

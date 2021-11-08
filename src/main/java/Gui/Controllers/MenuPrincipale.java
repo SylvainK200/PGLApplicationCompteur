@@ -1,6 +1,10 @@
 package Gui.Controllers;
 
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
+import Gui.Controllers.Methods.ImportationExportation;
+import Gui.Controllers.Methods.ImportationExportationImpl;
 import Gui.ModelTabs.MenuPrincipalTable;
 import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +27,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class MenuPrincipale  {
+    ImportationExportation importationExportation = new ImportationExportationImpl();
+    GeneralMethods generalMethods  = new GeneralMethodsImpl();
     @FXML
     private MenuItem modifier_donnee;
     @FXML
@@ -108,9 +114,9 @@ public class MenuPrincipale  {
     private ArrayList<MenuPrincipalTable> principalList = new ArrayList<>();
     private ArrayList<MenuPrincipalTable> currentList = new ArrayList<>();
     public void onclickrechercher(){
-        JSONObject result = findUnique("supplyPoint/ean_18/"+textEAN.getText());
-        JSONObject contract = findUnique("contract/ean/"+result.getInt("id"));
-        JSONArray consommations = find("supplyPoint");
+        JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
+        JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
+        JSONArray consommations = generalMethods.find("supplyPoint");
         //JSONObject user = findUnique("user/identifiant/"+contract.getString("client"));
 
         resultEAN.setText(result.getString("ean_18"));
@@ -126,24 +132,19 @@ public class MenuPrincipale  {
 
     }
 
-    // Add a public no-args constructor
-    public MenuPrincipale()
-    {
-    }
-
     @FXML
     public void initialize()
     {
         type_compteur.getItems().addAll("Electricite","Eau","Gaz");
         compteur.getItems().removeAll(compteur.getItems());
         compteur.getItems().addAll("Non Alloue","Alloue");
-        JSONArray clients = find("user");
+        JSONArray clients = generalMethods.find("user");
         for (Object client : clients){
             if (client instanceof  JSONObject){
                 combClient.getItems().add(((JSONObject) client).getString("identifiant"));
             }
         }
-        JSONArray array = find("supplyPoint");
+        JSONArray array = generalMethods.find("supplyPoint");
         for (Object obj : array) {
             if (obj instanceof  JSONObject){
                 compteur_importer.getItems().add(((JSONObject)obj).getString("ean_18"));
@@ -182,7 +183,7 @@ public class MenuPrincipale  {
         compteur.valueProperty().addListener(
                 (ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
                     table.getItems().removeAll(table.getItems());
-                    JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
+                    JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
                     for (Object elt : contract_supply){
                         if (elt instanceof  JSONObject){
 
@@ -199,9 +200,9 @@ public class MenuPrincipale  {
         colConsommation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,Double>("consommation"));
         colDateAffectation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_affectation"));
         colDateClotur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_cloture"));
-        JSONObject client  = findUnique("user/identifiant/"+combClient.getValue());
+        JSONObject client  = generalMethods.findUnique("user/identifiant/"+combClient.getValue());
         //System.out.println("currentprovider 2 : "+currentprovider.getInt("id"));
-        JSONArray contract_supply =find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
+        JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
         combPortefeuille.getItems().removeAll(combPortefeuille.getItems());
         table.getItems().removeAll(table.getItems());
         principalList.removeAll(principalList);
@@ -225,7 +226,7 @@ public class MenuPrincipale  {
 
     @FXML
     public void goToModifierDonnee(){
-        current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
+        current_supply_point = generalMethods.findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("ModificationDonnees.fxml");
     }
@@ -245,7 +246,7 @@ public class MenuPrincipale  {
            File result = js.showOpenDialog(null);
         if (result!=null)
         {
-            importerFileCSV(result,type_compteur.getValue());
+            importationExportation.importerFileCSV(result,type_compteur.getValue());
         }
        }else {
            JOptionPane.showMessageDialog(null,"Veuillez choisir le type de compteur dont \n les donnees seront importees");
@@ -283,68 +284,7 @@ public class MenuPrincipale  {
         File result = js.showSaveDialog(null);
         if (result!=null)
         {
-            FacilitatorProviderLinkClient.eportToCSV(result,currentList);
-        }
-    }
-    public static void importerFileCSV(File file,String typeCompteur){
-        //JSONObject compteur = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
-        try {
-            JSONObject result = new JSONObject() ;
-            Scanner sc = new Scanner(file);
-            sc.useDelimiter("\n");
-            int i = 0 ;
-            int j = 0;
-            while (sc.hasNext())
-            {
-
-                if (i > 0) {
-                    String ligne = sc.next();
-                    System.out.println(ligne);
-                    String[] elts = ligne.split(";");
-
-
-
-                    if (i==1){
-                        JSONObject compteur = new JSONObject();
-                        compteur.put("ean_18",elts[0]);
-                        compteur.put("energy",typeCompteur);
-                         result = createObject(compteur,"supplyPoint");
-                        i+=1;
-                    }
-                    String newElement = elts[2].substring(0,5);
-                    enregistrer (result,elts[1],Integer.parseInt(newElement));
-
-                }
-                else {
-                    i++;
-                    String ligne = sc.next();
-                }
-
-            }
-            sc.close();
-            JOptionPane.showMessageDialog(null,"Importation terminee");
-        }catch (Exception e ) {
-            e.printStackTrace();
-        }
-
-    }
-    public static void enregistrer(JSONObject result,String date,long index){
-
-        JSONObject consommationValue = new JSONObject();
-
-
-        consommationValue.put("value",index);
-        try{
-            consommationValue.put("date", Date.valueOf(date));
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(" result : " + result.toString());
-        consommationValue.put("supplyPoint",result);
-        JSONObject result2 = createObject(consommationValue,"consommationValue");
-
-        if (!result2.isEmpty()){
-            System.out.println(result2);
+            importationExportation.exportToCSV(result,currentList);
         }
     }
 

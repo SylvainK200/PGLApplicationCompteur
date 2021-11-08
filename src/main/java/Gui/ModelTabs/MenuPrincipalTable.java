@@ -1,5 +1,7 @@
 package Gui.ModelTabs;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,8 +9,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static Gui.Controllers.NouveauContrat.find;
 import static Gui.FacilitatorProviderLinkClient.extractConsommations;
 
 public class MenuPrincipalTable {
@@ -19,7 +19,7 @@ public class MenuPrincipalTable {
     private String date_affectation;
     private String date_cloture;
     private String nameWallet ;
-
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
     public String getNameWallet() {
         return nameWallet;
     }
@@ -37,7 +37,7 @@ public class MenuPrincipalTable {
         if (Objects.isNull(json)){
             nameWallet = contract_supply.getJSONObject("wallet").getString("name");
         }
-        JSONArray consommationValues = find("supplyPoint");
+        JSONArray consommationValues = generalMethods.find("supplyPoint");
         if (contract_supply.get("supplyPoint") instanceof  JSONObject)
         {
             ArrayList<JSONObject> consommations = extractConsommations(consommationValues,contract_supply.getJSONObject("supplyPoint").getLong("id")) ;

@@ -1,5 +1,7 @@
 package Gui.Controllers;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import Gui.FacilitatorProviderLinkClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +16,6 @@ import javax.swing.*;
 import java.sql.Date;
 import java.util.Objects;
 
-import static Gui.Controllers.NouveauContrat.*;
 import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 public class SupprimerDonnees {
@@ -38,8 +39,11 @@ public class SupprimerDonnees {
     @FXML
     private Button quitter;
     JSONObject selectedCompteur = new JSONObject();
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
+
+
     public void initialize(){
-        JSONArray compteurs = find("supplyPoint");
+        JSONArray compteurs = generalMethods.find("supplyPoint");
         if (Objects.nonNull(compteurs))
         {
             for (int i = 0 ; i<compteurs.length();i++){
@@ -52,13 +56,13 @@ public class SupprimerDonnees {
     }
     @FXML
     void cloturerCompteurDonnee(ActionEvent event) {
-        selectedCompteur = findUnique("supplyPoint/ean_18/"+compteur.getValue());
+        selectedCompteur = generalMethods.findUnique("supplyPoint/ean_18/"+compteur.getValue());
         //selectedCompteur.remove("home");
        // selectedCompteur.put("home", (Collection<?>) null);
-        JSONObject currentContract = findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
+        JSONObject currentContract = generalMethods.findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
         currentContract.remove("dateCloture");
         currentContract.put("dateCloture",new Date(System.currentTimeMillis()));
-        updateObject(currentContract,"contractSupplyPoint");
+        generalMethods.updateObject(currentContract,"contractSupplyPoint");
 
         /*PortfolioManagementClient.stage.close();
         PortfolioManagementClient.showPages("MenuPrincipale.fxml");*/
@@ -71,9 +75,9 @@ public class SupprimerDonnees {
     @FXML
     void supprimerHistorique(ActionEvent event) {
         JSONObject notification  = new JSONObject();
-        JSONObject selected = findUnique("supplyPoint/ean_18/"+compteur.getValue());
+        JSONObject selected = generalMethods.findUnique("supplyPoint/ean_18/"+compteur.getValue());
         long idSupplyPoint = selected.getLong("id");
-        JSONArray arrays = find("consommationValue");
+        JSONArray arrays = generalMethods.find("consommationValue");
         for (int i = 0 ; i < arrays.length();i++){
             JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
             long idCons = arrays.getJSONObject(i).getLong("id");
@@ -81,7 +85,7 @@ public class SupprimerDonnees {
             //System.out.println(" id : "+id + " idCons : "+idSupplyPoint);
             if (id == idSupplyPoint )
             {
-                JSONObject deleted = deleteObject("consommationValue/"+idCons);
+                JSONObject deleted = generalMethods.deleteObject("consommationValue/"+idCons);
                 System.out.println("element numero : "+i);
             }
 
@@ -91,7 +95,7 @@ public class SupprimerDonnees {
         notification.put("content",notification_suppression.getText());
         notification.put("supplyPoint",selectedCompteur);
         notification.put("provider",currentprovider);
-        JSONObject res = createObject(notification,"notification");
+        JSONObject res = generalMethods.createObject(notification,"notification");
         if (!res.isEmpty()){
             JOptionPane.showMessageDialog(null,"Notification cree");
 

@@ -1,5 +1,7 @@
 package Gui.Controllers.client;
 
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import Gui.ModelTabs.AllContract;
 import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
@@ -15,13 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import static Gui.Controllers.NouveauContrat.find;
-import static Gui.Controllers.NouveauContrat.findUnique;
 import static Gui.FacilitatorProviderLinkClient.currentClient;
-import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 public class AfficherContrats {
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
+
     @FXML
     private TableView<AllContract> table_contrat;
 
@@ -108,7 +108,7 @@ public class AfficherContrats {
         col_network_manager_cost.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("network_manager_cost"));
         col_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("tax_rate"));
         col_over_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("over_tax_rate"));
-        JSONArray contract_supply = find("contractSupplyPoint/client/identifiant/"+currentClient.getString("identifiant"));
+        JSONArray contract_supply = generalMethods.find("contractSupplyPoint/client/identifiant/"+currentClient.getString("identifiant"));
         for (int i =0;i<contract_supply.length();i++){
             // formation de chaque ligne du tableau a remplir
             JSONObject client = this.findClientOfContract(contract_supply.getJSONObject(i));
@@ -126,7 +126,7 @@ public class AfficherContrats {
         if (json instanceof  JSONObject) {
             String identifiant = ((JSONObject) json).getString("client");
             System.out.println("identifiant" + identifiant);
-            client = findUnique("user/identifiant/"+identifiant);
+            client = generalMethods.findUnique("user/identifiant/"+identifiant);
         }
         if (client == null){
             return new JSONObject();
