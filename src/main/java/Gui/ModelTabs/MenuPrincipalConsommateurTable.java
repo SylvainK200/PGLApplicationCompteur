@@ -37,7 +37,6 @@ public class MenuPrincipalConsommateurTable {
         type_energie = contract_supply_point.getJSONObject("supplyPoint").getString("energy");
         type_compteur = contract_supply_point.getString("meter_type");
         Fournisseur = contract_supply_point.getJSONObject("contract").getJSONObject("provider").getString("company_name");
-        //System.out.println("date");
         date_affectation = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
         date_cloture = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
         System.out.println("contract ; "+contract_supply_point.get("wallet"));
@@ -51,12 +50,9 @@ public class MenuPrincipalConsommateurTable {
 
         JSONArray consommations = generalMethods.find("consommationValue/historiqueRecent/"+id);
         if (!Objects.nonNull(consommations)){
-            //System.out.println("identifiant numerique "+id);
             consommation = consommations.getJSONObject(0).getDouble("value")+"";
         }else {
-            //System.out.println("consommation : ");
             consommation = "0";
-           // System.out.println(consommation);
         }
     }
 

@@ -25,7 +25,6 @@ public class NewContractTable {
         nom_client = client.getString("identifiant");
         Object json = contract_supply_point.get("contract");
         if (json instanceof  JSONObject){
-           // System.out.println(((JSONObject) json).toString());
             num_contrat = ((JSONObject)json).getString("numero_contract");
 
             String deb = df.format(contract_supply_point.getJSONObject("contract").getString("date_begin"));

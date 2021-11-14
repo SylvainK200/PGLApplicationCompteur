@@ -110,6 +110,8 @@ public class MenuPrincipale  {
     private TableColumn<MenuPrincipalTable, String> colDateClotur;
     private ArrayList<MenuPrincipalTable> principalList = new ArrayList<>();
     private ArrayList<MenuPrincipalTable> currentList = new ArrayList<>();
+
+
     public void onclickrechercher(){
         JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
         JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
@@ -229,8 +231,6 @@ public class MenuPrincipale  {
     }
     @FXML
     public void goToSupprimerDonnee(){
-        //current_supply_point = findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
-//        System.out.println("current supply point to supprimer : " +current_supply_point.toString());
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("SupprimerDonnes.fxml");
     }
@@ -254,8 +254,6 @@ public class MenuPrincipale  {
     @FXML
     public void goToExporter(){
         save();
-        //PortfolioManagementClient.stage.close();
-        //PortfolioManagementClient.showPages("Exportation.fxml");
     }
     @FXML
     public void goToAfficherContrat() {
@@ -273,11 +271,9 @@ public class MenuPrincipale  {
         FacilitatorProviderLinkClient.showPages("login.fxml");
     }
 
-    public void save()
-    {
+    public void save() {
         FileChooser js = new FileChooser();
         js.setTitle("Export to a csv file");
-//        js.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(".sim"));
         File result = js.showSaveDialog(null);
         if (result!=null)
         {

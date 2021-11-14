@@ -57,15 +57,11 @@ public class SupprimerDonnees {
     @FXML
     void cloturerCompteurDonnee(ActionEvent event) {
         selectedCompteur = generalMethods.findUnique("supplyPoint/ean_18/"+compteur.getValue());
-        //selectedCompteur.remove("home");
-       // selectedCompteur.put("home", (Collection<?>) null);
         JSONObject currentContract = generalMethods.findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
         currentContract.remove("dateCloture");
         currentContract.put("dateCloture",new Date(System.currentTimeMillis()));
         generalMethods.updateObject(currentContract,"contractSupplyPoint");
 
-        /*PortfolioManagementClient.stage.close();
-        PortfolioManagementClient.showPages("MenuPrincipale.fxml");*/
     }
     @FXML
     void quitter(ActionEvent event) {
@@ -82,7 +78,6 @@ public class SupprimerDonnees {
             JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
             long idCons = arrays.getJSONObject(i).getLong("id");
             long id = o.getLong("id");
-            //System.out.println(" id : "+id + " idCons : "+idSupplyPoint);
             if (id == idSupplyPoint )
             {
                 JSONObject deleted = generalMethods.deleteObject("consommationValue/"+idCons);

@@ -25,7 +25,6 @@ public class AllContract {
         nom_client = client.getString("identifiant");
         meter_rate = contract_supply_point.getDouble("meter_rate");
         network_manager_cost = contract_supply_point.getDouble("network_manager_cost");
-        //over_tax_rate = contract_supply_point.getDouble("over_tax_rate");
         tax_rate = contract_supply_point.getDouble("tax_rate");
         Object json = contract_supply_point.get("contract");
         if (json instanceof  JSONObject){

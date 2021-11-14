@@ -122,7 +122,6 @@ public class HistoriqueCompteur {
         final String FOURNISSEUR = generalMethods.findUnique("provider/ean" + ean).getString("company_name");
         FileChooser js = new FileChooser();
         js.setTitle("Export to a csv file");
-//        js.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(".sim"));
         File file = js.showSaveDialog(null);
         if (file != null) {
             try {

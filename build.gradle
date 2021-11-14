@@ -31,8 +31,8 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:3.14.6'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-
-
+	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+	implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 	implementation('org.controlsfx:controlsfx:11.1.0')
 	implementation 'org.testfx:testfx-core:4.0.16-alpha'
 	implementation 'org.loadui:testFx:3.1.2'
