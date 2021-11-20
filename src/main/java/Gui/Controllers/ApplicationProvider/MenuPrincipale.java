@@ -200,7 +200,7 @@ public class MenuPrincipale  {
         colDateAffectation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_affectation"));
         colDateClotur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_cloture"));
         JSONObject client  = generalMethods.findUnique("user/identifiant/"+combClient.getValue());
-        //System.out.println("currentprovider 2 : "+currentprovider.getInt("id"));
+        ;
         JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
         combPortefeuille.getItems().removeAll(combPortefeuille.getItems());
         table.getItems().removeAll(table.getItems());

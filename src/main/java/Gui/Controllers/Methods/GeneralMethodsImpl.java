@@ -10,9 +10,9 @@ import org.json.JSONObject;
 import javax.swing.*;
 
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
-import static Gui.Controllers.ApplicationProvider.RetrouverCompte.API_URL;
 
 public class GeneralMethodsImpl implements GeneralMethods{
+    public  static String API_URL = "https://energy-management-be.herokuapp.com/energy-management";
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
         JSONObject resp = new JSONObject();

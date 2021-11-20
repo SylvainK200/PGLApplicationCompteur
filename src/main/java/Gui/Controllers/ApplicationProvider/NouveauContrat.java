@@ -1,6 +1,7 @@
 package Gui.Controllers.ApplicationProvider;
 
 
+import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
 import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
 import Gui.Controllers.Methods.GeneralMethods;
@@ -108,7 +109,7 @@ public class NouveauContrat {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("http://localhost:8085/energy-management/user/identifiant/"+identifiant)
+                .url(API_URL+"/user/identifiant/"+identifiant)
                 .method("GET", null)
                 .build();
         JSONObject result = null;
@@ -129,7 +130,7 @@ public class NouveauContrat {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("http://localhost:8085/energy-management/user")
+                .url(API_URL+"/user")
                 .method("GET", null)
                 .build();
         JSONArray result = null;
@@ -205,19 +206,16 @@ public class NouveauContrat {
     void confirmerAjout(ActionEvent event) {
         int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
         JSONObject contract_supply = new JSONObject();
-        JSONObject contract = new JSONObject();
         JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
         JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/ean_18/"+combEAN.getValue());
 
-        contract.put("date_begin",date_debut.getValue());
-        contract.put("date_end",date_fin.getValue());
-        contract.put("numero_contract","num"+aleatoire);
-        contract.put("client",NumeroClient.getValue());
-        contract.put("provider",currentprovider);
-        contract = generalMethods.createObject(contract,"contract");
+        contract_supply.put("date_begin",date_debut.getValue());
+        contract_supply.put("date_end",date_fin.getValue());
+        contract_supply.put("numero_contract","num"+aleatoire);
+        contract_supply.put("client",NumeroClient.getValue());
+        contract_supply.put("provider",currentprovider);
         contract_supply.put("meter_type",meter_type.getValue());
         contract_supply.put("meter_rate",meter_rate.getText());
-        contract_supply.put("contract",contract);
         contract_supply.put("supplyPoint",supplyPoint);
         contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
         contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));

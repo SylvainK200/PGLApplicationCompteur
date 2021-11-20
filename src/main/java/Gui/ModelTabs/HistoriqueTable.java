@@ -14,10 +14,14 @@ public class HistoriqueTable {
 
     public HistoriqueTable (JSONObject consommationelt, String fournis){
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-
-        ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");
-        type_energy= consommationelt.getJSONObject("supplyPoint").getString("energy");
+        Object supply_point = consommationelt.get("supplyPoint");
+        if (supply_point instanceof JSONObject) {
+            ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");
+            type_energy = consommationelt.getJSONObject("supplyPoint").getString("energy");
+        } else {
+            ean = "non defini";
+            type_energy = "non defini";
+        }
         date = df.format(consommationelt.getLong("date"))+"";
         consommation = consommationelt.getDouble("value")+"";
         fournisseur = fournis;

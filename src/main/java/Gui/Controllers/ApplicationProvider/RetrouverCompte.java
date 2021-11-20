@@ -16,9 +16,10 @@ import org.json.JSONObject;
 import javax.swing.JOptionPane;
 
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
+import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
 
 public class RetrouverCompte {
-    public  static String API_URL = "http://localhost:8085/energy-management";
+
     @FXML
     private TextField identifiant;
 
@@ -94,7 +95,7 @@ public class RetrouverCompte {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("http://localhost:8085/energy-management/provider/identifiant/"+identifiant.getText())
+                .url(API_URL+"/provider/identifiant/"+identifiant.getText())
                 .method("GET", null)
                 .build();
         try {

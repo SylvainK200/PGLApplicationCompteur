@@ -28,8 +28,8 @@ public class MenuPrincipalTable {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
         type_compteur = contract_supply.getJSONObject("supplyPoint").getString("energy");
-        String deb = df.format(contract_supply.getJSONObject("contract").getLong("date_begin"));
-        String fin = df.format(contract_supply.getJSONObject("contract").getLong("date_end"));
+        String deb = df.format(contract_supply.getLong("date_begin"));
+        String fin = df.format(contract_supply.getLong("date_end"));
         cout = contract_supply.getDouble("meter_rate");
         nameWallet = "";
         Object json = contract_supply.get("wallet");

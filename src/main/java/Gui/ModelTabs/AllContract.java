@@ -26,18 +26,13 @@ public class AllContract {
         meter_rate = contract_supply_point.getDouble("meter_rate");
         network_manager_cost = contract_supply_point.getDouble("network_manager_cost");
         tax_rate = contract_supply_point.getDouble("tax_rate");
-        Object json = contract_supply_point.get("contract");
-        if (json instanceof  JSONObject){
-            num_contrat = ((JSONObject)json).getString("numero_contract");
 
-            String deb = df.format(contract_supply_point.getJSONObject("contract").getLong("date_begin"));
-            String fin = df.format(contract_supply_point.getJSONObject("contract").getLong("date_end"));
-
-            debut_contrat = deb;
-            fin_contrat = fin;
-
-        }
-        json = contract_supply_point.get("supplyPoint");
+        num_contrat = contract_supply_point.getString("numero_contract");
+        String deb = df.format(contract_supply_point.getLong("date_begin"));
+        String fin = df.format(contract_supply_point.getLong("date_end"));
+        debut_contrat = deb;
+        fin_contrat = fin;
+        Object json = contract_supply_point.get("supplyPoint");
         if (json instanceof  JSONObject){
             compteur = ((((JSONObject) json).getString("ean_18")));
             energy = ((JSONObject)json).getString("energy");

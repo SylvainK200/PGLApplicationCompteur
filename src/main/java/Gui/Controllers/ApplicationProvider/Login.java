@@ -17,8 +17,7 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import java.util.Objects;
-
-import static Gui.Controllers.ApplicationProvider.RetrouverCompte.API_URL;
+import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
 import static Gui.FacilitatorProviderLinkClient.*;
 public class Login {
 

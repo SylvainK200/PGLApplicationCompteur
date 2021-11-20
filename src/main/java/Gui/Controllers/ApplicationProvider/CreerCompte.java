@@ -11,8 +11,7 @@ import okhttp3.*;
 import org.json.JSONObject;
 
 import javax.swing.*;
-
-import static Gui.Controllers.ApplicationProvider.RetrouverCompte.API_URL;
+import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
 
 public class CreerCompte {
     @FXML
