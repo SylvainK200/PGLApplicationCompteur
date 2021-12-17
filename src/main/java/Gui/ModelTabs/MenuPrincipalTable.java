@@ -9,7 +9,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
+
 import static Gui.FacilitatorProviderLinkClient.extractConsommations;
+
 
 public class MenuPrincipalTable {
     private String ean_18;

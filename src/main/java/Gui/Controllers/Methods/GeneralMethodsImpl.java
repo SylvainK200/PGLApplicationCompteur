@@ -109,7 +109,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println(res);
+            System.out.println("this is the result for method : "+res);
             if (res !=null)
             {
                 result= new JSONArray(res);

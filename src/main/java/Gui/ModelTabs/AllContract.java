@@ -1,6 +1,5 @@
 package Gui.ModelTabs;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DateFormat;

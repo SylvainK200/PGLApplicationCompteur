@@ -22,6 +22,8 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.*;
+
 public class NouveauContrat {
     public enum MeterType {
         MONOHORARY, BIHORARY, EXCLUSIVENIGHT
@@ -232,10 +234,12 @@ public class NouveauContrat {
         JSONObject compteur = new JSONObject();
         compteur.put("ean_18",newEAN.getText());
         compteur.put("energy",newEnergy.getValue());
+        compteur.put("name", currentprovider.getString("company_name"));
         try{
             JSONObject res = generalMethods.createObject(compteur,"/supplyPoint");
             if (!res.isEmpty()){
                 combEAN.getItems().add(newEAN.getText());
+                JOptionPane.showMessageDialog(null,"Creation Compteur terminee");
             }
             newEAN.setText("");
             newEnergy.setValue("");
