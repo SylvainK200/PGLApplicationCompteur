@@ -12,12 +12,11 @@ import javax.swing.*;
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
 
 public class GeneralMethodsImpl implements GeneralMethods{
-    public  static String API_URL = "https://energy-management-be.herokuapp.com/energy-management";
+    public  static String API_URL = "http://localhost:8085/energy-management";
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
         JSONObject resp = new JSONObject();
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody formBody = RequestBody.create(JSON, contract.toString());
         Request request = new Request.Builder()
                 .url(API_URL +"/"+ url)
@@ -121,6 +120,24 @@ public class GeneralMethodsImpl implements GeneralMethods{
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public JSONArray findSupplyPointByUser() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JSONArray findSupplyPointByUserByEan_18() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JSONArray findContractByUserByEan_18() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

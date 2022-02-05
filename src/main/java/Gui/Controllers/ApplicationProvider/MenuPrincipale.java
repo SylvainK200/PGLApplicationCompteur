@@ -113,10 +113,14 @@ public class MenuPrincipale  {
 
 
     public void onclickrechercher(){
+        // findSupplyPointByUserByEan_18()
         JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
+
+        // findContractByUserByEan_18()
         JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
+
+        //findSupplyPointByUser();
         JSONArray consommations = generalMethods.find("supplyPoint");
-        //JSONObject user = findUnique("user/identifiant/"+contract.getString("client"));
 
         resultEAN.setText(result.getString("ean_18"));
         resultConsommateur.setText(contract.getString("client"));
@@ -126,9 +130,6 @@ public class MenuPrincipale  {
             JSONObject derniereConsommation = consommationValues.get(consommationValues.size()-1);
             resultConsommation.setText(derniereConsommation.getString("value"));
         }
-
-
-
     }
 
     @FXML
@@ -137,13 +138,17 @@ public class MenuPrincipale  {
         type_compteur.getItems().addAll("Electricite","Eau","Gaz");
         compteur.getItems().removeAll(compteur.getItems());
         compteur.getItems().addAll("Non Alloue","Alloue");
+
         JSONArray clients = generalMethods.find("user");
+
         for (Object client : clients){
             if (client instanceof  JSONObject){
                 combClient.getItems().add(((JSONObject) client).getString("identifiant"));
             }
         }
+
         JSONArray array = generalMethods.find("supplyPoint");
+
         for (Object obj : array) {
             if (obj instanceof  JSONObject){
                 compteur_importer.getItems().add(((JSONObject)obj).getString("ean_18"));
