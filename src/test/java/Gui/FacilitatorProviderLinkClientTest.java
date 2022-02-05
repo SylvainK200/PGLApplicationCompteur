@@ -1,4 +1,5 @@
 package tests;
+
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 

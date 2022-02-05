@@ -31,7 +31,8 @@ public class GeneralMethodsImpl implements GeneralMethods{
             response.close();
         }
         catch (Exception e){
-            e.printStackTrace();}
+            e.printStackTrace();
+        }
         return resp;
     }
 

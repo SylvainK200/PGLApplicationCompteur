@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.FacilitatorProviderLinkClientTest" tests="5" skipped="0" failures="2" errors="0" timestamp="2021-08-09T10:03:50" hostname="DESKTOP-AQ54D41" time="38.332">
+<testsuite name="tests.FacilitatorProviderLinkClientTest" tests="7" skipped="0" failures="5" errors="0" timestamp="2022-01-15T18:53:15" hostname="script0-pc" time="52.773">
   <properties/>
-  <testcase name="t1_signup_conso_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="16.8"/>
-  <testcase name="t1_signup_provider_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="14.412"/>
-  <testcase name="t0_should_contain_button()" classname="tests.FacilitatorProviderLinkClientTest" time="0.345"/>
-  <testcase name="t2_login_conso_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="3.571">
-    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@3badcbc8[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$827/0x000000010048b440@37c7b784&quot;,&#10;lookup by selector: &quot;#exporter_button&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@3badcbc8[styleClass=root]],
-lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$827/0x000000010048b440@37c7b784&quot;,
-lookup by selector: &quot;#exporter_button&quot;
+  <testcase name="t1_signup_conso_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="17.939">
+    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@2697f251[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@1fef4d52&quot;,&#10;lookup by selector: &quot;#connect_button&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@2697f251[styleClass=root]],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@1fef4d52&quot;,
+lookup by selector: &quot;#connect_button&quot;
 	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
 	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
 	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
-	at tests.FacilitatorProviderLinkClientTest.t2_login_conso_should_work(FacilitatorProviderLinkClientTest.java:45)
+	at tests.FacilitatorProviderLinkClientTest.t1_signup_conso_should_work(FacilitatorProviderLinkClientTest.java:222)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -27,13 +24,13 @@ lookup by selector: &quot;#exporter_button&quot;
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
@@ -77,17 +74,95 @@ lookup by selector: &quot;#exporter_button&quot;
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 </failure>
   </testcase>
-  <testcase name="t2_login_provider_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="3.198">
-    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@423d3f03[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$827/0x000000010048b440@4ffff9de&quot;,&#10;lookup by selector: &quot;#Buttonrecherche&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@423d3f03[styleClass=root]],
-lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$827/0x000000010048b440@4ffff9de&quot;,
+  <testcase name="t1_signup_provider_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="13.984">
+    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@11d9f385[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@8903a28&quot;,&#10;lookup by selector: &quot;#connect_button&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@11d9f385[styleClass=root]],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@8903a28&quot;,
+lookup by selector: &quot;#connect_button&quot;
+	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
+	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
+	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
+	at tests.FacilitatorProviderLinkClientTest.t1_signup_provider_should_work(FacilitatorProviderLinkClientTest.java:196)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:515)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:171)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:167)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:114)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:59)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:105)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+</failure>
+  </testcase>
+  <testcase name="t0_should_contain_button()" classname="tests.FacilitatorProviderLinkClientTest" time="0.251"/>
+  <testcase name="t3_create_ean()" classname="tests.FacilitatorProviderLinkClientTest" time="12.514"/>
+  <testcase name="t4_create_contract()" classname="tests.FacilitatorProviderLinkClientTest" time="2.678">
+    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@79dba3b1[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@154e8008&quot;,&#10;lookup by selector: &quot;#Buttonrecherche&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@79dba3b1[styleClass=root]],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@154e8008&quot;,
 lookup by selector: &quot;#Buttonrecherche&quot;
 	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
 	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
 	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
-	at tests.FacilitatorProviderLinkClientTest.t2_login_provider_should_work(FacilitatorProviderLinkClientTest.java:62)
+	at tests.FacilitatorProviderLinkClientTest.t4_create_contract(FacilitatorProviderLinkClientTest.java:46)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -103,13 +178,13 @@ lookup by selector: &quot;#Buttonrecherche&quot;
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
@@ -153,45 +228,203 @@ lookup by selector: &quot;#Buttonrecherche&quot;
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 </failure>
   </testcase>
-  <system-out><![CDATA[Enregistrement termine
-Enregistrement termine
+  <testcase name="t2_login_conso_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="2.744">
+    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@7c743f7[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@14f0516c&quot;,&#10;lookup by selector: &quot;#exporter_button&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@7c743f7[styleClass=root]],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@14f0516c&quot;,
+lookup by selector: &quot;#exporter_button&quot;
+	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
+	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
+	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
+	at tests.FacilitatorProviderLinkClientTest.t2_login_conso_should_work(FacilitatorProviderLinkClientTest.java:126)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:515)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:171)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:167)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:114)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:59)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:105)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+</failure>
+  </testcase>
+  <testcase name="t2_login_provider_should_work()" classname="tests.FacilitatorProviderLinkClientTest" time="2.655">
+    <failure message="org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@16b53696[styleClass=root]],&#10;lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@6fe6fb49&quot;,&#10;lookup by selector: &quot;#Buttonrecherche&quot;" type="org.testfx.service.query.EmptyNodeQueryException">org.testfx.service.query.EmptyNodeQueryException: there is no node in the scene-graph matching the query: NodeQuery: from nodes: [AnchorPane@16b53696[styleClass=root]],
+lookup by function: &quot;org.testfx.util.NodeQueryUtils$$Lambda$831/0x00000008403bb040@6fe6fb49&quot;,
+lookup by selector: &quot;#Buttonrecherche&quot;
+	at org.testfx.service.query.impl.NodeQueryImpl.query(NodeQueryImpl.java:132)
+	at org.testfx.api.FxAssert.toNode(FxAssert.java:168)
+	at org.testfx.api.FxAssert.verifyThat(FxAssert.java:71)
+	at tests.FacilitatorProviderLinkClientTest.t2_login_provider_should_work(FacilitatorProviderLinkClientTest.java:143)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:515)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:171)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:167)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:114)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:59)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:105)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:110)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:72)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:71)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+</failure>
+  </testcase>
+  <system-out><![CDATA[current provider :{"number":"690909090","password":"test","reponse_secrete":"test","city":"test","street":"test","company_name":"test0pro","identifiant":"test0pro","id":3,"postal_code":"12","question_secrete":"test","address_mail":"mail@example.com"}
+this is the result for method : [{"id":2,"address_mail":"mail@example.com","name":"test0conso","surname":null,"password":"test","question_secrete":"Who","reponse_secrete":"is","number":null,"identifiant":"test0conso"},{"id":7,"address_mail":"adrien.coppens@umons.ac.be","name":"a","surname":null,"password":"a","question_secrete":"a","reponse_secrete":"a","number":"1","identifiant":"a"},{"id":17,"address_mail":"b","name":"b","surname":null,"password":"b","question_secrete":"b","reponse_secrete":"b","number":"1","identifiant":"b"},{"id":18,"address_mail":"c","name":"c","surname":null,"password":"c","question_secrete":"c","reponse_secrete":"c","number":"1","identifiant":"c"},{"id":19,"address_mail":"d@d.d","name":"d","surname":null,"password":"d","question_secrete":"d","reponse_secrete":"d","number":"1","identifiant":"d"},{"id":20,"address_mail":"root123@gmail.com","name":"nom1","surname":null,"password":"root123","question_secrete":"valider","reponse_secrete":"valider","number":"12","identifiant":"root"},{"id":21,"address_mail":"abdel@example.com","name":"abdel","surname":"allah","password":"abdel","question_secrete":"Who","reponse_secrete":"is","number":null,"identifiant":"abdel0"},{"id":26,"address_mail":"ahmedsali@gmail.com","name":"Ahmed","surname":"Sali","password":"salifou","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali"},{"id":27,"address_mail":"ahmedsali1@gmail.com","name":"Ahmed1","surname":"Sali1","password":"salifou1","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali1"},{"id":28,"address_mail":"ahmedsali2@gmail.com","name":"Ahmed2","surname":"Sali2","password":"salifou2","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali2"},{"id":29,"address_mail":"ahmedsali3@gmail.com","name":"Ahmed3","surname":"Sali3","password":"salifou3","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali3"},{"id":30,"address_mail":"ahmedsali4@gmail.com","name":"Ahmed4","surname":"Sali4","password":"salifou4","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali4"},{"id":31,"address_mail":"ahmedsali4@gmail.com","name":"Ahmed5","surname":"Sali5","password":"salifou5","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali5"},{"id":48,"address_mail":"bbb@gmail.com","name":"isaac","surname":null,"password":"isaac","question_secrete":"who","reponse_secrete":"who","number":"69999999","identifiant":"isaac"}]
+this is the result for method : []
+Execution de initialize
+[{"id":2,"address_mail":"mail@example.com","name":"test0conso","surname":null,"password":"test","question_secrete":"Who","reponse_secrete":"is","number":null,"identifiant":"test0conso"},{"id":7,"address_mail":"adrien.coppens@umons.ac.be","name":"a","surname":null,"password":"a","question_secrete":"a","reponse_secrete":"a","number":"1","identifiant":"a"},{"id":17,"address_mail":"b","name":"b","surname":null,"password":"b","question_secrete":"b","reponse_secrete":"b","number":"1","identifiant":"b"},{"id":18,"address_mail":"c","name":"c","surname":null,"password":"c","question_secrete":"c","reponse_secrete":"c","number":"1","identifiant":"c"},{"id":19,"address_mail":"d@d.d","name":"d","surname":null,"password":"d","question_secrete":"d","reponse_secrete":"d","number":"1","identifiant":"d"},{"id":20,"address_mail":"root123@gmail.com","name":"nom1","surname":null,"password":"root123","question_secrete":"valider","reponse_secrete":"valider","number":"12","identifiant":"root"},{"id":21,"address_mail":"abdel@example.com","name":"abdel","surname":"allah","password":"abdel","question_secrete":"Who","reponse_secrete":"is","number":null,"identifiant":"abdel0"},{"id":26,"address_mail":"ahmedsali@gmail.com","name":"Ahmed","surname":"Sali","password":"salifou","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali"},{"id":27,"address_mail":"ahmedsali1@gmail.com","name":"Ahmed1","surname":"Sali1","password":"salifou1","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali1"},{"id":28,"address_mail":"ahmedsali2@gmail.com","name":"Ahmed2","surname":"Sali2","password":"salifou2","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali2"},{"id":29,"address_mail":"ahmedsali3@gmail.com","name":"Ahmed3","surname":"Sali3","password":"salifou3","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali3"},{"id":30,"address_mail":"ahmedsali4@gmail.com","name":"Ahmed4","surname":"Sali4","password":"salifou4","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali4"},{"id":31,"address_mail":"ahmedsali4@gmail.com","name":"Ahmed5","surname":"Sali5","password":"salifou5","question_secrete":"What is my name?","reponse_secrete":"Ahmed Sali","number":"32 2345843024","identifiant":"ahSali5"},{"id":48,"address_mail":"bbb@gmail.com","name":"isaac","surname":null,"password":"isaac","question_secrete":"who","reponse_secrete":"who","number":"69999999","identifiant":"isaac"}]
+this is the result for method : []
 ]]></system-out>
-  <system-err><![CDATA[Aug 09, 2021 11:03:51 AM javafx.fxml.FXMLLoader$ValueElement processValue
+  <system-err><![CDATA[Jan 15, 2022 7:53:15 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:03:51 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:53:16 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:03:52 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:53:17 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:06 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:53:33 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:06 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:53:33 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:04:07 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:53:33 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:07 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:53:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
+Jan 15, 2022 7:53:47 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:04:07 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:53:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:21 AM javafx.fxml.FXMLLoader$ValueElement processValue
-WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:21 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:53:47 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:04:21 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:53:50 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:21 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:53:54 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
+Jan 15, 2022 7:53:59 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
+Jan 15, 2022 7:53:59 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:04:21 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:54:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:21 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:54:02 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
-Aug 09, 2021 11:04:24 AM javafx.fxml.FXMLLoader$ValueElement processValue
+Jan 15, 2022 7:54:05 PM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:25 AM javafx.fxml.FXMLLoader$ValueElement processValue
-WARNING: Loading FXML document with JavaFX API of version 16 by JavaFX runtime of version 15.0.1
-Aug 09, 2021 11:04:25 AM javafx.css.CssParser declaration
+Jan 15, 2022 7:54:05 PM javafx.css.CssParser declaration
 WARNING: CSS Error parsing '*{-fx-fill: blue; -fx-font-style: underline;}: Expected '<font-style>' while parsing '-fx-font-style' at [1,34]
 ]]></system-err>
 </testsuite>
