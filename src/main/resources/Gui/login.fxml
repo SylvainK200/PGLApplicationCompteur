@@ -11,34 +11,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="449.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Login">
+<AnchorPane prefHeight="469.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Login">
    <children>
-      <TextField fx:id="identifiant" layoutX="239.0" layoutY="159.0" promptText="login" />
-      <Label layoutX="131.0" layoutY="160.0" text="Identifiant">
+      <TextField fx:id="identifiant" layoutX="317.0" layoutY="174.0" prefHeight="24.0" prefWidth="197.0" promptText="login" />
+      <Label layoutX="189.0" layoutY="177.0" text="Identifiant">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="mot_de_passe" layoutX="239.0" layoutY="228.0" promptText="mot de passe" />
-      <Label layoutX="131.0" layoutY="228.0" text="Mot de passe">
+      <PasswordField fx:id="mot_de_passe" layoutX="317.0" layoutY="243.0" prefHeight="24.0" prefWidth="197.0" promptText="mot de passe" />
+      <Label layoutX="189.0" layoutY="245.0" text="Mot de passe">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="type_utilisateur" layoutX="238.0" layoutY="282.0" prefWidth="150.0" promptText="Type Utilisateur" />
-      <Button fx:id="connect_button" layoutX="267.0" layoutY="336.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="92.0" text="Se connecter" textAlignment="CENTER" />
-      <Text fx:id="mot_de_passe_perdu" layoutX="239.0" layoutY="397.0" onMouseClicked="#retrouverCompte" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue; -fx-font-style: underline;" text="J'ai perdu mon mot de passe" />
-      <Text fx:id="creer_compte" layoutX="239.0" layoutY="424.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue;" text="Creer un compte" wrappingWidth="148.79999999999995" />
-      <ImageView fitHeight="98.0" fitWidth="152.0" layoutX="250.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+      <ComboBox fx:id="type_utilisateur" layoutX="321.0" layoutY="299.0" prefHeight="24.0" prefWidth="197.0" promptText="Type Utilisateur" />
+      <Button fx:id="connect_button" layoutX="191.0" layoutY="346.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="326.0" text="Se connecter" textAlignment="CENTER" />
+      <Text fx:id="mot_de_passe_perdu" layoutX="190.0" layoutY="400.0" onMouseClicked="#retrouverCompte" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue; -fx-cursor: pointer;" text="J'ai perdu mon mot de passe" textAlignment="CENTER" wrappingWidth="317.0" />
+      <Text fx:id="creer_compte" layoutX="397.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue;" text="Creer un compte" textAlignment="CENTER" wrappingWidth="121.0" />
+      <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="315.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@photos/login.png" />
          </image>
       </ImageView>
-      <Text layoutX="213.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue">
+      <Text layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue" textAlignment="CENTER" wrappingWidth="702.0">
          <font>
             <Font name="Algerian" size="36.0" />
          </font>
       </Text>
+      <Label layoutX="190.0" layoutY="301.0" text="Type">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Text fx:id="creer_compte1" layoutX="141.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous n'avez pas de compte ?" textAlignment="CENTER" wrappingWidth="317.0" />
 
 
    </children>
