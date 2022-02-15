@@ -126,14 +126,16 @@ public class AffichierContrats {
     // recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
-        Object json = contract_supply_point.get("contract");
-        if (json instanceof  JSONObject) {
-            String identifiant = ((JSONObject) json).getString("client");
-            System.out.println("identifiant" + identifiant);
-            client = generalMethods.findUnique("user/identifiant/"+identifiant);
-        }
-        if (client == null){
-            return new JSONObject();
+        if(contract_supply_point.has("contract")){
+            Object json = contract_supply_point.get("contract");
+            if (json instanceof  JSONObject) {
+                String identifiant = ((JSONObject) json).getString("client");
+                System.out.println("identifiant" + identifiant);
+                client = generalMethods.findUnique("user/identifiant/"+identifiant);
+            }
+            if (client == null){
+                return new JSONObject();
+            }
         }
         return client;
     }

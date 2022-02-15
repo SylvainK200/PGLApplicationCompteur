@@ -75,15 +75,18 @@ public class Login {
                         response.close();
                     }
 
+                }else{
+                    JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.");
                 }
             } catch (JSONException e) {
-                System.out.println("reponse vide");
+                JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.");
+                System.out.println("Login.java -> connect()");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur \n que vous etes");
+            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur.");
         }
         }
     @FXML

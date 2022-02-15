@@ -37,6 +37,7 @@ public class ModificationDonnees {
     GeneralMethods generalMethods = new GeneralMethodsImpl();
     JSONObject current ;
     JSONObject consommation ;
+
     public void initialize(){
         try{
             current = current_supply_point;
@@ -47,10 +48,14 @@ public class ModificationDonnees {
                 textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
             }
         }catch(Exception e){
-
+            JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.");
+            valider.setDisable(true);
+            annuler_button.setDisable(true);
+            textConsommationCorriges.setDisable(true);
         }
 
     }
+    
     @FXML
     void annuler(ActionEvent event) {
         textConsommationCorriges.setText("");

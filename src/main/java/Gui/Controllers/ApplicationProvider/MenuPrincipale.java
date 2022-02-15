@@ -213,19 +213,25 @@ public class MenuPrincipale  {
         currentList.removeAll(currentList);
         for (int i =0;i<contract_supply.length();i++){
             JSONObject current = contract_supply.getJSONObject(i);
-            if (current.get("contract") instanceof JSONObject){
-                if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
-                    table.getItems().add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
-                    if (Objects.isNull(contract_supply.getJSONObject(i).get("wallet"))){
-                        JSONObject wallet = contract_supply.getJSONObject(i).getJSONObject("wallet");
-                        combPortefeuille.getItems().add(wallet.getString("name"));
+            if(current.has("contract")){
+                if (current.get("contract") instanceof JSONObject){
+                    if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
+                        table.getItems().add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
+                        if (Objects.isNull(contract_supply.getJSONObject(i).get("wallet"))){
+                            JSONObject wallet = contract_supply.getJSONObject(i).getJSONObject("wallet");
+                            combPortefeuille.getItems().add(wallet.getString("name"));
+                        }
+                        principalList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
+                        currentList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
                     }
-                    principalList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
-                    currentList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
                 }
+            }else{
+                //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.");
+                System.out.println("Ce client n'a pas de contrats");
             }
         }
-            System.out.println("remplissage termine");
+        //JOptionPane.showMessageDialog(null,"Chargement terminé.");
+        System.out.println("remplissage termine");
     }
 
     @FXML
@@ -234,11 +240,13 @@ public class MenuPrincipale  {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("ModificationDonnees.fxml");
     }
+
     @FXML
     public void goToSupprimerDonnee(){
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("SupprimerDonnes.fxml");
     }
+
     @FXML
     public void goToImporter(){
        if (type_compteur.getValue()!=null ){
@@ -256,20 +264,24 @@ public class MenuPrincipale  {
 
 
     }
+
     @FXML
     public void goToExporter(){
         save();
     }
+
     @FXML
     public void goToAfficherContrat() {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("AffichierContrats.fxml");
     }
+
     @FXML
     public void goToEtablirContrat(){
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("NouveauContrat.fxml");
     }
+    
     @FXML
     public void seDeconnecter(){
         FacilitatorProviderLinkClient.stage.close();

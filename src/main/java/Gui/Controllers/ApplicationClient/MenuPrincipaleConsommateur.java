@@ -112,13 +112,16 @@ public class MenuPrincipaleConsommateur{
 
     @FXML
     private Button annuler;
+
     @FXML
     private ComboBox<String> wallets;
+
     private ArrayList<MenuPrincipalConsommateurTable> listPrincipal = new ArrayList<>();
     private ObservableList researchList = FXCollections.observableArrayList();
     private FilteredList<MenuPrincipalConsommateurTable> filteredList;
     private JSONObject currentSupplyPoint;
     GeneralMethods generalMethods = new GeneralMethodsImpl();
+
     public void initialize(){
         etat_compteur.getItems().addAll("cloture","ouvert");
         utilisateur.setText(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
@@ -211,6 +214,7 @@ public class MenuPrincipaleConsommateur{
 
         });
     }
+
     @FXML
     public void registerConsommation(ActionEvent event){
         LocalDate date_lect = date_lecture.getValue();
@@ -233,12 +237,14 @@ public class MenuPrincipaleConsommateur{
         }
 
     }
+    
     @FXML
     void annuler_button(ActionEvent event) {
         date_debut_importation.setValue(null);
         date_maximale.setValue(null);
         ean_exporter.setValue(null);
     }
+
     @FXML
     void exporterDonnee(ActionEvent event) {
         String date_deb = date_debut_importation.getValue()+"";
@@ -258,33 +264,31 @@ public class MenuPrincipaleConsommateur{
         if (file!=null)
         {
             try{
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.append(HEADER);
-            fileWriter.append(SEPARATOR);
-            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-            for (int i = 0 ; i<consommations.length();i++){
-                JSONObject elt  = consommations.getJSONObject(i);
-
-                fileWriter.append(elt.getJSONObject("supplyPoint").getString("ean_18"));
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+elt.getJSONObject("supplyPoint").getString("energy"));
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+df.format(elt.getLong("date")) );
-                fileWriter.append(DELIMITER);
-                fileWriter.append(""+FOURNISSEUR);
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.append(HEADER);
                 fileWriter.append(SEPARATOR);
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
+                for (int i = 0 ; i<consommations.length();i++){
+                    JSONObject elt  = consommations.getJSONObject(i);
+
+                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("ean_18"));
+                    fileWriter.append(DELIMITER);
+                    fileWriter.append(""+elt.getJSONObject("supplyPoint").getString("energy"));
+                    fileWriter.append(DELIMITER);
+                    fileWriter.append(""+df.format(elt.getLong("date")) );
+                    fileWriter.append(DELIMITER);
+                    fileWriter.append(""+FOURNISSEUR);
+                    fileWriter.append(SEPARATOR);
+
+                }
+                fileWriter.close();
+            }catch (Exception e ){
+                e.printStackTrace();
             }
-            fileWriter.close();
-        }catch (Exception e ){
-            e.printStackTrace();
         }
-
     }
 
-
-    }
     @FXML
     void deconnecter(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();

@@ -8,8 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="726.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.AffichierContrats">
-    <TableView fx:id="table_contrat" layoutX="10" layoutY="90.0" prefHeight="550.0" prefWidth="1218.0">
+<AnchorPane prefHeight="667.0" prefWidth="1241.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.AffichierContrats">
+    <TableView fx:id="table_contrat" layoutX="10.0" layoutY="95.0" prefHeight="550.0" prefWidth="1218.0">
         <columns>
             <TableColumn fx:id="colNomClient" prefWidth="83.19997882843018" text="Nom Client" />
             <TableColumn fx:id="colNumeroContrat" prefWidth="100.80001831054688" text="Numéro Contrat" />
@@ -25,11 +25,11 @@
          <TableColumn fx:id="col_over_tax_rate" prefWidth="123.99997558593759" text="taxe supplementaire" />
         </columns>
     </TableView>
-   <Text layoutX="270.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des contrats" wrappingWidth="329.5625">
+   <Text layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des contrats" textAlignment="CENTER" wrappingWidth="1241.0">
       <font>
          <Font name="Algerian" size="32.0" />
       </font>
    </Text>
-   <Button fx:id="quitter" layoutX="1115.0" layoutY="54.0" mnemonicParsing="false" onAction="#quitterPage" prefHeight="26.0" prefWidth="109.0" text="Quitter" />
-   <TextField fx:id="recherche" layoutX="853.0" layoutY="57.0" promptText="rechercher" />
+   <Button fx:id="quitter" layoutX="1115.0" layoutY="59.0" mnemonicParsing="false" onAction="#quitterPage" prefHeight="26.0" prefWidth="109.0" text="Quitter" />
+   <TextField fx:id="recherche" layoutX="853.0" layoutY="62.0" promptText="rechercher" />
 </AnchorPane>

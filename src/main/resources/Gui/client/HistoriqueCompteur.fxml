@@ -8,11 +8,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.HistoriqueCompteur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.HistoriqueCompteur">
    <children>
-      <Label layoutX="472.0" layoutY="52.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
-      <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="48.0" prefHeight="26.0" prefWidth="197.0" promptText="afficher information  EAN" />
+      <Label layoutX="472.0" layoutY="76.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
+      <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="72.0" prefHeight="26.0" prefWidth="197.0" promptText="afficher information  EAN" />
       <TableView fx:id="table" layoutX="14.0" layoutY="116.0" prefHeight="322.0" prefWidth="631.0">
         <columns>
             <TableColumn fx:id="colEAN" prefWidth="120.79998207092285" text="EAN" />
@@ -22,7 +23,7 @@
             <TableColumn fx:id="fournisseur" prefWidth="127.20000000000005" text="Fournisseur" />
         </columns>
       </TableView>
-      <Button fx:id="boutton_retour" layoutX="779.0" layoutY="47.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="116.0" text="Retour" />
+      <Button fx:id="boutton_retour" layoutX="779.0" layoutY="71.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="116.0" text="Retour" />
        <AnchorPane fx:id="exportation" layoutX="1265.0" layoutY="-3.0" prefHeight="665.0" prefWidth="1060.0" />
       <AnchorPane layoutX="657.0" layoutY="96.0" prefHeight="275.0" prefWidth="250.0">
          <children>
@@ -38,5 +39,10 @@
             <Button fx:id="annuler" layoutX="126.0" layoutY="188.0" mnemonicParsing="false" onAction="#annuler_button" prefHeight="26.0" prefWidth="113.0" text="Annuler" />
          </children>
       </AnchorPane>
+      <Text layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historique" textAlignment="CENTER" wrappingWidth="919.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -11,7 +11,6 @@ import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -103,7 +102,6 @@ public class NouveauContrat {
 
     @FXML
     private ComboBox<String> portefeuille;
-    private FilteredList<NewContractTable> contracts;
 
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 
@@ -194,9 +192,12 @@ public class NouveauContrat {
         for (int i =0;i<contract_supply.length();i++){
             System.out.println("Dans la boucle for");
             JSONObject current = contract_supply.getJSONObject(i);
-            if (current.get("contract") instanceof JSONObject){
-                if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
-                    table.getItems().add(new NewContractTable(client,contract_supply.getJSONObject(i)));
+
+            if(current.has("contract")){
+                if (current.get("contract") instanceof JSONObject){
+                    if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
+                        table.getItems().add(new NewContractTable(client,contract_supply.getJSONObject(i)));
+                    }
                 }
             }
 
@@ -206,47 +207,63 @@ public class NouveauContrat {
 
     @FXML
     void confirmerAjout(ActionEvent event) {
-        int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
-        JSONObject contract_supply = new JSONObject();
-        JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
-        JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/ean_18/"+combEAN.getValue());
 
-        contract_supply.put("date_begin",date_debut.getValue());
-        contract_supply.put("date_end",date_fin.getValue());
-        contract_supply.put("numero_contract","num"+aleatoire);
-        contract_supply.put("client",NumeroClient.getValue());
-        contract_supply.put("provider",currentprovider);
-        contract_supply.put("meter_type",meter_type.getValue());
-        contract_supply.put("meter_rate",meter_rate.getText());
-        contract_supply.put("supplyPoint",supplyPoint);
-        contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
-        contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
-        contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
-        contract_supply.put("wallet",wallet);
+        if(date_debut.getValue()==null || date_fin.getValue()==null || portefeuille.getValue() ==null || meter_type.getValue()==null || 
+           meter_rate.getText().isEmpty() || network_manager_cost.getText().isEmpty() || over_tax_rate.getText().isEmpty() || 
+           tax_rate.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.");
+        }else{
+            if(date_fin.getValue().isAfter(date_debut.getValue())){
+                int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
+                JSONObject contract_supply = new JSONObject();
+                JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
+                JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/ean_18/"+combEAN.getValue());
 
-        JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
-        generalMethods.createObject(contract_supply,"contractSupplyPoint");
-        table.getItems().add(new NewContractTable(client,contract_supply));
+                contract_supply.put("date_begin",date_debut.getValue());
+                contract_supply.put("date_end",date_fin.getValue());
+                contract_supply.put("numero_contract","num"+aleatoire);
+                contract_supply.put("client",NumeroClient.getValue());
+                contract_supply.put("provider",currentprovider);
+                contract_supply.put("meter_type",meter_type.getValue());
+                contract_supply.put("meter_rate",meter_rate.getText());
+                contract_supply.put("supplyPoint",supplyPoint);
+                contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
+                contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
+                contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
+                contract_supply.put("wallet",wallet);
 
+                JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
+                generalMethods.createObject(contract_supply,"contractSupplyPoint");
+                table.getItems().add(new NewContractTable(client,contract_supply));
+            }else{
+                JOptionPane.showMessageDialog(null,"La date de fin doit venir après celle de début.");
+            }
+        }
     }
+   
     @FXML
     void creerCompteur(ActionEvent event){
-        JSONObject compteur = new JSONObject();
-        compteur.put("ean_18",newEAN.getText());
-        compteur.put("energy",newEnergy.getValue());
-        compteur.put("name", currentprovider.getString("company_name"));
-        try{
-            JSONObject res = generalMethods.createObject(compteur,"/supplyPoint");
-            if (!res.isEmpty()){
+        if( newEnergy.getValue()==null || newEAN.getText() == "" ){
+            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.");
+        }else{
+            JSONObject compteur = new JSONObject();
+            compteur.put("ean_18",newEAN.getText());
+            compteur.put("energy",newEnergy.getValue());
+            compteur.put("name", currentprovider.getString("company_name"));
+            try{
+                JSONObject res = generalMethods.createObject(compteur,"/supplyPoint");
+                
                 combEAN.getItems().add(newEAN.getText());
-                JOptionPane.showMessageDialog(null,"Creation Compteur terminee");
-            }
-            newEAN.setText("");
-            newEnergy.setValue("");
-            budget.setText("");
-            budgetType.setText("");
-        }catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"La creation du compteur terminee");
 
+                newEAN.setText("");
+                newEnergy.setValue("");
+                budget.setText("");
+                budgetType.setText("");
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"La creation du compteur a echoué");
+                System.out.println("Creating new compteur failed NouveauContract.java -> creerCompteur");
+            }
         }
     }
 

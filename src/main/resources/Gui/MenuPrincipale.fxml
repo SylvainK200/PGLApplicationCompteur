@@ -11,11 +11,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
-
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.MenuPrincipale">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.MenuPrincipale">
 
     <style>
         -fx-padding: 10;
@@ -65,7 +69,7 @@
 
             <Label fx:id="lblEAN" layoutX="600" layoutY="54" text="EAN :   " />
             <TextField fx:id="textEAN" layoutX="650" layoutY="48" promptText="ean a rechercher" />
-           <Button fx:id="Buttonrecherche" layoutX="820.0" layoutY="46.0" mnemonicParsing="false" onAction="#onclickrechercher" text="Recherche" />
+           <Button fx:id="Buttonrecherche" layoutX="831.0" layoutY="47.0" mnemonicParsing="false" onAction="#onclickrechercher" text="Recherche" />
 
         <Label fx:id="labelEAN" layoutX="600.0" layoutY="107.0" text="EAN :   " />
         <TextField fx:id="resultEAN" disable="true" layoutX="750.0" layoutY="107.0" />
@@ -75,14 +79,14 @@
         <Label fx:id="lblConsommateur" layoutX="600.0" layoutY="188.0" text="Consommateur  :   " />
         <TextField fx:id="resultConsommateur" disable="true" layoutX="750.0" layoutY="188.0" />
 
-        <Label fx:id="lblClient" layoutX="10.0" layoutY="93.0" text="Client :   " />
-        <ComboBox fx:id="combClient" layoutX="110.0" layoutY="88.0" prefWidth="150.0" promptText="client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label fx:id="lblPortefeuille" layoutX="10.0" layoutY="148.0" text="Portefeuille :   " />
-        <ComboBox fx:id="combPortefeuille" layoutX="110.0" layoutY="148.0" prefWidth="150.0" promptText="portefeuille" GridPane.columnIndex="2" GridPane.rowIndex="5">
+        <Label fx:id="lblClient" layoutX="36.0" layoutY="67.0" text="Client :   " />
+        <ComboBox fx:id="combClient" layoutX="121.0" layoutY="62.0" prefWidth="150.0" promptText="client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label fx:id="lblPortefeuille" layoutX="36.0" layoutY="123.0" text="Portefeuille :   " />
+        <ComboBox fx:id="combPortefeuille" layoutX="121.0" layoutY="122.0" prefWidth="150.0" promptText="portefeuille" GridPane.columnIndex="2" GridPane.rowIndex="5">
 
         </ComboBox>
-        <Label fx:id="lblCompteur" layoutX="10.0" layoutY="208.0" text="Compteur :   " />
-        <ComboBox fx:id="compteur" layoutX="110.0" layoutY="203.0" prefWidth="150.0" promptText="Compteurs">
+        <Label fx:id="lblCompteur" layoutX="36.0" layoutY="183.0" text="Compteur :   " />
+        <ComboBox fx:id="compteur" layoutX="121.0" layoutY="177.0" prefWidth="150.0" promptText="Compteurs">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Compteurs affectés " />
@@ -91,19 +95,19 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <TableView fx:id="table" layoutX="79.0" layoutY="300.0" prefHeight="400.0" prefWidth="720.0">
+        <TableView fx:id="table" layoutX="27.0" layoutY="268.0" prefHeight="400.0" prefWidth="898.0">
             <columns>
                 <TableColumn fx:id="colEAN" prefWidth="123.0" text="EAN" />
                 <TableColumn fx:id="colConsommation" prefWidth="147.00001525878906" text="Cosommation" />
-                <TableColumn fx:id="colCout" prefWidth="64.33331298828125" text="Coût" />
-                <TableColumn fx:id="colCompteur" prefWidth="128.99996948242188" text="Type Compteur" />
-                <TableColumn fx:id="colDateAffectation" prefWidth="111.33331298828125" text="Date Affectation" />
-                <TableColumn fx:id="colDateClotur" prefWidth="118.3333740234375" text="Date de clôlur" />
+                <TableColumn fx:id="colCout" prefWidth="139.0" text="Coût" />
+                <TableColumn fx:id="colCompteur" prefWidth="140.0" text="Type Compteur" />
+                <TableColumn fx:id="colDateAffectation" prefWidth="163.0" text="Date Affectation" />
+                <TableColumn fx:id="colDateClotur" prefWidth="184.0" text="Date de clôlure" />
             </columns>
         </TableView>
-      <ComboBox fx:id="compteur_importer" layoutX="325.0" layoutY="88.0" prefHeight="26.0" prefWidth="180.0" promptText="compteurs a importer" />
-      <Text layoutX="332.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="importer donnees compteurs" wrappingWidth="165.5999755859375" />
-      <ComboBox fx:id="type_compteur" layoutX="327.0" layoutY="146.0" prefHeight="37.0" prefWidth="180.0" promptText="type compteur" />
+      <ComboBox fx:id="compteur_importer" layoutX="345.0" layoutY="108.0" prefHeight="26.0" prefWidth="195.0" promptText="compteurs a importer" />
+      <Text layoutX="345.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="importer données compteurs" wrappingWidth="194.5999755859375" />
+      <ComboBox fx:id="type_compteur" layoutX="347.0" layoutY="158.0" prefHeight="26.0" prefWidth="195.0" promptText="type compteur" />
     </children>
 
 </AnchorPane>
