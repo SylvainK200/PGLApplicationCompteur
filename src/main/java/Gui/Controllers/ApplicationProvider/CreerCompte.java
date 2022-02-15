@@ -106,12 +106,12 @@ public class CreerCompte {
                 }
 
             }else {
-                JOptionPane.showMessageDialog(null,"Choisissez le type d'utilisateur \n que vous etes");
+                JOptionPane.showMessageDialog(null,"Choisissez le type d'utilisateur \n que vous etes", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
 
          }
         else{
-            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation ne sont pas identiques");
+            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation ne sont pas identiques", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

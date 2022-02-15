@@ -1,18 +1,15 @@
-package tests;
+package Gui;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-
-import Gui.FacilitatorProviderLinkClient;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import org.junit.BeforeClass;
 import org.testfx.util.WaitForAsyncUtils;
+
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     
@@ -72,7 +69,8 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         type(KeyCode.DOWN);
         type(KeyCode.ENTER);
         clickOn("#confirmation_ajout");
-        WaitForAsyncUtils.waitForFxEvents();
+        type(KeyCode.ENTER);
+        //WaitForAsyncUtils.waitForFxEvents();
         //verifyThat("#connect_button", hasText("Se connecter"));
     }
 
@@ -108,7 +106,8 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
         clickOn("#budget").write("10000");
         clickOn("#budgetType").write("Standart");
         clickOn("#creer_compteur");
-        WaitForAsyncUtils.waitForFxEvents();
+        type(KeyCode.ENTER);
+        //WaitForAsyncUtils.waitForFxEvents();
     }
 
     @Test 
@@ -224,18 +223,8 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     }
 
     @Test
-    public void t0_should_contain_button() {
-        // expect:
+    public void t0_login_interface_should_contain_button() {
+        //expect :
         verifyThat("#connect_button", hasText("Se connecter"));
     }
-
-    /*
-        @Test public void should_click_on_button() {
-            // when:
-            clickOn(".button");
-            WaitForAsyncUtils.waitForFxEvents();
-            // then:
-            verifyThat(".button", hasText("clicked!"));
-        }
-    */
 }

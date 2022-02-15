@@ -92,10 +92,10 @@ public class SupprimerDonnees {
         notification.put("provider",currentprovider);
         JSONObject res = generalMethods.createObject(notification,"notification");
         if (!res.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Notification cree");
+            JOptionPane.showMessageDialog(null,"Notification créée", "Message", JOptionPane.INFORMATION_MESSAGE);
 
         }else {
-            JOptionPane.showMessageDialog(null,"resultat vide ");
+            JOptionPane.showMessageDialog(null,"resultat vide ", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

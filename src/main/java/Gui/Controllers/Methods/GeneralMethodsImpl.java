@@ -47,7 +47,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()){
-                JOptionPane.showMessageDialog(null,"Operation d'enregistrement reussie");
+                JOptionPane.showMessageDialog(null,"Operation d'enregistrement reussie", "Message", JOptionPane.INFORMATION_MESSAGE);
                 return new JSONObject(response.body().string());
             }
             response.close();
@@ -121,23 +121,4 @@ public class GeneralMethodsImpl implements GeneralMethods{
         }
         return result;
     }
-
-    @Override
-    public JSONArray findSupplyPointByUser() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JSONArray findSupplyPointByUserByEan_18() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JSONArray findContractByUserByEan_18() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

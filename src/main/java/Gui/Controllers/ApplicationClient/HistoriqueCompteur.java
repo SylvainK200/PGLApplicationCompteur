@@ -150,6 +150,7 @@ public class HistoriqueCompteur {
 
         }
     }
+    
     @FXML
     void retour(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();

@@ -85,7 +85,7 @@ public class RetrouverCompte {
 
         }else
         {
-            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation sont differents");
+            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation sont differents", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

@@ -48,7 +48,7 @@ public class ModificationDonnees {
                 textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.");
+            JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.", "Message", JOptionPane.INFORMATION_MESSAGE);
             valider.setDisable(true);
             annuler_button.setDisable(true);
             textConsommationCorriges.setDisable(true);

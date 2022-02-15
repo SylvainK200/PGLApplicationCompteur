@@ -75,7 +75,7 @@ public class AfficherContrats {
 
     public void initialize(){
         initTable();
-        contratsList = new FilteredList<>(contrats,p->true);
+        contratsList = new FilteredList<AllContract>(contrats,p->true);
         recherche.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) ->{
             contratsList.setPredicate(
                     contrat->{

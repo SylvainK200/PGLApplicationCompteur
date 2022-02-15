@@ -220,7 +220,7 @@ public class MenuPrincipaleConsommateur{
         LocalDate date_lect = date_lecture.getValue();
         String value = valeur_vue.getText();
         if (currentSupplyPoint == null ) {
-            JOptionPane.showMessageDialog(null,"S'il vous plait choisissez le compteur dans la partie consommation");
+            JOptionPane.showMessageDialog(null,"S'il vous plait choisissez le compteur dans la partie consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             JSONObject newConsommation = new JSONObject();
@@ -230,9 +230,9 @@ public class MenuPrincipaleConsommateur{
 
             JSONObject created = generalMethods.createObject(newConsommation,"consommationValue");
             if (created.isEmpty()){
-                JOptionPane.showMessageDialog(null,"Echec lors de l'ajout de la nouvelle consommation");
+                JOptionPane.showMessageDialog(null,"Echec lors de l'ajout de la nouvelle consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
             }else {
-                JOptionPane.showMessageDialog(null,"Enregistrement reussi de la nouvelle consommation");
+                JOptionPane.showMessageDialog(null,"Enregistrement reussi de la nouvelle consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 

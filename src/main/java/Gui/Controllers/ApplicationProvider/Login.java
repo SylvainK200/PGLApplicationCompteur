@@ -76,17 +76,17 @@ public class Login {
                     }
 
                 }else{
-                    JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.");
+                    JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (JSONException e) {
-                JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.");
+                JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.", "Message", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Login.java -> connect()");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur.");
+            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
         }
     @FXML
@@ -97,8 +97,12 @@ public class Login {
 
     @FXML
     void retrouverCompte(MouseEvent event) {
+        /*
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("retrouverCompte.fxml");
+        */
+
+        JOptionPane.showMessageDialog(null,"Désolé, fonctionnalité pas prise en compte.", "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

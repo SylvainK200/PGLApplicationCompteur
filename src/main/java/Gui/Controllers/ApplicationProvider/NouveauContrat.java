@@ -211,7 +211,7 @@ public class NouveauContrat {
         if(date_debut.getValue()==null || date_fin.getValue()==null || portefeuille.getValue() ==null || meter_type.getValue()==null || 
            meter_rate.getText().isEmpty() || network_manager_cost.getText().isEmpty() || over_tax_rate.getText().isEmpty() || 
            tax_rate.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.");
+            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }else{
             if(date_fin.getValue().isAfter(date_debut.getValue())){
                 int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
@@ -236,7 +236,7 @@ public class NouveauContrat {
                 generalMethods.createObject(contract_supply,"contractSupplyPoint");
                 table.getItems().add(new NewContractTable(client,contract_supply));
             }else{
-                JOptionPane.showMessageDialog(null,"La date de fin doit venir après celle de début.");
+                JOptionPane.showMessageDialog(null,"La date de fin doit venir après celle de début.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -244,24 +244,24 @@ public class NouveauContrat {
     @FXML
     void creerCompteur(ActionEvent event){
         if( newEnergy.getValue()==null || newEAN.getText() == "" ){
-            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.");
+            JOptionPane.showMessageDialog(null,"Remplissez tous les champs.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JSONObject compteur = new JSONObject();
             compteur.put("ean_18",newEAN.getText());
             compteur.put("energy",newEnergy.getValue());
             compteur.put("name", currentprovider.getString("company_name"));
             try{
-                JSONObject res = generalMethods.createObject(compteur,"/supplyPoint");
+                generalMethods.createObject(compteur,"/supplyPoint");
                 
                 combEAN.getItems().add(newEAN.getText());
-                JOptionPane.showMessageDialog(null,"La creation du compteur terminee");
+                JOptionPane.showMessageDialog(null,"La creation du compteur terminee", "Message", JOptionPane.INFORMATION_MESSAGE);
 
                 newEAN.setText("");
                 newEnergy.setValue("");
                 budget.setText("");
                 budgetType.setText("");
             }catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"La creation du compteur a echoué");
+                JOptionPane.showMessageDialog(null,"La creation du compteur a echoué", "Message", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Creating new compteur failed NouveauContract.java -> creerCompteur");
             }
         }

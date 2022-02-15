@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class ImportationExportationImpl implements ImportationExportation{
     GeneralMethods generalMethods = new GeneralMethodsImpl();
+
+
     public void exportToCSV(File file, List<MenuPrincipalTable> elts) {
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
@@ -56,41 +58,32 @@ public class ImportationExportationImpl implements ImportationExportation{
             JSONObject result = new JSONObject() ;
             Scanner sc = new Scanner(file);
             sc.useDelimiter("\n");
-            int i = 0 ;
-            int j = 0;
+            int i = 1;
+
+            sc.next();
+
             while (sc.hasNext())
             {
-
-                if (i > 0) {
-                    String ligne = sc.next();
-                    System.out.println(ligne);
-                    String[] elts = ligne.split(";");
-
-
-
-                    if (i==1){
-                        JSONObject compteur = new JSONObject();
-                        compteur.put("ean_18",elts[0]);
-                        compteur.put("energy",typeCompteur);
-                        result = generalMethods.createObject(compteur,"supplyPoint");
-                        i+=1;
-                    }
-                    String newElement = elts[2].substring(0,5);
-                    enregistrer (result,elts[1],Integer.parseInt(newElement));
-
+                String ligne = sc.next();
+                System.out.println(ligne);
+                String[] elts = ligne.split(";");
+                if (i==1){
+                    JSONObject compteur = new JSONObject();
+                    compteur.put("ean_18",elts[0]);
+                    compteur.put("energy",typeCompteur);
+                    result = generalMethods.createObject(compteur,"supplyPoint");
+                    i+=1;
                 }
-                else {
-                    i++;
-                    String ligne = sc.next();
-                }
+                String newElement = elts[2].substring(0,5);
+                enregistrer (result,elts[1],Integer.parseInt(newElement));
 
             }
             sc.close();
-            JOptionPane.showMessageDialog(null,"Importation terminee");
+            JOptionPane.showMessageDialog(null,"L'importation est terminée", "Message", JOptionPane.INFORMATION_MESSAGE);
         }catch (Exception e ) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"L'importation a échoué", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
     public void enregistrer(JSONObject result,String date,long index){
 

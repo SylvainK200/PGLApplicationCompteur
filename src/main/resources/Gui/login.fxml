@@ -19,7 +19,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="mot_de_passe" layoutX="317.0" layoutY="243.0" prefHeight="24.0" prefWidth="197.0" promptText="mot de passe" />
+      <PasswordField fx:id="mot_de_passe" layoutX="317.0" layoutY="243.0" prefHeight="24.0" prefWidth="197.0" promptText="Mot de passe" />
       <Label layoutX="189.0" layoutY="245.0" text="Mot de passe">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -28,7 +28,7 @@
       <ComboBox fx:id="type_utilisateur" layoutX="321.0" layoutY="299.0" prefHeight="24.0" prefWidth="197.0" promptText="Type Utilisateur" />
       <Button fx:id="connect_button" layoutX="191.0" layoutY="346.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="326.0" text="Se connecter" textAlignment="CENTER" />
       <Text fx:id="mot_de_passe_perdu" layoutX="190.0" layoutY="400.0" onMouseClicked="#retrouverCompte" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue; -fx-cursor: pointer;" text="J'ai perdu mon mot de passe" textAlignment="CENTER" wrappingWidth="317.0" />
-      <Text fx:id="creer_compte" layoutX="397.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue;" text="Creer un compte" textAlignment="CENTER" wrappingWidth="121.0" />
+      <Text fx:id="creer_compte" layoutX="397.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue;" text="Créer un compte" textAlignment="CENTER" wrappingWidth="121.0" />
       <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="315.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@photos/login.png" />

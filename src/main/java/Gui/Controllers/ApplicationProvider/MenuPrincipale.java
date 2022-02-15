@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 
 import static Gui.FacilitatorProviderLinkClient.*;
 
@@ -226,11 +229,11 @@ public class MenuPrincipale  {
                     }
                 }
             }else{
-                //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.");
+                //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.",, "Message", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Ce client n'a pas de contrats");
             }
         }
-        //JOptionPane.showMessageDialog(null,"Chargement terminé.");
+        //JOptionPane.showMessageDialog(null,"Chargement terminé.",, "Message", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("remplissage termine");
     }
 
@@ -250,16 +253,18 @@ public class MenuPrincipale  {
     @FXML
     public void goToImporter(){
        if (type_compteur.getValue()!=null ){
-        FileChooser js = new FileChooser();
-        js.setTitle("Import an CSV file");
+           
+        FileChooser js = getFileChooser();
 
-           File result = js.showOpenDialog(null);
+        js.setTitle("Selectionner le fichier à importer");
+
+        File result = js.showOpenDialog(null);
         if (result!=null)
         {
             importationExportation.importerFileCSV(result,type_compteur.getValue());
         }
        }else {
-           JOptionPane.showMessageDialog(null,"Veuillez choisir le type de compteur dont \n les donnees seront importees");
+           JOptionPane.showMessageDialog(null,"Veuillez choisir le type de compteur dont \n les donnees seront importees", "Message", JOptionPane.INFORMATION_MESSAGE);
        }
 
 
@@ -289,13 +294,28 @@ public class MenuPrincipale  {
     }
 
     public void save() {
-        FileChooser js = new FileChooser();
-        js.setTitle("Export to a csv file");
+        FileChooser js = getFileChooser();
+        js.setTitle("Selectionner le fichier où exporter");
         File result = js.showSaveDialog(null);
         if (result!=null)
         {
             importationExportation.exportToCSV(result,currentList);
         }
+    }
+
+    public FileChooser getFileChooser(){
+
+        FileChooser js = new FileChooser();
+
+        js.getExtensionFilters().add(new ExtensionFilter("Supported Files (*.csv|*.json|*.yml|*.Yaml)", "*.csv","*.csv","*.json", "*.yml","*.yaml"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("CSV Files (*.csv)", "*.csv"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("JSON Files (*.json)", "*.json"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("YAML Files (*.yml | *.yaml)", "*.yml","*.yaml"));
+
+        return js;
     }
 
 }
