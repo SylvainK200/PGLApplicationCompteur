@@ -47,7 +47,7 @@ public class MenuPrincipalConsommateurTable {
         long id = contract_supply_point.getJSONObject("supplyPoint").getLong("id");
 
         JSONArray consommations = generalMethods.find("consommationValue/historiqueRecent/"+id);
-        if (!Objects.nonNull(consommations)){
+        if (Objects.nonNull(consommations)){
             consommation = consommations.getJSONObject(0).getDouble("value")+"";
         }else {
             consommation = "0";

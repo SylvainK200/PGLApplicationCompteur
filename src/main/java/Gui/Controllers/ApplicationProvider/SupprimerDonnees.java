@@ -80,7 +80,7 @@ public class SupprimerDonnees {
             long id = o.getLong("id");
             if (id == idSupplyPoint )
             {
-                JSONObject deleted = generalMethods.deleteObject("consommationValue/"+idCons);
+                generalMethods.deleteObject("consommationValue/"+idCons);
                 System.out.println("element numero : "+i);
             }
 

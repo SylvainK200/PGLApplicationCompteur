@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 
 import static Gui.FacilitatorProviderLinkClient.*;
 

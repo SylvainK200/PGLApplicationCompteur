@@ -66,11 +66,11 @@ public class GeneralMethodsImpl implements GeneralMethods{
                 .build();
 
         try {
-            Response response = client.newCall(request).execute();
+            client.newCall(request).execute();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  new JSONObject();
+        return new JSONObject();
 
     }
 
