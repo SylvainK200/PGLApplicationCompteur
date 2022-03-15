@@ -56,11 +56,20 @@ public class SupprimerDonnees {
     }
     @FXML
     void cloturerCompteurDonnee(ActionEvent event) {
-        selectedCompteur = generalMethods.findUnique("supplyPoint/ean_18/"+compteur.getValue());
-        JSONObject currentContract = generalMethods.findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
-        currentContract.remove("dateCloture");
-        currentContract.put("dateCloture",new Date(System.currentTimeMillis()));
-        generalMethods.updateObject(currentContract,"contractSupplyPoint");
+        String compteurToClose = compteur.getValue();
+        if( compteurToClose!=null && (!compteurToClose.isBlank() )){
+            selectedCompteur = generalMethods.findUnique("supplyPoint/ean_18/"+compteurToClose);
+            JSONObject currentContract = generalMethods.findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
+            
+            currentContract.remove("dateCloture");
+            currentContract.put("dateCloture",new Date(System.currentTimeMillis()));
+            generalMethods.updateObject(currentContract,"contractSupplyPoint");
+
+            JOptionPane.showMessageDialog(null,"Cloture effectuée", "Message", JOptionPane.INFORMATION_MESSAGE);
+            compteur.getItems().remove(compteurToClose);
+        }else{
+            JOptionPane.showMessageDialog(null,"Veuillez selectionner un compteur", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }
     @FXML
@@ -70,32 +79,38 @@ public class SupprimerDonnees {
     }
     @FXML
     void supprimerHistorique(ActionEvent event) {
-        JSONObject notification  = new JSONObject();
-        JSONObject selected = generalMethods.findUnique("supplyPoint/ean_18/"+compteur.getValue());
-        long idSupplyPoint = selected.getLong("id");
-        JSONArray arrays = generalMethods.find("consommationValue");
-        for (int i = 0 ; i < arrays.length();i++){
-            JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
-            long idCons = arrays.getJSONObject(i).getLong("id");
-            long id = o.getLong("id");
-            if (id == idSupplyPoint )
-            {
-                generalMethods.deleteObject("consommationValue/"+idCons);
-                System.out.println("element numero : "+i);
+
+        String compteurToClose = compteur.getValue();
+        if( compteurToClose!=null && (!compteurToClose.isBlank() )){
+            JSONObject notification  = new JSONObject();
+            JSONObject selected = generalMethods.findUnique("supplyPoint/ean_18/"+compteurToClose);
+            long idSupplyPoint = selected.getLong("id");
+            JSONArray arrays = generalMethods.find("consommationValue");
+            for (int i = 0 ; i < arrays.length();i++){
+                JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
+                long idCons = arrays.getJSONObject(i).getLong("id");
+                long id = o.getLong("id");
+                if (id == idSupplyPoint )
+                {
+                    generalMethods.deleteObject("consommationValue/"+idCons);
+                    System.out.println("element numero : "+i);
+                }
+
             }
+            selectedCompteur = selected;
 
-        }
-        selectedCompteur = selected;
+            notification.put("content",notification_suppression.getText());
+            notification.put("supplyPoint",selectedCompteur);
+            notification.put("provider",currentprovider);
+            JSONObject res = generalMethods.createObject(notification,"notification");
+            if (!res.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Notification créée", "Message", JOptionPane.INFORMATION_MESSAGE);
 
-        notification.put("content",notification_suppression.getText());
-        notification.put("supplyPoint",selectedCompteur);
-        notification.put("provider",currentprovider);
-        JSONObject res = generalMethods.createObject(notification,"notification");
-        if (!res.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Notification créée", "Message", JOptionPane.INFORMATION_MESSAGE);
-
-        }else {
-            JOptionPane.showMessageDialog(null,"resultat vide ", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null,"resultat vide ", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Veuillez selectionner un compteur", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

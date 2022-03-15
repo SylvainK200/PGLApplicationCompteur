@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.MenuPrincipale">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="961.0" stylesheets="@styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.MenuPrincipale">
 
     <style>
         -fx-padding: 10;
@@ -27,8 +27,7 @@
         -fx-border-width: 2;
         -fx-border-insets: 5;
         -fx-border-radius: 5;
-        -fx-border-color: blue;
-    </style>
+        -fx-border-color: blue;-fx-background-color: #fff;</style>
     <children>
         <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
@@ -64,12 +63,10 @@
                 </Menu>
             </menus>
         </MenuBar>
-    </children>
-    <children>
 
-            <Label fx:id="lblEAN" layoutX="600" layoutY="54" text="EAN :   " />
-            <TextField fx:id="textEAN" layoutX="650" layoutY="48" promptText="ean a rechercher" />
-           <Button fx:id="Buttonrecherche" layoutX="831.0" layoutY="47.0" mnemonicParsing="false" onAction="#onclickrechercher" text="Recherche" />
+        <Label fx:id="lblEAN" layoutX="600" layoutY="54" text="EAN :   " />
+        <TextField fx:id="textEAN" layoutX="650" layoutY="48" promptText="ean a rechercher" />
+        <Button fx:id="Buttonrecherche" layoutX="831.0" layoutY="47.0" mnemonicParsing="false" onAction="#onclickrechercher" styleClass="connect" text="Recherche" />
 
         <Label fx:id="labelEAN" layoutX="600.0" layoutY="107.0" text="EAN :   " />
         <TextField fx:id="resultEAN" disable="true" layoutX="750.0" layoutY="107.0" />

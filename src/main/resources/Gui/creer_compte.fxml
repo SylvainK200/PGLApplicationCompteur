@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="598.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.CreerCompte">
+<AnchorPane prefHeight="598.0" prefWidth="606.0" stylesheets="@styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.CreerCompte">
    <children>
-      <Text layoutX="8.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer votre compte" textAlignment="CENTER" wrappingWidth="590.171875">
+      <Text layoutX="8.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bienvenu" text="Créer votre compte" textAlignment="CENTER" wrappingWidth="590.171875">
          <font>
             <Font name="Algerian" size="32.0" />
          </font>
@@ -38,7 +38,7 @@
       <Text layoutX="92.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal " />
       <TextField fx:id="postal_code" layoutX="91.0" layoutY="467.0" promptText="code postal" />
       <ComboBox fx:id="type_utilisateur" layoutX="333.0" layoutY="467.0" prefHeight="24.0" prefWidth="171.0" promptText="Type Utilisateur" />
-      <Button fx:id="creer_compte" layoutX="394.0" layoutY="544.0" mnemonicParsing="false" onAction="#creerCompte" text="Créer compte" />
-      <Button fx:id="retour" layoutX="522.0" layoutY="545.0" mnemonicParsing="false" onAction="#retourDeLaCreation" text="Retour" />
+      <Button fx:id="creer_compte" layoutX="394.0" layoutY="544.0" mnemonicParsing="false" onAction="#creerCompte" styleClass="connect" text="Créer compte" />
+      <Button fx:id="retour" layoutX="522.0" layoutY="545.0" mnemonicParsing="false" onAction="#retourDeLaCreation" styleClass="cancel" text="Retour" />
    </children>
 </AnchorPane>

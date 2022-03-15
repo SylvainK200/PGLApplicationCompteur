@@ -1,17 +1,18 @@
 package Gui.Controllers.ApplicationProvider;
 
 import Gui.FacilitatorProviderLinkClient;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import okhttp3.*;
-import org.json.JSONObject;
+import okhttp3.MediaType;
 
-import javax.swing.*;
-import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
+import javax.swing.JOptionPane;
+
+import org.json.JSONObject;
 
 public class CreerCompte {
     @FXML
@@ -50,13 +51,20 @@ public class CreerCompte {
     private Button creer_compte;
     @FXML
     private ComboBox<String> type_utilisateur;
+
+
     public void initialize(){
         type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
     }
+
+
     @FXML
     private Button retour;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
+
+    public GeneralMethodsImpl backend = GeneralMethodsImpl.getInstance();
+    
     JSONObject fabriquerJson(){
         JSONObject json = new JSONObject();
         json.put("address_mail", adresse_mail.getText());
@@ -74,35 +82,25 @@ public class CreerCompte {
 
     @FXML
     void creerCompte(ActionEvent event) {
-        if (confirmation_mot_de_passe.getText().equals(mot_de_passe.getText()))
-        { OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-            JSONObject jsonObject= this.fabriquerJson();
+        if (confirmation_mot_de_passe.getText().equals(mot_de_passe.getText())) { 
+            
             if (this.type_utilisateur.getValue() !=null){
-
-                String url = "/user";
-                if (this.type_utilisateur.getValue() == "Fournisseur"){
-                    jsonObject.remove("name");
-                    jsonObject.put("company_name",nom.getText());
-                    url  = "/provider";
-                }
-                RequestBody formBody = RequestBody.create(JSON, jsonObject.toString());
-                Request request = new Request.Builder()
-                        .url(API_URL +url)
-                        .post(formBody)
-                        .build();
-                try {
-                    Response response = client.newCall(request).execute();
-                    if (response.isSuccessful()){
-                        System.out.println("Enregistrement termine");
-                        FacilitatorProviderLinkClient.stage.close();
-                        FacilitatorProviderLinkClient.showPages("login.fxml");
-
-                    }
-                    response.close();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
+                boolean response = backend.signup(nom.getText(), 
+                                                  identifiant.getText(), 
+                                                  mot_de_passe.getText(),
+                                                  adresse_mail.getText(),
+                                                  question_secrete.getText(),
+                                                  reponse_question_secrete.getText(),
+                                                  street.getText(),
+                                                  number.getText(),
+                                                  city.getText(),
+                                                  postal_code.getText(), type_utilisateur.getValue().equals("Fournisseur"));
+                                                  
+                if (response){
+                    FacilitatorProviderLinkClient.stage.close();
+                    FacilitatorProviderLinkClient.showPages("login.fxml");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Une erreur s'est produite", "Message", JOptionPane.ERROR_MESSAGE);
                 }
 
             }else {

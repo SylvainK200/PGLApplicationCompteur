@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="469.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Login">
+<AnchorPane prefHeight="469.0" prefWidth="702.0" style="-fx-background-color: #fff;" stylesheets="@styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Login">
    <children>
       <TextField fx:id="identifiant" layoutX="317.0" layoutY="174.0" prefHeight="24.0" prefWidth="197.0" promptText="login" />
       <Label layoutX="189.0" layoutY="177.0" text="Identifiant">
@@ -26,15 +26,15 @@
          </font>
       </Label>
       <ComboBox fx:id="type_utilisateur" layoutX="321.0" layoutY="299.0" prefHeight="24.0" prefWidth="197.0" promptText="Type Utilisateur" />
-      <Button fx:id="connect_button" layoutX="191.0" layoutY="346.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="326.0" text="Se connecter" textAlignment="CENTER" />
-      <Text fx:id="mot_de_passe_perdu" layoutX="190.0" layoutY="400.0" onMouseClicked="#retrouverCompte" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue; -fx-cursor: pointer;" text="J'ai perdu mon mot de passe" textAlignment="CENTER" wrappingWidth="317.0" />
-      <Text fx:id="creer_compte" layoutX="397.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: blue;" text="Créer un compte" textAlignment="CENTER" wrappingWidth="121.0" />
+      <Button fx:id="connect_button" layoutX="191.0" layoutY="346.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="326.0" styleClass="connect" text="Se connecter" textAlignment="CENTER" />
+      <Text fx:id="mot_de_passe_perdu" layoutX="190.0" layoutY="400.0" onMouseClicked="#retrouverCompte" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link" text="J'ai perdu mon mot de passe" textAlignment="CENTER" wrappingWidth="317.0" />
+      <Text fx:id="creer_compte" layoutX="397.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link" text="Créer un compte" textAlignment="CENTER" wrappingWidth="121.0" />
       <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="315.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@photos/login.png" />
          </image>
       </ImageView>
-      <Text layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue" textAlignment="CENTER" wrappingWidth="702.0">
+      <Text layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bienvenu" text="Bienvenue" textAlignment="CENTER" wrappingWidth="702.0">
          <font>
             <Font name="Algerian" size="36.0" />
          </font>
@@ -44,7 +44,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Text fx:id="creer_compte1" layoutX="141.0" layoutY="432.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous n'avez pas de compte ?" textAlignment="CENTER" wrappingWidth="317.0" />
+      <Text fx:id="creer_compte1" layoutX="193.0" layoutY="433.0" onMouseClicked="#creerCompte" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous n'avez pas de compte ?" textAlignment="CENTER" wrappingWidth="204.0" />
 
 
    </children>

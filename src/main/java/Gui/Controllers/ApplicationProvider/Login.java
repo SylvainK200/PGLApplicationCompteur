@@ -1,6 +1,7 @@
 package Gui.Controllers.ApplicationProvider;
 
 import Gui.FacilitatorProviderLinkClient;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,16 +10,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.util.Objects;
-import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
-import static Gui.FacilitatorProviderLinkClient.*;
+
+import javax.swing.JOptionPane;
+
+import static Gui.FacilitatorProviderLinkClient.currentprovider;
+import static Gui.FacilitatorProviderLinkClient.currentClient;;
 public class Login {
 
     @FXML
@@ -39,27 +39,25 @@ public class Login {
     public void initialize(){
         type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
     }
+
+    public GeneralMethodsImpl backend = GeneralMethodsImpl.getInstance();
+
     @FXML
     void connect(ActionEvent event) {
+        
         if (Objects.nonNull(type_utilisateur.getValue()) && type_utilisateur.getValue()!="") {
-           String url = "" ;
-           if (type_utilisateur.getValue().equals("Consommateur")){
-               url = API_URL+"/user/identifiant/"+identifiant.getText()+"/"+mot_de_passe.getText();
-           }
-           else {
-               url = API_URL + "/provider/identifiant/"+identifiant.getText()+"/"+mot_de_passe.getText();
-           }
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .build();
+            String username = identifiant.getText() ;
+            String password = mot_de_passe.getText();
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .method("GET", null)
-                    .build();
+            if(username.isBlank() || password.isBlank()){
+                JOptionPane.showMessageDialog(null,"Veuillez entrer le nom d'utilisateur et le password.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             try {
-                Response response = client.newCall(request).execute();
 
-                JSONObject user = new JSONObject(response.body().string());
+                JSONObject user = backend.signin(username, password, !type_utilisateur.getValue().equals("Consommateur"));
+                
                 if (!user.isEmpty()) {
                     FacilitatorProviderLinkClient.stage.close();
                     if (this.type_utilisateur.getValue().equals("Fournisseur"))
@@ -67,12 +65,10 @@ public class Login {
                         currentprovider = user;
                         System.out.println("current provider :" + currentprovider.toString());
                         FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
-                        response.close();
                     }else {
                         currentClient = user;
                         System.out.println("current provider :" + currentClient.toString());
                         FacilitatorProviderLinkClient.showPages("client/MenuPrincipaleConsommateur.fxml");
-                        response.close();
                     }
 
                 }else{

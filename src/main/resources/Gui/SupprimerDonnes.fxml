@@ -8,18 +8,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.SupprimerDonnees">
-    <Label fx:id="lblEAN" layoutX="71.0" layoutY="80.0" text="EAN :   " />
-    <ComboBox fx:id="compteur" layoutX="171.0" layoutY="75.0" prefWidth="300.0" promptText="EAN" />
-    <Button fx:id="cloturerCompteur" layoutX="71.0" layoutY="140.0" mnemonicParsing="false" onAction="#cloturerCompteurDonnee" prefWidth="400" text="Clôturer Compteur" />
-    <Label fx:id="lblNotification" layoutX="71.0" layoutY="190.0" text="Notification :   " />
+<AnchorPane prefHeight="400.0" prefWidth="552.0" stylesheets="@styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.SupprimerDonnees">
+    <Label fx:id="lblEAN" layoutX="71.0" layoutY="110.0" text="EAN :   " />
+    <ComboBox fx:id="compteur" layoutX="168.0" layoutY="105.0" prefWidth="300.0" promptText="EAN" />
+    <Button fx:id="cloturerCompteur" layoutX="71.0" layoutY="150.0" mnemonicParsing="false" onAction="#cloturerCompteurDonnee" prefWidth="400" styleClass="connect" text="Clôturer Compteur" />
+    <Label fx:id="lblNotification" layoutX="71.0" layoutY="200.0" text="Notification :   " />
    <TextArea fx:id="notification_suppression" layoutX="71.0" layoutY="230.0" prefHeight="100.0" prefWidth="400.0" />
-    <Button fx:id="supprimer_historique_button" layoutX="71.0" layoutY="360.0" mnemonicParsing="false" onAction="#supprimerHistorique" prefHeight="26.0" prefWidth="197.0" text="Supprimer Historiques" />
-   <Text layoutX="129.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer les données">
+    <Button fx:id="supprimer_historique_button" layoutX="73.0" layoutY="356.0" mnemonicParsing="false" onAction="#supprimerHistorique" prefHeight="26.0" prefWidth="186.0" styleClass="connect" text="Supprimer Historiques" />
+   <Text layoutX="9.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bienvenu" text="Supprimer les données" textAlignment="CENTER" wrappingWidth="534.0">
       <font>
          <Font size="28.0" />
       </font>
    </Text>
-   <Button fx:id="quitter" layoutX="305.0" layoutY="356.0" mnemonicParsing="false" onAction="#quitter" prefHeight="26.0" prefWidth="197.0" text="Quitter" />
+   <Button fx:id="quitter" layoutX="301.0" layoutY="356.0" mnemonicParsing="false" onAction="#quitter" prefHeight="26.0" prefWidth="170.0" styleClass="cancel" text="Quitter" />
     
 </AnchorPane>

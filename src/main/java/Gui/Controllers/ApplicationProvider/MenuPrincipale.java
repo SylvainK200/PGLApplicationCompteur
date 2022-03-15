@@ -115,22 +115,24 @@ public class MenuPrincipale  {
 
 
     public void onclickrechercher(){
-        // findSupplyPointByUserByEan_18()
-        JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
+        if(!textEAN.getText().isBlank()){
+            // findSupplyPointByUserByEan_18()
+            JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
 
-        // findContractByUserByEan_18()
-        JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
+            // findContractByUserByEan_18()
+            JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
 
-        //findSupplyPointByUser();
-        JSONArray consommations = generalMethods.find("supplyPoint");
+            //findSupplyPointByUser();
+            JSONArray consommations = generalMethods.find("supplyPoint");
 
-        resultEAN.setText(result.getString("ean_18"));
-        resultConsommateur.setText(contract.getString("client"));
-        ArrayList<JSONObject> consommationValues = extractConsommations(consommations,result.getLong("id"));
-        if (consommationValues.size()>1)
-        {
-            JSONObject derniereConsommation = consommationValues.get(consommationValues.size()-1);
-            resultConsommation.setText(derniereConsommation.getString("value"));
+            resultEAN.setText(result.getString("ean_18"));
+            resultConsommateur.setText(contract.getString("client"));
+            ArrayList<JSONObject> consommationValues = extractConsommations(consommations,result.getLong("id"));
+            if (consommationValues.size()>1)
+            {
+                JSONObject derniereConsommation = consommationValues.get(consommationValues.size()-1);
+                resultConsommation.setText(derniereConsommation.getString("value"));
+            }
         }
     }
 

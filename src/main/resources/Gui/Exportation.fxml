@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="266.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Exportation">
+<AnchorPane prefHeight="266.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.Exportation">
     <Label fx:id="lblEAN" layoutX="10" layoutY="50" text="EAN :   " />
     <ComboBox fx:id="compteur" layoutX="110.0" layoutY="45.0" prefWidth="300.0" promptText="EAN" />
     <TextField fx:id="textEAN" disable="false" layoutX="110.0" layoutY="85" prefHeight="26.0" prefWidth="300.0" text="Consommation Du Mois" />

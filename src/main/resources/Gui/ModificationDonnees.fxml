@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.ModificationDonnees">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="458.0" stylesheets="@styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationProvider.ModificationDonnees">
     <children>
 
         <Label fx:id="labelConsommationActuel" layoutX="30.0" layoutY="54.0" text="consommation actuel :   " />
@@ -13,9 +13,9 @@
         <Label fx:id="labelConsommationCorriges" layoutX="30.0" layoutY="110.0" text="Consommation Corrigé  :   " />
         <TextField fx:id="textConsommationCorriges" layoutX="220.0" layoutY="100.0" prefHeight="26.0" prefWidth="210.0" />
 
-        <Button fx:id="annuler_button" layoutX="188.0" layoutY="174.0" mnemonicParsing="false" onAction="#annuler" prefWidth="100" text="Annuler" />
-        <Button fx:id="valider" layoutX="30.0" layoutY="174.0" mnemonicParsing="false" onAction="#valider" prefWidth="100" text="Valider" />
-      <Button fx:id="quitter" layoutX="340.0" layoutY="173.0" mnemonicParsing="false" onAction="#quitterPage" prefHeight="26.0" prefWidth="90.0" text="Quitter" />
+        <Button fx:id="annuler_button" layoutX="188.0" layoutY="174.0" mnemonicParsing="false" onAction="#annuler" prefWidth="100" styleClass="cancel" text="Annuler" />
+        <Button fx:id="valider" layoutX="30.0" layoutY="174.0" mnemonicParsing="false" onAction="#valider" prefWidth="100" styleClass="connect" text="Valider" />
+      <Button fx:id="quitter" layoutX="340.0" layoutY="173.0" mnemonicParsing="false" onAction="#quitterPage" prefHeight="26.0" prefWidth="90.0" styleClass="cancel" text="Quitter" />
 
     </children>
 </AnchorPane>
