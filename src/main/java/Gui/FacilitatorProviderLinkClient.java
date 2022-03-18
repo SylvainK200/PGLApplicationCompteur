@@ -37,12 +37,12 @@ public class FacilitatorProviderLinkClient extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage=primaryStage;
-       showPages("login.fxml");
+        showPages("login.fxml");
     }
 
     public static void startForTests(Stage primaryStage) throws Exception{
         stage=primaryStage;
-       showPages("login.fxml");
+        showPages("login.fxml");
     }
     
 

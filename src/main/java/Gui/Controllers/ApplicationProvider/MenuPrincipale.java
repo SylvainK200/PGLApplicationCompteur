@@ -251,7 +251,7 @@ public class MenuPrincipale  implements Initializable{
             }
         }
         else{
-            //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.",, "Message", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.", "Message", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Ce client n'a pas de contrats");
         }
         
@@ -261,6 +261,10 @@ public class MenuPrincipale  implements Initializable{
 
     @FXML
     public void goToModifierDonnee(){
+        if(compteur_importer.getValue() == null){
+            JOptionPane.showMessageDialog(null,"Veuillez choisir le compteur à importer", "Message", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         current_supply_point = generalMethods.findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("ModificationDonnees.fxml");

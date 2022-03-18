@@ -54,7 +54,7 @@ public class MenuPrincipalTable {
         {
             ArrayList<JSONObject> consommations = extractConsommations(consommationValues,contract_supply.getJSONObject("supplyPoint").getLong("id")) ;
             if (consommations.size()>0){
-                consommation = consommations.get(consommations.size()-1).getDouble("value");
+                consommation = consommations.get(consommations.size()-1).getDouble("consommation");
             }
             ean_18 = contract_supply.getJSONObject("supplyPoint").getString("ean_18");
 

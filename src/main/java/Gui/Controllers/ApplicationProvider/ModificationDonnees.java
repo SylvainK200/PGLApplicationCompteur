@@ -45,7 +45,12 @@ public class ModificationDonnees {
             List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
             if (consommations.size()>0){
                 consommation = consommations.get(consommations.size()-1);
-                textConsommationActuel.setText(String.valueOf(consommation.getDouble("value")));
+                textConsommationActuel.setText(String.valueOf(consommation.getDouble("consommation")));
+            }else{
+                JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                valider.setDisable(true);
+                annuler_button.setDisable(true);
+                textConsommationCorriges.setDisable(true);
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.", "Message", JOptionPane.INFORMATION_MESSAGE);
@@ -66,9 +71,9 @@ public class ModificationDonnees {
         if (!textConsommationCorriges.getText().equals("") && !textConsommationCorriges.getText().isEmpty()){
             int retour = JOptionPane.showConfirmDialog(null,"Etes vous sur de vouloir modifier la valeur de la consommation ? ");
                 if (retour == 0) {
-                    consommation.remove("value");
-                    consommation.put("value",Double.parseDouble(textConsommationCorriges.getText()));
-                    generalMethods.updateObject(consommation,"consommationValue");
+                    consommation.remove("consommation");
+                    consommation.put("consommation",Double.parseDouble(textConsommationCorriges.getText()));
+                    generalMethods.updateObject(consommation,"historicalValue");
                 }
         }
     }
