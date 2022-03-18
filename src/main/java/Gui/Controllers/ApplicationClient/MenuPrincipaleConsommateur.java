@@ -1,8 +1,18 @@
 package Gui.Controllers.ApplicationClient;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Gui.FacilitatorProviderLinkClient;
 import Gui.Controllers.Methods.GeneralMethods;
 import Gui.Controllers.Methods.GeneralMethodsImpl;
-import Gui.FacilitatorProviderLinkClient;
 import Gui.ModelTabs.MenuPrincipalConsommateurTable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,22 +20,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import javafx.util.StringConverter;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
 public class MenuPrincipaleConsommateur{
 
@@ -120,9 +126,10 @@ public class MenuPrincipaleConsommateur{
     private ComboBox<String> wallets;
 
     private ArrayList<MenuPrincipalConsommateurTable> listPrincipal = new ArrayList<>();
-    private ObservableList researchList = FXCollections.observableArrayList();
+    private ObservableList<MenuPrincipalConsommateurTable> researchList = FXCollections.observableArrayList();
     private FilteredList<MenuPrincipalConsommateurTable> filteredList;
     private JSONObject currentSupplyPoint;
+    
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 
     public void initialize(){

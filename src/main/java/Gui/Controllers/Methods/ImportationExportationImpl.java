@@ -25,7 +25,7 @@ public class ImportationExportationImpl implements ImportationExportation{
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.append(HEADER);
             fileWriter.append(SEPARATOR);
-            Iterator it = elts.iterator();
+            Iterator<MenuPrincipalTable> it = elts.iterator();
 
             while (it.hasNext()){
                 MenuPrincipalTable elt =(MenuPrincipalTable) it.next();

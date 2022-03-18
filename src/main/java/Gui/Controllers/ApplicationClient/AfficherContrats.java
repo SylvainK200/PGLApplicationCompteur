@@ -65,7 +65,7 @@ public class AfficherContrats {
 
     @FXML
     private Button quitter;
-    private ObservableList contrats = FXCollections.observableArrayList();
+    private ObservableList<AllContract> contrats = FXCollections.observableArrayList();
     private FilteredList<AllContract> contratsList;
     @FXML
     void quitterPage(ActionEvent event) {

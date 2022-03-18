@@ -1,8 +1,16 @@
 package Gui.Controllers.ApplicationClient;
 
+import java.io.File;
+import java.io.FileWriter;
+
+import javax.swing.JOptionPane;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Gui.FacilitatorProviderLinkClient;
 import Gui.Controllers.Methods.GeneralMethods;
 import Gui.Controllers.Methods.GeneralMethodsImpl;
-import Gui.FacilitatorProviderLinkClient;
 import Gui.ModelTabs.HistoriqueTable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,18 +18,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import javax.swing.JOptionPane;
 
 public class HistoriqueCompteur {
 
@@ -157,16 +159,13 @@ public class HistoriqueCompteur {
                     fileWriter.append(DELIMITER);
                     fileWriter.append("" + FOURNISSEUR);
                     fileWriter.append(SEPARATOR);
-
                 }
                 fileWriter.close();
                 JOptionPane.showMessageDialog(null,"Exportation effectuée avec succès dans le fichier : " + file.getAbsolutePath(), "Message", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,"Exportation a échoué. Regardez les logs", "Message", JOptionPane.INFORMATION_MESSAGE);
-
             }
-
         }
     }
     

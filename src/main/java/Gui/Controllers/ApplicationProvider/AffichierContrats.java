@@ -63,7 +63,7 @@ public class AffichierContrats {
 
     @FXML
     private Button quitter;
-    private ObservableList contrats = FXCollections.observableArrayList();
+    private ObservableList<AllContract> contrats = FXCollections.observableArrayList();
     private FilteredList<AllContract> contratsList;
     GeneralMethods generalMethods = new GeneralMethodsImpl();
     @FXML

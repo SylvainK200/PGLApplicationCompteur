@@ -1,13 +1,12 @@
 package Gui.ModelTabs;
 
-import Gui.Controllers.Methods.GeneralMethods;
-import Gui.Controllers.Methods.GeneralMethodsImpl;
+import java.util.Objects;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Objects;
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 
 public class MenuPrincipalConsommateurTable {
     public String ean_18;

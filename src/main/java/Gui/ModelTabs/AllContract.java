@@ -2,9 +2,6 @@ package Gui.ModelTabs;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 public class AllContract {
     private String nom_client;
     private String num_contrat;

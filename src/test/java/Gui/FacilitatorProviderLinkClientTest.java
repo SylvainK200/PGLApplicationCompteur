@@ -1,22 +1,15 @@
 package Gui;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
-import Gui.Controllers.Methods.GeneralMethodsImpl;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -123,10 +116,6 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
     @Test 
     public void t2_login_conso_should_work() {
 
-        /************  Mock Signin in GeneralMethodsImpl  *********/
-        //when(backend.signin(any(String.class), any(String.class), any(Boolean.class))).thenReturn(response);
-        /************             ********             ***********/
-
         //when set username
         clickOn("#identifiant").write("test0conso");
         //and set password
@@ -143,11 +132,6 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
 
     @Test 
     public void t2_login_provider_should_work() {
-
-        /************  Mock Signin in GeneralMethodsImpl  *********/
-        //when(backend.signin(any(String.class), any(String.class), any(Boolean.class))).thenReturn(response);
-        /************             ********             ***********/
-
         //when set username
         clickOn("#identifiant").write("test0pro");
         //and set password
@@ -191,10 +175,6 @@ public class FacilitatorProviderLinkClientTest extends ApplicationTest {
 
     @Test 
     public void t1_signup_provider_should_work() {
-
-        /***  Mock signup fonction of GeneralMethodsImpl.java ***/
-        //when(backend.signup(any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(String.class), any(Boolean.class))).thenReturn(true);
-        /**************************   ***  **********************/
 
         //Loading page
         clickOn("#creer_compte");
