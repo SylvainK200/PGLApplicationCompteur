@@ -23,12 +23,12 @@ public class AllContract {
     public AllContract (JSONObject client , JSONObject contract_supply_point){
         nom_client = client.getString("identifiant");
         meter_rate = contract_supply_point.getDouble("meter_rate");
+        type_contrat = contract_supply_point.getString("meter_type");
         network_manager_cost = contract_supply_point.getDouble("network_manager_cost");
         tax_rate = contract_supply_point.getDouble("tax_rate");
-
         num_contrat = contract_supply_point.getString("numero_contract");
-        String deb = df.format(contract_supply_point.getLong("date_begin"));
-        String fin = df.format(contract_supply_point.getLong("date_end"));
+        String deb = contract_supply_point.getString("date_begin").split("T")[0];
+        String fin = contract_supply_point.getString("date_end").split("T")[0];
         debut_contrat = deb;
         fin_contrat = fin;
         Object json = contract_supply_point.get("supplyPoint");

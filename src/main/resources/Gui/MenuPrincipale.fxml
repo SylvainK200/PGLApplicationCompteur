@@ -95,7 +95,7 @@
         <TableView fx:id="table" layoutX="27.0" layoutY="268.0" prefHeight="400.0" prefWidth="898.0">
             <columns>
                 <TableColumn fx:id="colEAN" prefWidth="123.0" text="EAN" />
-                <TableColumn fx:id="colConsommation" prefWidth="147.00001525878906" text="Cosommation" />
+                <TableColumn fx:id="colConsommation" prefWidth="147.00001525878906" text="Consommation" />
                 <TableColumn fx:id="colCout" prefWidth="139.0" text="Coût" />
                 <TableColumn fx:id="colCompteur" prefWidth="140.0" text="Type Compteur" />
                 <TableColumn fx:id="colDateAffectation" prefWidth="163.0" text="Date Affectation" />

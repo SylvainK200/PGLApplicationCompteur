@@ -1,16 +1,16 @@
 package Gui.ModelTabs;
 
-import Gui.Controllers.Methods.GeneralMethods;
-import Gui.Controllers.Methods.GeneralMethodsImpl;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import static Gui.FacilitatorProviderLinkClient.extractConsommations;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static Gui.FacilitatorProviderLinkClient.extractConsommations;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Gui.Controllers.Methods.GeneralMethods;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 
 
 public class MenuPrincipalTable {
@@ -27,18 +27,28 @@ public class MenuPrincipalTable {
     }
 
     public MenuPrincipalTable (JSONObject contract_supply) {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
         type_compteur = contract_supply.getJSONObject("supplyPoint").getString("energy");
-        String deb = df.format(contract_supply.getLong("date_begin"));
-        String fin = df.format(contract_supply.getLong("date_end"));
+        
+        try {
+            date_affectation = contract_supply.getString("date_begin").split("T")[0];
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            date_cloture = contract_supply.getString("date_end").split("T")[0];
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         cout = contract_supply.getDouble("meter_rate");
         nameWallet = "";
         Object json = contract_supply.get("wallet");
-        System.out.println(Objects.isNull(json));
-        if (Objects.isNull(json)){
+        System.out.println("Wallet is null ? " + Objects.isNull(json));
+        if (!Objects.isNull(json)){
             nameWallet = contract_supply.getJSONObject("wallet").getString("name");
         }
+
         JSONArray consommationValues = generalMethods.find("supplyPoint");
         if (contract_supply.get("supplyPoint") instanceof  JSONObject)
         {
@@ -49,10 +59,6 @@ public class MenuPrincipalTable {
             ean_18 = contract_supply.getJSONObject("supplyPoint").getString("ean_18");
 
         }
-
-
-            date_affectation = deb;
-            date_cloture =fin;
 
     }
 

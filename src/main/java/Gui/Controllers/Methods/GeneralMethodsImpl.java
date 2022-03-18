@@ -89,7 +89,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println("resultat "+res);
+            System.out.println("this is the result for method find unique /"+url+" : "+res);
             if (response.isSuccessful())
             {
                 result= new JSONObject(res);
@@ -113,7 +113,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println("this is the result for method : "+res);
+            System.out.println("this is the result for method find /"+url+" : "+res);
             if (res !=null)
             {
                 result= new JSONArray(res);

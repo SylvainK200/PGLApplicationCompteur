@@ -171,6 +171,20 @@ public class NouveauContrat {
         }
 
         NumeroClient.getItems().addAll(clientsList);
+
+        // Charger les portefeuilles du client selectionné
+        NumeroClient.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            JSONArray list_portefeuilles = generalMethods.find("wallet/identifiant/"+newValue);
+
+            portefeuille.getItems().clear();
+
+            for (int i = 0;i<list_portefeuilles.length();i++)
+            {
+                portefeuille.getItems().add( list_portefeuilles.getJSONObject(i).getString("name"));
+
+            }
+        }); 
+
         combEAN.getItems().addAll(eansList);
         NumeroClient.valueProperty().addListener((ObservableValue<? extends  String>observable,String oldvalue,String newValue)->{
             initTable();
@@ -214,10 +228,13 @@ public class NouveauContrat {
             JOptionPane.showMessageDialog(null,"Remplissez tous les champs.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }else{
             if(date_fin.getValue().isAfter(date_debut.getValue())){
-                int aleatoire = 100 + (int)((Math.random()+0.002)*10000);
+                String aleatoire = ""+ System.currentTimeMillis() + (char)( (int)(Math.random()*10) );
                 JSONObject contract_supply = new JSONObject();
                 JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
                 JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/ean_18/"+combEAN.getValue());
+
+                supplyPoint = new JSONObject(supplyPoint, "id");
+                wallet = new JSONObject(wallet, "id");
 
                 contract_supply.put("date_begin",date_debut.getValue());
                 contract_supply.put("date_end",date_fin.getValue());
@@ -247,9 +264,19 @@ public class NouveauContrat {
             JOptionPane.showMessageDialog(null,"Remplissez tous les champs.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JSONObject compteur = new JSONObject();
+            JSONObject pointFourniture = new JSONObject();
+
             compteur.put("ean_18",newEAN.getText());
             compteur.put("energy",newEnergy.getValue());
-            compteur.put("name", currentprovider.getString("company_name"));
+            compteur.put("name", newEAN.getText() + '_' + currentprovider.getString("company_name"));
+
+            pointFourniture.put("ean_18",newEAN.getText());
+            pointFourniture.put("energy",newEnergy.getValue());
+            pointFourniture.put("name", newEAN.getText() + '_' + currentprovider.getString("company_name"));
+            pointFourniture.put("provider",currentprovider);
+
+            compteur.put("pointFourniture", pointFourniture);
+
             try{
                 generalMethods.createObject(compteur,"/supplyPoint");
                 

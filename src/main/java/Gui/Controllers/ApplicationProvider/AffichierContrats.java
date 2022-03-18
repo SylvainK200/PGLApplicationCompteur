@@ -112,31 +112,28 @@ public class AffichierContrats {
         col_network_manager_cost.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("network_manager_cost"));
         col_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("tax_rate"));
         col_over_tax_rate.setCellValueFactory(new PropertyValueFactory<AllContract,Integer>("over_tax_rate"));
+
         JSONArray contract_supply = generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
-        for (int i =0;i<contract_supply.length();i++){
-            // formation de chaque ligne du tableau a remplir
-            JSONObject client = this.findClientOfContract(contract_supply.getJSONObject(i));
-            if (!client.isEmpty()){
-                contrats.add(new AllContract(client,contract_supply.getJSONObject(i)));
-                table_contrat.getItems().add(new AllContract(client,contract_supply.getJSONObject(i)));}
+        if(contract_supply.length()>0){
+            for (int i =0;i<contract_supply.length();i++){
+                // formation de chaque ligne du tableau a remplir
+                JSONObject client = this.findClientOfContract(contract_supply.getJSONObject(i));
+                if (!client.isEmpty()){
+                    contrats.add(new AllContract(client,contract_supply.getJSONObject(i)));
+                    table_contrat.getItems().add(new AllContract(client,contract_supply.getJSONObject(i)));}
+            }
+            System.out.println("remplissage termine");
+        }else{
+            System.out.println("Ce provider n'a pas de contracts");
         }
-        System.out.println("remplissage termine");
     }
 
     // recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
-        if(contract_supply_point.has("contract")){
-            Object json = contract_supply_point.get("contract");
-            if (json instanceof  JSONObject) {
-                String identifiant = ((JSONObject) json).getString("client");
-                System.out.println("identifiant" + identifiant);
-                client = generalMethods.findUnique("user/identifiant/"+identifiant);
-            }
-            if (client == null){
-                return new JSONObject();
-            }
-        }
+        String identifiant = contract_supply_point.getString("client");
+        System.out.println("identifiant" + identifiant);
+        client = generalMethods.findUnique("user/identifiant/"+identifiant);
         return client;
     }
 

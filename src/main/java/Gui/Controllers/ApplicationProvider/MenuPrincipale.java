@@ -9,6 +9,7 @@ import Gui.ModelTabs.MenuPrincipalTable;
 import Gui.FacilitatorProviderLinkClient;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
@@ -22,10 +23,12 @@ import javax.swing.*;
 import static Gui.FacilitatorProviderLinkClient.*;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class MenuPrincipale  {
+public class MenuPrincipale  implements Initializable{
     ImportationExportation importationExportation = new ImportationExportationImpl();
     GeneralMethods generalMethods  = new GeneralMethodsImpl();
     @FXML
@@ -136,6 +139,13 @@ public class MenuPrincipale  {
         }
     }
 
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.initialize();
+    }
+    
     @FXML
     public void initialize()
     {
@@ -158,47 +168,57 @@ public class MenuPrincipale  {
                 compteur_importer.getItems().add(((JSONObject)obj).getString("ean_18"));
             }
         }
+
+        // Charger les portefeuilles du client selectionné
+        combClient.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            JSONArray list_portefeuilles = generalMethods.find("wallet/identifiant/"+newValue);
+
+            combPortefeuille.getItems().clear();
+            combPortefeuille.getItems().add("");
+
+            for (int i = 0;i<list_portefeuilles.length();i++)
+            {
+                combPortefeuille.getItems().add( list_portefeuilles.getJSONObject(i).getString("name"));
+
+            }
+        }); 
+
         combClient.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
            System.out.println("client modifie");
-            if (combClient.getValue()!=null)
+
+            if (newValue!=null)
             {
                 System.out.println("Execution de la fonction inittable");
                 initTable();
-                compteur_importer.getItems().removeAll(compteur_importer.getItems());
+                compteur_importer.getItems().clear();
                 for (MenuPrincipalTable elt : principalList) {
                     compteur_importer.getItems().add(elt.getEan_18());
                 }
             }
 
         });
+
         combPortefeuille.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
-            if (combPortefeuille.getValue()!=null)
+            if (newValue!=null && newValue!="")
             {
                 System.out.println("Execution de la fonction de filtre combPortefeuille");
-                ArrayList<MenuPrincipalTable>  listeFiltree = new ArrayList<MenuPrincipalTable>();
-                listeFiltree.addAll(principalList);
-                table.getItems().removeAll(table.getItems());
-                currentList.removeAll(currentList);
-                for (MenuPrincipalTable elt : listeFiltree){
-                    if (elt.getNameWallet().equals(combPortefeuille.getValue())){
+
+                table.getItems().clear();
+                currentList.clear();
+
+                for (MenuPrincipalTable elt : principalList){
+                    if (elt.getNameWallet().equalsIgnoreCase(combPortefeuille.getValue())){
                         table.getItems().add(elt);
                         currentList.add(elt);
                     }
                 }
+
+            }else{
+                table.getItems().clear();
+                table.getItems().addAll(principalList);
             }
 
         });
-        compteur.valueProperty().addListener(
-                (ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
-                    table.getItems().removeAll(table.getItems());
-                    JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
-                    for (Object elt : contract_supply){
-                        if (elt instanceof  JSONObject){
-
-                        }
-                    }
-                });
-
     }
 
     void initTable(){
@@ -208,32 +228,33 @@ public class MenuPrincipale  {
         colConsommation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,Double>("consommation"));
         colDateAffectation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_affectation"));
         colDateClotur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalTable,String>("date_cloture"));
-        JSONObject client  = generalMethods.findUnique("user/identifiant/"+combClient.getValue());
-        ;
-        JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id"));
-        combPortefeuille.getItems().removeAll(combPortefeuille.getItems());
-        table.getItems().removeAll(table.getItems());
-        principalList.removeAll(principalList);
-        currentList.removeAll(currentList);
-        for (int i =0;i<contract_supply.length();i++){
-            JSONObject current = contract_supply.getJSONObject(i);
-            if(current.has("contract")){
-                if (current.get("contract") instanceof JSONObject){
-                    if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
-                        table.getItems().add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
-                        if (Objects.isNull(contract_supply.getJSONObject(i).get("wallet"))){
-                            JSONObject wallet = contract_supply.getJSONObject(i).getJSONObject("wallet");
-                            combPortefeuille.getItems().add(wallet.getString("name"));
-                        }
-                        principalList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
-                        currentList.add(new MenuPrincipalTable(contract_supply.getJSONObject(i)));
-                    }
+        //JSONObject client  = generalMethods.findUnique("user/identifiant/"+combClient.getValue());
+        
+        JSONArray contract_supply =generalMethods.find("contractSupplyPoint/byProvider/"+currentprovider.getInt("id")+"/byClient/"+combClient.getValue());
+        //combPortefeuille.getItems().removeAll(combPortefeuille.getItems());
+        
+        table.getItems().clear();
+        principalList.clear();
+        currentList.clear();
+        if (contract_supply.length() > 0){
+            for (int i =0;i<contract_supply.length();i++){
+                JSONObject current = contract_supply.getJSONObject(i);
+
+                table.getItems().add(new MenuPrincipalTable(current));
+                if (Objects.isNull(current.get("wallet"))){
+                    JSONObject wallet = current.getJSONObject("wallet");
+                    combPortefeuille.getItems().add(wallet.getString("name"));
                 }
-            }else{
-                //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.",, "Message", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Ce client n'a pas de contrats");
+                principalList.add(new MenuPrincipalTable(current));
+                currentList.add(new MenuPrincipalTable(current));
+                    
             }
         }
+        else{
+            //JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.",, "Message", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Ce client n'a pas de contrats");
+        }
+        
         //JOptionPane.showMessageDialog(null,"Chargement terminé.",, "Message", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("remplissage termine");
     }

@@ -45,7 +45,7 @@
 
 .bienvenu
 {
-    -fx-font-style:bold;
+    -fx-font-weight:bold;
     -fx-font-size:40px;
     -fx-font-family:'Abyssinica SIL';
 }
@@ -61,12 +61,17 @@
 }
 
 
-.table-view .table-column{
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
     -fx-background-color: rgb(10, 114, 184);
     -fx-fill: white;
+    -fx-text-fill:white;
 }
 
-.table-view .table-column .text{
+.table-view .column-header .text,
+.table-view .column-header .filler .text,
+.table-view .column-header-background .filler .text{
     -fx-fill: white;
-
+    -fx-text-fill:white;
 }
