@@ -21,6 +21,8 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.swing.JOptionPane;
+
 public class HistoriqueCompteur {
 
     GeneralMethods generalMethods = new GeneralMethodsImpl();
@@ -58,6 +60,7 @@ public class HistoriqueCompteur {
 
     private ObservableList<HistoriqueTable> researchList = FXCollections.observableArrayList();
     private FilteredList<HistoriqueTable> filteredList;
+
     public void initialize(){
         colEAN.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("ean"));
         type_energy.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("type_energy"));
@@ -67,8 +70,9 @@ public class HistoriqueCompteur {
         JSONArray suppliesPoint = generalMethods.find("supplyPoint/client/identifiant/"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0; i<suppliesPoint.length();i++){
             JSONObject currentObject = suppliesPoint.getJSONObject(i);
-            JSONArray consommationSupplyPoint = generalMethods.find("consommationValue/historiqueRecent/"+currentObject.getLong("id"));
+            JSONArray consommationSupplyPoint = generalMethods.find("historicalValue/historiqueRecent/"+currentObject.getLong("id"));
             combEAN.getItems().add(currentObject.getString("ean_18"));
+            ean_exporter.getItems().add(currentObject.getString("ean_18"));
             for (int j =0;j<consommationSupplyPoint.length();j++){
                 JSONObject current_consommation = consommationSupplyPoint.getJSONObject(j);
                 JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("ean_18"));
@@ -109,26 +113,36 @@ public class HistoriqueCompteur {
 
     @FXML
     void exporterDonnee(ActionEvent event) {
-        String date_deb = date_debut_importation.getValue() + "";
-        String date_fin = date_maximale.getValue() + "";
         String ean = ean_exporter.getValue();
 
+        if(ean==null || ean.isEmpty() || ean.isBlank()){
+            JOptionPane.showMessageDialog(null,"Veuillez selectionner l'EAN à exporter", "Message", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if( date_debut_importation.getValue().isAfter(date_maximale.getValue())){
+            JOptionPane.showMessageDialog(null,"La date de debut doit être avant celle de fin", "Message", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        String date_deb = date_debut_importation.getValue() + "";
+        String date_fin = date_maximale.getValue() + "";
+
         JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/" + ean);
-        JSONArray consommations = generalMethods.find("consommationValue/consommations/" + supply.getString("id") +
+        JSONArray consommations = generalMethods.find("/historicalValue/consommations/" + supply.getLong("id") +
                 "/" + date_deb + "/" + date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
-        final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur;";
-        final String FOURNISSEUR = generalMethods.findUnique("provider/ean" + ean).getString("company_name");
-        FileChooser js = new FileChooser();
-        js.setTitle("Export to a csv file");
+        final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur";
+        final String FOURNISSEUR = generalMethods.findUnique("provider/ean/" + ean).getString("company_name");
+        FileChooser js = generalMethods.getFileChooser();
+        js.setTitle("Export to ");
         File file = js.showSaveDialog(null);
         if (file != null) {
             try {
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.append(HEADER);
                 fileWriter.append(SEPARATOR);
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
                 for (int i = 0; i < consommations.length(); i++) {
                     JSONObject elt = consommations.getJSONObject(i);
@@ -137,15 +151,20 @@ public class HistoriqueCompteur {
                     fileWriter.append(DELIMITER);
                     fileWriter.append("" + elt.getJSONObject("supplyPoint").getString("energy"));
                     fileWriter.append(DELIMITER);
-                    fileWriter.append("" + df.format(elt.getLong("date")));
+                    fileWriter.append("" + elt.getString("date").split("T")[0]);
+                    fileWriter.append(DELIMITER);
+                    fileWriter.append("" + elt.getLong("consommation"));
                     fileWriter.append(DELIMITER);
                     fileWriter.append("" + FOURNISSEUR);
                     fileWriter.append(SEPARATOR);
 
                 }
                 fileWriter.close();
+                JOptionPane.showMessageDialog(null,"Exportation effectuée avec succès dans le fichier : " + file.getAbsolutePath(), "Message", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Exportation a échoué. Regardez les logs", "Message", JOptionPane.INFORMATION_MESSAGE);
+
             }
 
         }

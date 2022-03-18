@@ -24,10 +24,9 @@ public class MenuPrincipalConsommateurTable {
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
         System.out.println("debut ligne");
 
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         System.out.println(Objects.isNull(contract_supply_point.get("dateCloture")));
         if (!Objects.nonNull(contract_supply_point.get("dateCloture"))){
-            cloture  = df.format(contract_supply_point.getLong("dateCloture"));
+            cloture  = contract_supply_point.getString("dateCloture").split("T")[0];
 
         }else {
             cloture = "non defini";
@@ -36,8 +35,8 @@ public class MenuPrincipalConsommateurTable {
         type_energie = contract_supply_point.getJSONObject("supplyPoint").getString("energy");
         type_compteur = contract_supply_point.getString("meter_type");
         Fournisseur = contract_supply_point.getJSONObject("provider").getString("company_name");
-        date_affectation = df.format(contract_supply_point.getLong("date_begin"));
-        date_cloture = df.format(contract_supply_point.getLong("date_end"));
+        date_affectation = contract_supply_point.getString("date_begin").split("T")[0];
+        date_cloture = contract_supply_point.getString("date_end").split("T")[0];
         if (!Objects.nonNull(contract_supply_point.get("wallet"))){
             wallet = contract_supply_point.getJSONObject("wallet").getString("name");
         }
@@ -46,9 +45,13 @@ public class MenuPrincipalConsommateurTable {
         }
         long id = contract_supply_point.getJSONObject("supplyPoint").getLong("id");
 
-        JSONArray consommations = generalMethods.find("consommationValue/historiqueRecent/"+id);
-        if (Objects.nonNull(consommations)){
-            consommation = consommations.getJSONObject(0).getDouble("value")+"";
+        JSONArray consommations = generalMethods.find("historicalValue/historiqueRecent/"+id);
+        if (Objects.nonNull(consommations) && consommations.length() > 0){
+            int consommationTotal = 0;
+            for(int i=0; i< consommations.length();i++){
+                consommationTotal += consommations.getJSONObject(i).getDouble("consommation");
+            }
+            consommation = ""+consommationTotal;
         }else {
             consommation = "0";
         }

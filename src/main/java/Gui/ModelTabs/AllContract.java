@@ -18,8 +18,7 @@ public class AllContract {
     private double network_manager_cost;
     private double over_tax_rate;
     private double tax_rate;
-    private DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
+    
     public AllContract (JSONObject client , JSONObject contract_supply_point){
         nom_client = client.getString("identifiant");
         meter_rate = contract_supply_point.getDouble("meter_rate");

@@ -8,9 +8,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javafx.scene.control.DatePicker;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.StringConverter;
+
 import javax.swing.*;
 
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class GeneralMethodsImpl implements GeneralMethods{
     public  static String API_URL = "http://localhost:8085/energy-management";
@@ -19,6 +27,9 @@ public class GeneralMethodsImpl implements GeneralMethods{
 
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
+
+        System.out.println("Creating "+url + " : " + contract);
+
         JSONObject resp = new JSONObject();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody formBody = RequestBody.create(JSON, contract.toString());
@@ -36,6 +47,8 @@ public class GeneralMethodsImpl implements GeneralMethods{
         catch (Exception e){
             e.printStackTrace();
         }
+        System.out.println("Responding : "+resp);
+
         return resp;
     }
 
@@ -216,4 +229,48 @@ public class GeneralMethodsImpl implements GeneralMethods{
     }
 
     public GeneralMethodsImpl(){}
+
+    @Override
+    public void redefineDatePickerDateFormat(DatePicker datePicker) {
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            String pattern = "yyyy-MM-dd";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+           
+            {
+                datePicker.setPromptText(pattern.toLowerCase());
+            }
+           
+            @Override public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+           
+            @Override public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+           });
+    }
+    
+    @Override
+    public FileChooser getFileChooser(){
+
+        FileChooser js = new FileChooser();
+
+        js.getExtensionFilters().add(new ExtensionFilter("Supported Files (*.csv|*.json|*.yml|*.Yaml)", "*.csv","*.csv","*.json", "*.yml","*.yaml"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("CSV Files (*.csv)", "*.csv"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("JSON Files (*.json)", "*.json"));
+
+        js.getExtensionFilters().add(new ExtensionFilter("YAML Files (*.yml | *.yaml)", "*.yml","*.yaml"));
+
+        return js;
+    }
 }

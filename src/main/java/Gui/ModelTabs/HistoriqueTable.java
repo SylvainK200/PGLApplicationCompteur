@@ -22,8 +22,8 @@ public class HistoriqueTable {
             ean = "non defini";
             type_energy = "non defini";
         }
-        date = df.format(consommationelt.getLong("date"))+"";
-        consommation = consommationelt.getDouble("value")+"";
+        date = consommationelt.getString("date").split("T")[0];
+        consommation = consommationelt.getLong("consommation")+"";
         fournisseur = fournis;
     }
     public String getEan() {

@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.util.StringConverter;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,6 +24,7 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class MenuPrincipaleConsommateur{
@@ -136,6 +139,9 @@ public class MenuPrincipaleConsommateur{
         table.getItems().clear();
         initTable();
         initConsommation();
+
+        generalMethods.redefineDatePickerDateFormat(date_lecture);
+        generalMethods.redefineDatePickerDateFormat(date_maximale);        
     }
     
     void initConsommation(){
@@ -146,17 +152,21 @@ public class MenuPrincipaleConsommateur{
         ean_18.valueProperty().addListener((ObservableValue<?extends String>observable,String oldValue,String newValue)->{
             JSONObject currentSupp = generalMethods.findUnique("supplyPoint/ean_18/"+newValue);
             currentSupplyPoint = currentSupp;
-            JSONArray historique = generalMethods.find("consommationValue/historiqueRecent/"+currentSupp.getLong("id"));
+            JSONArray historique = generalMethods.find("historicalValue/historiqueRecent/"+currentSupp.getLong("id"));
             if (historique.length()>0){
-                JSONObject current = historique.getJSONObject(0);
-                consommation_recente.setText(current.getLong("value")+"");
-                date_recente.setText(current.getLong("value")+"");
+                int consommationTotal = 0;
+                for(int i=0; i< historique.length();i++){
+                    consommationTotal += historique.getJSONObject(i).getDouble("consommation");
+                }
+                consommation_recente.setText(consommationTotal+"");
+                date_recente.setText("Jusqu'a aujourd'hui");
             }else {
                 consommation_recente.setText("0");
                 date_recente.setText("Jusqu'a aujourd'hui");
             }
         });
     }
+    
     void initTable(){
         cloture.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("cloture"));
         ean.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("ean_18"));
@@ -194,13 +204,14 @@ public class MenuPrincipaleConsommateur{
             table.getItems().clear();
             table.getItems().addAll(filteredList);
         });
+
         etat_compteur.valueProperty().addListener((ObservableValue<? extends  String> observable,String oldValue,String newValue)->{
             filteredList.setPredicate(
                     contrat->{
-                        if (newValue=="cloture" && contrat.getCloture().contains("non")){
+                        if (newValue=="ouvert" && contrat.getCloture().contains("non")){
                             return true;
                         }
-                        if (newValue=="ouvert" && !contrat.getCloture().contains("non")) {
+                        if (newValue=="cloture" && !contrat.getCloture().contains("non")) {
                             return true;
                         }
                         else
@@ -218,21 +229,28 @@ public class MenuPrincipaleConsommateur{
     @FXML
     public void registerConsommation(ActionEvent event){
         LocalDate date_lect = date_lecture.getValue();
-        String value = valeur_vue.getText();
+        String newValue = valeur_vue.getText();
         if (currentSupplyPoint == null ) {
             JOptionPane.showMessageDialog(null,"S'il vous plait choisissez le compteur dans la partie consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }else if (newValue == null || newValue.isEmpty() || newValue.isBlank()){
+            JOptionPane.showMessageDialog(null,"Veuillez spécifier la valeur lue", "Message", JOptionPane.INFORMATION_MESSAGE);
         }
-        else {
+        else if (date_lect.isAfter(LocalDate.now())){
+            JOptionPane.showMessageDialog(null,"La date de lecture est après la date du jour. Modifiez la date de lecture et réessayez.", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }else{
             JSONObject newConsommation = new JSONObject();
-            newConsommation.put("value",value);
+            newConsommation.put("consommation",newValue);
             newConsommation.put("date",date_lect);
-            newConsommation.put("supplyPoint",currentSupplyPoint);
+            newConsommation.put("supplyPoint", new JSONObject(currentSupplyPoint,"id"));
 
-            JSONObject created = generalMethods.createObject(newConsommation,"consommationValue");
+            JSONObject created = generalMethods.createObject(newConsommation,"historicalValue");
             if (created.isEmpty()){
                 JOptionPane.showMessageDialog(null,"Echec lors de l'ajout de la nouvelle consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
             }else {
                 JOptionPane.showMessageDialog(null,"Enregistrement reussi de la nouvelle consommation", "Message", JOptionPane.INFORMATION_MESSAGE);
+                // Update table
+                initTable();
+                initConsommation();
             }
         }
 
@@ -258,8 +276,9 @@ public class MenuPrincipaleConsommateur{
         final String SEPARATOR = "\n";
         final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur;";
         final String FOURNISSEUR = generalMethods.findUnique("provider/ean"+ean).getString("company_name");
-        FileChooser js = new FileChooser();
-        js.setTitle("Export to a csv file");
+        FileChooser js = generalMethods.getFileChooser();
+        
+        js.setTitle("Export to");
         File file = js.showSaveDialog(null);
         if (file!=null)
         {

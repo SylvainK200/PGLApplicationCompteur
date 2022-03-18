@@ -3,6 +3,9 @@ package Gui.Controllers.Methods;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.scene.control.DatePicker;
+import javafx.stage.FileChooser;
+
 public interface GeneralMethods {
 
     public  JSONObject createObject(JSONObject contract, String url);
@@ -16,4 +19,8 @@ public interface GeneralMethods {
     public boolean signup(String name, String identifiant, String password, String adresse_mail,
                           String question_secrete, String reponse_question_secrete, String street, 
                           String number, String city, String postal_code, Boolean isProvider);
+
+
+    public void redefineDatePickerDateFormat(DatePicker datePicker);
+    public FileChooser getFileChooser();
 }
