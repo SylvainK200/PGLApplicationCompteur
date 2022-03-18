@@ -141,13 +141,15 @@ public class MenuPrincipaleConsommateur{
         initConsommation();
 
         generalMethods.redefineDatePickerDateFormat(date_lecture);
-        generalMethods.redefineDatePickerDateFormat(date_maximale);        
+        generalMethods.redefineDatePickerDateFormat(date_maximale);    
+        generalMethods.redefineDatePickerDateFormat(date_debut_importation); 
     }
     
     void initConsommation(){
         JSONArray supply_points = generalMethods.find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0 ; i<supply_points.length();i++){
             ean_18.getItems().add(supply_points.getJSONObject(i).getString("ean_18"));
+            ean_exporter.getItems().add(supply_points.getJSONObject(i).getString("ean_18"));
         }
         ean_18.valueProperty().addListener((ObservableValue<?extends String>observable,String oldValue,String newValue)->{
             JSONObject currentSupp = generalMethods.findUnique("supplyPoint/ean_18/"+newValue);
@@ -265,17 +267,29 @@ public class MenuPrincipaleConsommateur{
 
     @FXML
     void exporterDonnee(ActionEvent event) {
-        String date_deb = date_debut_importation.getValue()+"";
-        String date_fin = date_maximale.getValue()+"";
         String ean = ean_exporter.getValue();
 
+        if(ean==null || ean.isEmpty() || ean.isBlank()){
+            JOptionPane.showMessageDialog(null,"Veuillez selectionner le ean à exporter.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if( date_debut_importation.getValue().isAfter(date_maximale.getValue())){
+            JOptionPane.showMessageDialog(null,"La date de debut doit être avant celle de fin", "Message", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+
+        String date_deb = date_debut_importation.getValue()+"";
+        String date_fin = date_maximale.getValue()+"";
+
         JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/"+ean);
-        JSONArray consommations = generalMethods.find("consommationValue/consommations/"+supply.getString("id")+
+        JSONArray consommations = generalMethods.find("/historicalValue/consommations/"+supply.getLong("id")+
                 "/"+date_deb+"/"+date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
-        final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur;";
-        final String FOURNISSEUR = generalMethods.findUnique("provider/ean"+ean).getString("company_name");
+        final String HEADER = "EAN;type energie;date lecture;consommation;fournisseur;";
+        final String FOURNISSEUR = generalMethods.findUnique("provider/ean/"+ean).getString("company_name");
         FileChooser js = generalMethods.getFileChooser();
         
         js.setTitle("Export to");
@@ -286,7 +300,6 @@ public class MenuPrincipaleConsommateur{
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.append(HEADER);
                 fileWriter.append(SEPARATOR);
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
                 for (int i = 0 ; i<consommations.length();i++){
                     JSONObject elt  = consommations.getJSONObject(i);
@@ -295,15 +308,19 @@ public class MenuPrincipaleConsommateur{
                     fileWriter.append(DELIMITER);
                     fileWriter.append(""+elt.getJSONObject("supplyPoint").getString("energy"));
                     fileWriter.append(DELIMITER);
-                    fileWriter.append(""+df.format(elt.getLong("date")) );
+                    fileWriter.append(""+elt.getString("date").split("T")[0]);
+                    fileWriter.append(DELIMITER);
+                    fileWriter.append("" + elt.getLong("consommation"));
                     fileWriter.append(DELIMITER);
                     fileWriter.append(""+FOURNISSEUR);
                     fileWriter.append(SEPARATOR);
 
                 }
                 fileWriter.close();
+                JOptionPane.showMessageDialog(null,"Exportation effectuée avec succès dans le fichier : " + file.getAbsolutePath(), "Message", JOptionPane.INFORMATION_MESSAGE);
             }catch (Exception e ){
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Exportation a échoué. Regardez les logs", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }

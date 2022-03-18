@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.MenuPrincipaleConsommateur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1099.0" stylesheets="@../styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.MenuPrincipaleConsommateur">
 <children>
    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="1098.0">
    <children>
@@ -45,7 +45,7 @@
             <ComboBox id="ComboBoxEAN" fx:id="ean_18" layoutX="877.0" layoutY="66.0" prefHeight="26.0" prefWidth="200.0" />
             <Label layoutX="802.0" layoutY="118.0" text="Consommation actuelle :" />
             <Label id="LabelConsommationActuelle" fx:id="consommation_recente" disable="true" layoutX="968.0" layoutY="118.0" text="Indéfinie" />
-            <TableView fx:id="table" layoutX="9.0" layoutY="137.0" prefHeight="442.0" prefWidth="774.0">
+            <TableView fx:id="table" layoutX="9.0" layoutY="157.0" prefHeight="442.0" prefWidth="774.0">
                <columns>
                   <TableColumn fx:id="ean" prefWidth="102.39999771118164" text="Ean" />
                   <TableColumn fx:id="type_energie" minWidth="0.0" prefWidth="86.39999389648438" text="Type energie" />
@@ -57,7 +57,7 @@
                      <TableColumn fx:id="cloture" minWidth="0.0" prefWidth="112.0" text="cloture" />
                </columns>
             </TableView>
-               <GridPane layoutX="15.0" layoutY="58.0">
+               <GridPane layoutX="15.0" layoutY="78.0">
                  <columnConstraints>
                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -78,7 +78,7 @@
                      <Font name="Algerian" size="19.0" />
                   </font>
                </Label>
-               <TextField fx:id="rechercher" layoutX="555.0" layoutY="97.0" prefHeight="26.0" prefWidth="226.0" promptText="Rechercher " />
+               <TextField fx:id="rechercher" layoutX="555.0" layoutY="117.0" prefHeight="26.0" prefWidth="226.0" promptText="Rechercher " />
                <GridPane layoutX="801.0" layoutY="255.0" prefHeight="102.0" prefWidth="282.0">
                  <columnConstraints>
                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.4000244140625" minWidth="10.0" prefWidth="89.79998779296875" />
@@ -102,7 +102,7 @@
                      <Font name="Algerian" size="19.0" />
                   </font>
                </Label>
-               <Button fx:id="valider" layoutX="803.0" layoutY="366.0" mnemonicParsing="false" onAction="#registerConsommation" prefHeight="26.0" prefWidth="282.0" text="valider" />
+               <Button fx:id="valider" layoutX="803.0" layoutY="366.0" mnemonicParsing="false" onAction="#registerConsommation" prefHeight="26.0" prefWidth="282.0" styleClass="connect" text="valider" />
                <Label layoutX="837.0" layoutY="435.0" text="Exporter les données ">
                   <font>
                      <Font name="Algerian" size="19.0" />
@@ -111,11 +111,11 @@
                <ComboBox fx:id="ean_exporter" layoutX="807.0" layoutY="477.0" prefHeight="26.0" prefWidth="273.0" promptText="Choisir EAN" />
                <DatePicker fx:id="date_debut_importation" layoutX="808.0" layoutY="516.0" prefHeight="26.0" prefWidth="273.0" promptText="date minimale" />
                <DatePicker fx:id="date_maximale" layoutX="809.0" layoutY="555.0" prefHeight="26.0" prefWidth="273.0" promptText="date maximale" />
-               <Button fx:id="exporter_button" layoutX="809.0" layoutY="603.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="125.0" text="Exporter" />
-               <Button fx:id="annuler" layoutX="965.0" layoutY="603.0" mnemonicParsing="false" onAction="#annuler_button" prefHeight="26.0" prefWidth="113.0" text="Annuler" />
-               <ComboBox fx:id="wallets" layoutX="226.0" layoutY="58.0" prefHeight="24.0" prefWidth="182.0" promptText="Vos Portefeuilles" />
-               <ComboBox fx:id="etat_compteur" layoutX="226.0" layoutY="98.0" prefHeight="24.0" prefWidth="182.0" promptText="Etat compteur" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="766.0" text="Bienvenue" textAlignment="CENTER">
+               <Button fx:id="exporter_button" layoutX="809.0" layoutY="603.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="125.0" styleClass="connect" text="Exporter" />
+               <Button fx:id="annuler" layoutX="965.0" layoutY="603.0" mnemonicParsing="false" onAction="#annuler_button" prefHeight="26.0" prefWidth="113.0" styleClass="cancel" text="Annuler" />
+               <ComboBox fx:id="wallets" layoutX="226.0" layoutY="78.0" prefHeight="24.0" prefWidth="182.0" promptText="Vos Portefeuilles" />
+               <ComboBox fx:id="etat_compteur" layoutX="226.0" layoutY="118.0" prefHeight="24.0" prefWidth="182.0" promptText="Etat compteur" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="8.0" prefHeight="29.0" prefWidth="766.0" styleClass="bienvenu" text="Bienvenue" textAlignment="CENTER">
                      <font>
                         <Font size="23.0" />
                      </font>
