@@ -58,7 +58,7 @@ public class Login {
 
                 JSONObject user = backend.signin(username, password, !type_utilisateur.getValue().equals("Consommateur"));
                 
-                if (!user.isEmpty()) {
+                if ( user!=null  && !user.isEmpty()) {
                     FacilitatorProviderLinkClient.stage.close();
                     if (this.type_utilisateur.getValue().equals("Fournisseur"))
                     {

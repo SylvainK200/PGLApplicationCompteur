@@ -43,12 +43,16 @@ public class MenuPrincipalTable {
         }
         cout = contract_supply.getDouble("meter_rate");
         nameWallet = "";
-        Object json = contract_supply.get("wallet");
-        System.out.println("Wallet is null ? " + Objects.isNull(json));
-        if (!Objects.isNull(json)){
-            nameWallet = contract_supply.getJSONObject("wallet").getString("name");
-        }
+        try {
+            Object json = contract_supply.get("wallet");
+            System.out.println("Wallet is null ? " + Objects.isNull(json));
+            if (!Objects.isNull(json)){
+                nameWallet = contract_supply.getJSONObject("wallet").getString("name");
+            }
+        }catch (Exception e){
 
+        }
+        
         JSONArray consommationValues = generalMethods.find("supplyPoint");
         if (contract_supply.get("supplyPoint") instanceof  JSONObject)
         {

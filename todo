@@ -1,0 +1,7 @@
+- [] Changer les JOption par les alertes ( voir code Kouemo, main(), afficher alerte)
+- [x] Contrainte : ean == 18 chiffres ( l'imposer à l'utilisateur )
+- [] Ne pas ajouter l'ean dans exporter 
+- [] Fermer la pae de selectionner de fichier avant le message d'exportation reussie
+- [] Utiliser plutot les Loggers au lieu des sys.out ( voir code Kouemo)
+- [] creer la route /supplyPoint/client/{client}/free -> Nouveau contract line 157
+- [] Un provider ne peut afficher qu'un ean qu'il a crée

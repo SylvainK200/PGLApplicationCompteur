@@ -15,7 +15,7 @@
     <Label fx:id="lblNumeroClient" layoutX="29.0" layoutY="95.0" text="Nom Client :   " />
     <ComboBox fx:id="NumeroClient" layoutX="129.0" layoutY="93.0" prefHeight="26.0" prefWidth="160.0" promptText="Nom Client" />
     <Label fx:id="lblEAN" layoutX="377.0" layoutY="100.0" text="EAN :   " />
-    <ComboBox fx:id="combEAN" layoutX="447.0" layoutY="95.0" prefHeight="26.0" prefWidth="160.0" promptText="EAN" />
+    <ComboBox fx:id="combEAN" layoutX="447.0" layoutY="95.0" prefHeight="26.0" prefWidth="241.0" promptText="EAN" />
     <Button fx:id="confirmation_ajout" layoutX="882.0" layoutY="428.0" mnemonicParsing="false" onAction="#confirmerAjout" prefHeight="26.0" prefWidth="160.0" styleClass="connect" text="Attribuer compteur" />
     <TableView fx:id="table" layoutX="27.0" layoutY="128.0" prefHeight="600.0" prefWidth="837.0">
         <columns>

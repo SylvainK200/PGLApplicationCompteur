@@ -68,7 +68,7 @@ public class HistoriqueCompteur {
         type_energy.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("type_energy"));
         dateConsommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("date"));
         fournisseur.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
-        consommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
+        consommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("consommation"));
         JSONArray suppliesPoint = generalMethods.find("supplyPoint/client/identifiant/"+ FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for(int i = 0; i<suppliesPoint.length();i++){
             JSONObject currentObject = suppliesPoint.getJSONObject(i);

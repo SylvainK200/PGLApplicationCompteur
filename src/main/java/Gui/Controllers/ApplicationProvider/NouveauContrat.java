@@ -83,6 +83,7 @@ public class NouveauContrat {
     private TextField over_tax_rate;
     @FXML
     private DatePicker date_debut;
+
     @FXML
     private Button creer_compteur;
     @FXML
@@ -154,9 +155,7 @@ public class NouveauContrat {
         newEnergy.getItems().addAll("Electricite","Eau","Gaz");
         System.out.println("Execution de initialize");
         JSONArray clients = findUsers();
-        JSONArray supplies = generalMethods.find("supplyPoint/free");
         JSONObject client = new JSONObject();
-        JSONObject supply = new JSONObject();
         ObservableList<String> clientsList = FXCollections.observableArrayList();
         ObservableList<String> eansList  = FXCollections.observableArrayList();
         for (int i = 0;i<clients.length();i++)
@@ -165,15 +164,14 @@ public class NouveauContrat {
             clientsList.add(client.getString("identifiant"));
 
         }
-        for (int i = 0;i<supplies.length();i++){
-            supply = supplies.getJSONObject(i);
-            eansList.add(supply.getString("ean_18"));
-        }
 
         NumeroClient.getItems().addAll(clientsList);
 
         // Charger les portefeuilles du client selectionné
         NumeroClient.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            /**
+             * 
+             */
             JSONArray list_portefeuilles = generalMethods.find("wallet/identifiant/"+newValue);
 
             portefeuille.getItems().clear();
@@ -181,15 +179,29 @@ public class NouveauContrat {
             for (int i = 0;i<list_portefeuilles.length();i++)
             {
                 portefeuille.getItems().add( list_portefeuilles.getJSONObject(i).getString("name"));
-
             }
+
+            /**
+             * Prendre la liste des supplypoint free du consommateur actuel créé par le provider
+             */
+            JSONArray supplies = generalMethods.find("supplyPoint/free");
+
+            JSONObject supply = new JSONObject();
+            for (int i = 0;i<supplies.length();i++){
+                supply = supplies.getJSONObject(i);
+                eansList.add(supply.getString("ean_18"));
+            }
+            combEAN.getItems().clear();
+            combEAN.getItems().addAll(eansList);
         }); 
 
-        combEAN.getItems().addAll(eansList);
         NumeroClient.valueProperty().addListener((ObservableValue<? extends  String>observable,String oldvalue,String newValue)->{
             initTable();
 
         });
+
+        generalMethods.redefineDatePickerDateFormat(date_debut);
+        generalMethods.redefineDatePickerDateFormat(date_fin);
     }
     void initTable(){
         colCompteur.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("compteur"));
@@ -263,6 +275,12 @@ public class NouveauContrat {
         if( newEnergy.getValue()==null || newEAN.getText() == "" ){
             JOptionPane.showMessageDialog(null,"Remplissez tous les champs.", "Message", JOptionPane.INFORMATION_MESSAGE);
         }else{
+
+            if( ! generalMethods.checkEanValue(newEAN.getText())){
+                JOptionPane.showMessageDialog(null,"L'ean doit être composé de 18 chiffres", "Message", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             JSONObject compteur = new JSONObject();
             JSONObject pointFourniture = new JSONObject();
 

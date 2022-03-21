@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -241,13 +242,17 @@ public class MenuPrincipale  implements Initializable{
                 JSONObject current = contract_supply.getJSONObject(i);
 
                 table.getItems().add(new MenuPrincipalTable(current));
-                if (Objects.isNull(current.get("wallet"))){
-                    JSONObject wallet = current.getJSONObject("wallet");
-                    combPortefeuille.getItems().add(wallet.getString("name"));
+                try{
+                    if (Objects.isNull(current.get("wallet"))){
+                        JSONObject wallet = current.getJSONObject("wallet");
+                        combPortefeuille.getItems().add(wallet.getString("name"));
+                    }
+                }catch (JSONException e ){
+                    
                 }
+                
                 principalList.add(new MenuPrincipalTable(current));
                 currentList.add(new MenuPrincipalTable(current));
-                    
             }
         }
         else{

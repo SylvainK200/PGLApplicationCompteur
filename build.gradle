@@ -1,6 +1,8 @@
 plugins{
 	id 'application'
 	id 'org.openjfx.javafxplugin' version '0.0.9'
+
+    id 'org.beryx.jlink' version '2.22.0' // For executable file
 }
 
 javafx{
@@ -25,7 +27,6 @@ test {
     }
 }
 
-def powermock='2.0.2'
 
 dependencies {
 	testImplementation 'org.json:json:20210307'
@@ -44,26 +45,26 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mockito/mockito-core
 	testImplementation 'org.mockito:mockito-core:2.8.9'
 	testImplementation 'org.mockito:mockito-junit-jupiter:3.7.7'
-
-	// To mock static method
-	//testImplementation 'org.powermock:powermock-mockito-release-full:1.5.4'
-	testImplementation "org.powermock:powermock-core:${powermock}"
-    testImplementation "org.powermock:powermock-module-junit4:${powermock}"
-    testImplementation "org.powermock:powermock-api-mockito2:${powermock}"
 }
 
-mainClassName = 'Gui.FacilitatorProviderLinkClient'
+mainClassName = 'Gui.Main'
 
 
 task fatJar(type: Jar) {
   manifest {
-    attributes 'Main-Class': 'Gui.FacilitatorProviderLinkClient'
+    attributes 'Main-Class': 'Gui.Main'
   }
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
   archiveClassifier = "all"
   from {
-    configuration.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    configuration.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    //configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
   with jar
 }
 
+jlink {
+    launcher {
+        name = 'exe_name'
+    }
+}

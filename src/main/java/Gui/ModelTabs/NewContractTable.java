@@ -17,14 +17,15 @@ public class NewContractTable {
     public String typeEnergie;
     public String etat_compteur;
     public DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+    
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     public NewContractTable(JSONObject client,JSONObject contract_supply_point){
         nom_client = client.getString("identifiant");
         num_contrat = contract_supply_point.getString("numero_contract");
 
-        String deb = df.format( (LocalDate)contract_supply_point.get("date_begin"));
-        String fin = df.format( (LocalDate)contract_supply_point.get("date_end"));
+        String deb = df.format( contract_supply_point.get("date_begin"));
+        String fin = df.format( contract_supply_point.get("date_end"));
 
         debut_contrat = deb;
         fin_contrat = fin;

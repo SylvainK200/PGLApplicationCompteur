@@ -2,9 +2,6 @@ package Gui.ModelTabs;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 public class HistoriqueTable {
     private String ean;
     private String type_energy;
@@ -13,7 +10,6 @@ public class HistoriqueTable {
     private String fournisseur;
 
     public HistoriqueTable (JSONObject consommationelt, String fournis){
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         Object supply_point = consommationelt.get("supplyPoint");
         if (supply_point instanceof JSONObject) {
             ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");

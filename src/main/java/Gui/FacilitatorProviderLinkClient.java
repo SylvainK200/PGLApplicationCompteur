@@ -18,6 +18,7 @@ public class FacilitatorProviderLinkClient extends Application {
     public static JSONObject currentprovider;
     public static JSONObject current_supply_point;
     public static Stage  stage = new Stage();
+    
     public static void main(String[] args){
         launch(args);
     }

@@ -23,4 +23,12 @@ public interface GeneralMethods {
 
     public void redefineDatePickerDateFormat(DatePicker datePicker);
     public FileChooser getFileChooser();
+
+    /**
+     * Check if the ean consists of 18 digits
+     * @param ean the ean
+     * @return True if the ean consists of 18 digits else, False
+
+    */
+    public boolean checkEanValue(String ean);
 }
