@@ -15,8 +15,6 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import javax.swing.JOptionPane;
-
 import static Gui.FacilitatorProviderLinkClient.currentprovider;
 import static Gui.FacilitatorProviderLinkClient.currentClient;;
 public class Login {
@@ -40,7 +38,7 @@ public class Login {
         type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
     }
 
-    public GeneralMethodsImpl backend = GeneralMethodsImpl.getInstance();
+    public GeneralMethodsImpl generalMethods = new GeneralMethodsImpl();
 
     @FXML
     void connect(ActionEvent event) {
@@ -50,13 +48,13 @@ public class Login {
             String password = mot_de_passe.getText();
 
             if(username.isBlank() || password.isBlank()){
-                JOptionPane.showMessageDialog(null,"Veuillez entrer le nom d'utilisateur et le password.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Veuillez entrer le nom d'utilisateur et le password.");
                 return;
             }
 
             try {
 
-                JSONObject user = backend.signin(username, password, !type_utilisateur.getValue().equals("Consommateur"));
+                JSONObject user = generalMethods.signin(username, password, !type_utilisateur.getValue().equals("Consommateur"));
                 
                 if ( user!=null  && !user.isEmpty()) {
                     FacilitatorProviderLinkClient.stage.close();
@@ -72,17 +70,16 @@ public class Login {
                     }
 
                 }else{
-                    JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    generalMethods.afficherAlert("Vos identifiants semblent incorrets! Verifiez les et reessayer.");
                 }
             } catch (JSONException e) {
-                JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.", "Message", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Login.java -> connect()");
+                generalMethods.afficherAlert("Vos identifiants semblent incorrets! Verifiez les et reessayer.");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Veuillez choisir le type d'utilisateur.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez choisir le type d'utilisateur.");
         }
         }
     @FXML
@@ -97,8 +94,7 @@ public class Login {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("retrouverCompte.fxml");
         */
-
-        JOptionPane.showMessageDialog(null,"Désolé, fonctionnalité pas prise en compte.", "Message", JOptionPane.INFORMATION_MESSAGE);
+        generalMethods.afficherAlert("Désolé, fonctionnalité pas prise en compte.");
     }
 
 }

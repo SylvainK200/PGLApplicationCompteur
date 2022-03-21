@@ -5,3 +5,6 @@
 - [] Utiliser plutot les Loggers au lieu des sys.out ( voir code Kouemo)
 - [] creer la route /supplyPoint/client/{client}/free -> Nouveau contract line 157
 - [] Un provider ne peut afficher qu'un ean qu'il a crée
+
+
+On doit supprimer l'attribut ean_18 du supplyPoint ou retirer la contrainte d'unicité (ce qui a ete fait). En effet, tout les supplyPoint d'un point de fourniture on le meme ean_18

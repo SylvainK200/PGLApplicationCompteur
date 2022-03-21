@@ -13,7 +13,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONObject;
 
-import javax.swing.JOptionPane;
 
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
 import static Gui.Controllers.Methods.GeneralMethodsImpl.API_URL;
@@ -85,7 +84,7 @@ public class RetrouverCompte {
 
         }else
         {
-            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation sont differents", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Le mot de passe et sa confirmation sont differents");
         }
 
     }

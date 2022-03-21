@@ -10,8 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import okhttp3.MediaType;
 
-import javax.swing.JOptionPane;
-
 import org.json.JSONObject;
 
 public class CreerCompte {
@@ -52,6 +50,8 @@ public class CreerCompte {
     @FXML
     private ComboBox<String> type_utilisateur;
 
+    GeneralMethodsImpl generalMethods = new GeneralMethodsImpl();
+
 
     public void initialize(){
         type_utilisateur.getItems().addAll("Consommateur","Fournisseur");
@@ -61,9 +61,6 @@ public class CreerCompte {
     @FXML
     private Button retour;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-
-
-    public GeneralMethodsImpl backend = GeneralMethodsImpl.getInstance();
     
     JSONObject fabriquerJson(){
         JSONObject json = new JSONObject();
@@ -85,7 +82,7 @@ public class CreerCompte {
         if (confirmation_mot_de_passe.getText().equals(mot_de_passe.getText())) { 
             
             if (this.type_utilisateur.getValue() !=null){
-                boolean response = backend.signup(nom.getText(), 
+                boolean response = generalMethods.signup(nom.getText(), 
                                                   identifiant.getText(), 
                                                   mot_de_passe.getText(),
                                                   adresse_mail.getText(),
@@ -100,16 +97,16 @@ public class CreerCompte {
                     FacilitatorProviderLinkClient.stage.close();
                     FacilitatorProviderLinkClient.showPages("login.fxml");
                 }else{
-                    JOptionPane.showMessageDialog(null,"Une erreur s'est produite", "Message", JOptionPane.ERROR_MESSAGE);
+                    generalMethods.afficherAlert("Une erreur s'est produite");
                 }
 
             }else {
-                JOptionPane.showMessageDialog(null,"Choisissez le type d'utilisateur \n que vous etes", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Choisissez le type d'utilisateur \n que vous etes");
             }
 
          }
         else{
-            JOptionPane.showMessageDialog(null,"le mot de passe et sa confirmation ne sont pas identiques", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Le mot de passe et sa confirmation ne sont pas identiques.");
         }
     }
 

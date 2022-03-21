@@ -8,22 +8,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
 
-import javax.swing.*;
-
 import static Gui.Controllers.ApplicationProvider.CreerCompte.JSON;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GeneralMethodsImpl implements GeneralMethods{
     public  static String API_URL = "http://localhost:8085/energy-management";
-
-    private static GeneralMethodsImpl INSTANCE;
 
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
@@ -64,7 +64,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()){
-                JOptionPane.showMessageDialog(null,"Operation d'enregistrement reussie", "Message", JOptionPane.INFORMATION_MESSAGE);
+                this.afficherAlert("Operation d'enregistrement reussie.");
                 return new JSONObject(response.body().string());
             }
             response.close();
@@ -162,7 +162,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
             response.close();
             return user;
         } catch (JSONException e) {
-            JOptionPane.showMessageDialog(null,"Vos identifiants semblent incorrets! Verifiez les et reessayer.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            this.afficherAlert("Vos identifiants semblent incorrets! Verifiez les et reessayer.");
             System.out.println("GeneralMethodsImpl.java -> login()");
 
         } catch (Exception e) {
@@ -219,13 +219,6 @@ public class GeneralMethodsImpl implements GeneralMethods{
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static GeneralMethodsImpl getInstance(){
-        if( INSTANCE == null){
-            INSTANCE = new GeneralMethodsImpl();
-        }
-        return INSTANCE;
     }
 
     public GeneralMethodsImpl(){}
@@ -291,5 +284,24 @@ public class GeneralMethodsImpl implements GeneralMethods{
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    @Override
+    public void logOperation(Logger logger, String operationWarning, String operationSevere) {
+        if(operationWarning.equals("")){
+            logger.log(Level.SEVERE,operationSevere);
+        }
+        else if (operationSevere == ""){
+            logger.log(Level.WARNING,operationWarning);
+        }else if (!operationSevere.equals("") && !operationWarning.equals("")){
+            logger.log(Level.SEVERE,operationSevere);
+            logger.log(Level.WARNING,operationWarning);
+        }
+    }
+
+    @Override
+    public void afficherAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,contentText, ButtonType.OK);
+        alert.showAndWait();
     }
 }

@@ -3,7 +3,6 @@ package Gui.Controllers.Methods;
 import Gui.ModelTabs.MenuPrincipalTable;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.Date;
@@ -79,10 +78,10 @@ public class ImportationExportationImpl implements ImportationExportation{
 
             }
             sc.close();
-            JOptionPane.showMessageDialog(null,"L'importation est terminée", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("L'importation est terminée.");
         }catch (Exception e ) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null,"L'importation a échoué", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("L'importation a échoué.");
         }
     }
     public void enregistrer(JSONObject result,String date,long index){

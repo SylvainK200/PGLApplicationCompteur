@@ -11,8 +11,10 @@ import javafx.scene.control.TextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import java.lang.Exception;
 import static Gui.FacilitatorProviderLinkClient.*;
 
@@ -47,13 +49,13 @@ public class ModificationDonnees {
                 consommation = consommations.get(consommations.size()-1);
                 textConsommationActuel.setText(String.valueOf(consommation.getDouble("consommation")));
             }else{
-                JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Aucune consommation trouvée.");
                 valider.setDisable(true);
                 annuler_button.setDisable(true);
                 textConsommationCorriges.setDisable(true);
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Aucune consommation trouvée.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Aucune consommation trouvée.");
             valider.setDisable(true);
             annuler_button.setDisable(true);
             textConsommationCorriges.setDisable(true);

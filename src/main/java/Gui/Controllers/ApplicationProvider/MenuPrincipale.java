@@ -19,8 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.swing.*;
-
 import static Gui.FacilitatorProviderLinkClient.*;
 
 import java.io.File;
@@ -256,18 +254,16 @@ public class MenuPrincipale  implements Initializable{
             }
         }
         else{
-            JOptionPane.showMessageDialog(null,"Ce client n'a pas de contrats.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Ce client n'a pas de contrats.");
             System.out.println("Ce client n'a pas de contrats");
         }
-        
-        //JOptionPane.showMessageDialog(null,"Chargement terminé.",, "Message", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("remplissage termine");
     }
 
     @FXML
     public void goToModifierDonnee(){
         if(compteur_importer.getValue() == null){
-            JOptionPane.showMessageDialog(null,"Veuillez choisir le compteur à importer", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez choisir le compteur à importer");
             return;
         }
         current_supply_point = generalMethods.findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
@@ -295,7 +291,7 @@ public class MenuPrincipale  implements Initializable{
             importationExportation.importerFileCSV(result,type_compteur.getValue());
         }
        }else {
-           JOptionPane.showMessageDialog(null,"Veuillez choisir le type de compteur dont \n les donnees seront importees", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez choisir le type de compteur dont les donnees seront importees");
        }
 
 

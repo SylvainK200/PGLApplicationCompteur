@@ -12,7 +12,6 @@ import javafx.scene.control.TextArea;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -65,10 +64,10 @@ public class SupprimerDonnees {
             currentContract.put("dateCloture",new Date(System.currentTimeMillis()));
             generalMethods.updateObject(currentContract,"contractSupplyPoint");
 
-            JOptionPane.showMessageDialog(null,"Cloture effectuée", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Cloture effectuée.");
             compteur.getItems().remove(compteurToClose);
         }else{
-            JOptionPane.showMessageDialog(null,"Veuillez selectionner un compteur", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez selectionner un compteur.");
         }
 
     }
@@ -104,13 +103,13 @@ public class SupprimerDonnees {
             notification.put("provider",currentprovider);
             JSONObject res = generalMethods.createObject(notification,"notification");
             if (!res.isEmpty()){
-                JOptionPane.showMessageDialog(null,"Notification créée", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Notification créée");
 
             }else {
-                JOptionPane.showMessageDialog(null,"resultat vide ", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Resultat vide");
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Veuillez selectionner un compteur", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez selectionner un compteur");
         }
 
     }

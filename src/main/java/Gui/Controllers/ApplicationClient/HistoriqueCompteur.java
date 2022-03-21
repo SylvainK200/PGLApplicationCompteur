@@ -3,8 +3,6 @@ package Gui.Controllers.ApplicationClient;
 import java.io.File;
 import java.io.FileWriter;
 
-import javax.swing.JOptionPane;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -118,12 +116,12 @@ public class HistoriqueCompteur {
         String ean = ean_exporter.getValue();
 
         if(ean==null || ean.isEmpty() || ean.isBlank()){
-            JOptionPane.showMessageDialog(null,"Veuillez selectionner l'EAN à exporter", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("Veuillez selectionner l'EAN à exporter");
             return;
         }
 
         if( date_debut_importation.getValue().isAfter(date_maximale.getValue())){
-            JOptionPane.showMessageDialog(null,"La date de debut doit être avant celle de fin", "Message", JOptionPane.INFORMATION_MESSAGE);
+            generalMethods.afficherAlert("La date de debut doit être avant celle de fin.");
             return;
         }
 
@@ -161,10 +159,11 @@ public class HistoriqueCompteur {
                     fileWriter.append(SEPARATOR);
                 }
                 fileWriter.close();
-                JOptionPane.showMessageDialog(null,"Exportation effectuée avec succès dans le fichier : " + file.getAbsolutePath(), "Message", JOptionPane.INFORMATION_MESSAGE);
+
+                generalMethods.afficherAlert("Exportation effectuée avec succès dans le fichier : " + file.getAbsolutePath());
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null,"Exportation a échoué. Regardez les logs", "Message", JOptionPane.INFORMATION_MESSAGE);
+                generalMethods.afficherAlert("Exportation a échoué. Regardez les logs.");
             }
         }
     }
