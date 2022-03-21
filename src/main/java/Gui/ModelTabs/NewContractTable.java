@@ -32,7 +32,7 @@ public class NewContractTable {
 
         Object json  = contract_supply_point.get("supplyPoint");
         if (json instanceof  JSONObject){
-            System.out.println(((JSONObject)json).getString("energy").toString());
+            
             compteur = ((((JSONObject) json).getString("ean_18")));
             typeEnergie = ((JSONObject)json).getString("energy");
             etat_compteur = getEtat_compteur(contract_supply_point);
@@ -40,7 +40,7 @@ public class NewContractTable {
 
     }
     public static String getEtat_compteur(JSONObject contract_supply_point){
-        System.out.println("etat du compteur : "+contract_supply_point.toString());
+        
         Object json = null;
         if (contract_supply_point.has("wallet"))
         {

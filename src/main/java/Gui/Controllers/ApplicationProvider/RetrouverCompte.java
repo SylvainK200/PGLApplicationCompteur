@@ -1,6 +1,7 @@
 package Gui.Controllers.ApplicationProvider;
 
 import Gui.FacilitatorProviderLinkClient;
+import Gui.Controllers.Methods.GeneralMethodsImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,6 +43,8 @@ public class RetrouverCompte {
     @FXML
     private Button valider;
     private JSONObject currentUser;
+
+    GeneralMethodsImpl generalMethods = new GeneralMethodsImpl();
     public void initialize(){
         new_password.setDisable(true);
         confirm_password.setDisable(true);
@@ -71,7 +74,7 @@ public class RetrouverCompte {
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()){
-                    System.out.println("Enregistrement termine");
+                    generalMethods.log(this.getClass().getName(), "Enregistrement terminé.");
                     FacilitatorProviderLinkClient.stage.close();
                     FacilitatorProviderLinkClient.showPages("login.fxml");
 

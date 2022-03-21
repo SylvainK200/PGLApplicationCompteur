@@ -64,7 +64,6 @@ public class ImportationExportationImpl implements ImportationExportation{
             while (sc.hasNext())
             {
                 String ligne = sc.next();
-                System.out.println(ligne);
                 String[] elts = ligne.split(";");
                 if (i==1){
                     JSONObject compteur = new JSONObject();
@@ -95,12 +94,12 @@ public class ImportationExportationImpl implements ImportationExportation{
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(" result : " + result.toString());
+        
         consommationValue.put("supplyPoint",result);
         JSONObject result2 = generalMethods.createObject(consommationValue,"consommationValue");
 
         if (!result2.isEmpty()){
-            System.out.println(result2);
+            generalMethods.log(this.getClass().getName(), result2.toString());
         }
     }
 

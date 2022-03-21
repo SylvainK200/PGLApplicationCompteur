@@ -92,7 +92,6 @@ public class SupprimerDonnees {
                 if (id == idSupplyPoint )
                 {
                     generalMethods.deleteObject("consommationValue/"+idCons);
-                    System.out.println("element numero : "+i);
                 }
 
             }

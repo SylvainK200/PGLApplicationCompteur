@@ -21,9 +21,7 @@ public class MenuPrincipalConsommateurTable {
     public String cloture;
     GeneralMethods generalMethods = new GeneralMethodsImpl();
     public MenuPrincipalConsommateurTable(JSONObject contract_supply_point ) {
-        System.out.println("debut ligne");
-
-        System.out.println(Objects.isNull(contract_supply_point.get("dateCloture")));
+        
         if (!Objects.nonNull(contract_supply_point.get("dateCloture"))){
             cloture  = contract_supply_point.getString("dateCloture").split("T")[0];
 

@@ -183,11 +183,10 @@ public class MenuPrincipale  implements Initializable{
         }); 
 
         combClient.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
-           System.out.println("client modifie");
-
+            
+            generalMethods.log(this.getClass().getName(), "Client modifié");
             if (newValue!=null)
             {
-                System.out.println("Execution de la fonction inittable");
                 initTable();
                 compteur_importer.getItems().clear();
                 for (MenuPrincipalTable elt : principalList) {
@@ -200,7 +199,7 @@ public class MenuPrincipale  implements Initializable{
         combPortefeuille.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
             if (newValue!=null && newValue!="")
             {
-                System.out.println("Execution de la fonction de filtre combPortefeuille");
+                generalMethods.log(this.getClass().getName(), "Execution de la fonction de filtre combPortefeuille");
 
                 table.getItems().clear();
                 currentList.clear();
@@ -255,9 +254,7 @@ public class MenuPrincipale  implements Initializable{
         }
         else{
             generalMethods.afficherAlert("Ce client n'a pas de contrats.");
-            System.out.println("Ce client n'a pas de contrats");
         }
-        System.out.println("remplissage termine");
     }
 
     @FXML

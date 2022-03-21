@@ -61,11 +61,13 @@ public class Login {
                     if (this.type_utilisateur.getValue().equals("Fournisseur"))
                     {
                         currentprovider = user;
-                        System.out.println("current provider :" + currentprovider.toString());
+                        generalMethods.log(this.getClass().getName(),"Current provider :" + currentprovider.toString());
+                        
                         FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
                     }else {
                         currentClient = user;
-                        System.out.println("current provider :" + currentClient.toString());
+                        generalMethods.log(this.getClass().getName(), "current provider :" + currentClient.toString());
+                        
                         FacilitatorProviderLinkClient.showPages("client/MenuPrincipaleConsommateur.fxml");
                     }
 

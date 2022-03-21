@@ -22,6 +22,7 @@ public class FacilitatorProviderLinkClient extends Application {
     public static void main(String[] args){
         launch(args);
     }
+    
     public static void showPages (String page ){
 
         try {

@@ -45,7 +45,8 @@ public class MenuPrincipalTable {
         nameWallet = "";
         try {
             Object json = contract_supply.get("wallet");
-            System.out.println("Wallet is null ? " + Objects.isNull(json));
+            generalMethods.log(this.getClass().getName(), "Wallet is null ? " + Objects.isNull(json));
+            
             if (!Objects.isNull(json)){
                 nameWallet = contract_supply.getJSONObject("wallet").getString("name");
             }

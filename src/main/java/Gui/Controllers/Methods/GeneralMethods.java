@@ -35,6 +35,7 @@ public interface GeneralMethods {
     public boolean checkEanValue(String ean);
 
     public void logOperation(Logger logger,String operationWarning, String operationSevere );
+    public void log(String classname,String logs);
 
     public void afficherAlert(String contentText);
 }

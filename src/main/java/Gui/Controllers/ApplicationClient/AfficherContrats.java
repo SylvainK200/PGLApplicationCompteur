@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import static Gui.FacilitatorProviderLinkClient.currentClient;
 
 public class AfficherContrats {
-    GeneralMethods generalMethods = new GeneralMethodsImpl();
+    GeneralMethodsImpl generalMethods = new GeneralMethodsImpl();
 
     @FXML
     private TableView<AllContract> table_contrat;
@@ -61,7 +61,6 @@ public class AfficherContrats {
     private TableColumn<AllContract, Integer> col_over_tax_rate;
     @FXML
     private TextField recherche;
-
 
     @FXML
     private Button quitter;
@@ -116,14 +115,15 @@ public class AfficherContrats {
                 contrats.add(new AllContract(client,contract_supply.getJSONObject(i)));
                 table_contrat.getItems().add(new AllContract(client,contract_supply.getJSONObject(i)));}
         }
-        System.out.println("remplissage termine");
     }
 
     // recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
         String identifiant = contract_supply_point.getString("client");
-        System.out.println("identifiant" + identifiant);
+
+        generalMethods.log(this.getClass().getName(), "identifiant" + identifiant);
+
         client = generalMethods.findUnique("user/identifiant/"+identifiant);
         if (client == null){
             return new JSONObject();

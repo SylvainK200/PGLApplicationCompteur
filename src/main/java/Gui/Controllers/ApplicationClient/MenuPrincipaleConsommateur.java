@@ -183,7 +183,9 @@ public class MenuPrincipaleConsommateur{
         date_cloture.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("date_cloture"));
         fournisseur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("fournisseur"));
         consommation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("consommation"));
-        System.out.println(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+
+        generalMethods.log(this.getClass().getName(),FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        
         JSONArray contract_supply_points = generalMethods.find("contractSupplyPoint/wallet/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         for (int i = 0;i<contract_supply_points.length();i++){
             JSONObject contract_supply_point = contract_supply_points.getJSONObject(i);

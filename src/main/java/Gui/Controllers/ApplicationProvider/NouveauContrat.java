@@ -119,9 +119,9 @@ public class NouveauContrat {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println(res);
-            result= new JSONObject(res);
+            generalMethods.log(this.getClass().getName(), "Response /user/identifiant/"+identifiant+ " : " + res);
 
+            result= new JSONObject(res);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class NouveauContrat {
         return result;
     }
 
-    public static JSONArray findUsers(){
+    public JSONArray findUsers(){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
@@ -140,7 +140,9 @@ public class NouveauContrat {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println(res);
+
+            generalMethods.log(this.getClass().getName(), "Response /user/ : " + res);
+
             result= new JSONArray(res);
         }
         catch (Exception e){
@@ -155,7 +157,7 @@ public class NouveauContrat {
         meter_type.getItems().addAll(MeterType.MONOHORARY.toString(),
                 MeterType.BIHORARY.toString(),MeterType.EXCLUSIVENIGHT.toString());
         newEnergy.getItems().addAll("Electricite","Eau","Gaz");
-        System.out.println("Execution de initialize");
+        
         JSONArray clients = findUsers();
 
         JSONObject client = new JSONObject();
@@ -242,7 +244,6 @@ public class NouveauContrat {
         table.getItems().removeAll(table.getItems());
 
         for (int i =0;i<contract_supply.length();i++){
-            System.out.println("Dans la boucle for");
             JSONObject current = contract_supply.getJSONObject(i);
 
             if(current.has("contract")){
@@ -334,7 +335,7 @@ public class NouveauContrat {
                 budgetType.setText("");
             }catch (Exception e) {
                 generalMethods.afficherAlert("La creation du compteur a echoué.");
-                System.out.println("Creating new compteur failed NouveauContract.java -> creerCompteur");
+                generalMethods.log(this.getClass().getName(), "Creating new compteur failed NouveauContract.java -> creerCompteur");
             }
         }
     }

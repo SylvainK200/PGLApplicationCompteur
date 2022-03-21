@@ -1,10 +1,9 @@
-- [] Changer les JOption par les alertes ( voir code Kouemo, main(), afficher alerte)
 - [x] Contrainte : ean == 18 chiffres ( l'imposer à l'utilisateur )
 - [] Ne pas ajouter l'ean dans exporter 
 - [] Fermer la pae de selectionner de fichier avant le message d'exportation reussie
-- [] Utiliser plutot les Loggers au lieu des sys.out ( voir code Kouemo)
-- [] creer la route /supplyPoint/client/{client}/free -> Nouveau contract line 157
-- [] Un provider ne peut afficher qu'un ean qu'il a crée
-
+- [x] Utiliser plutot les Loggers au lieu des sys.out ( voir code Kouemo)
+- [x] creer la route /supplyPoint/client/{client}/free -> Nouveau contract line 157
+- [x] Un provider ne peut afficher qu'un ean qu'il a crée
+- [x] JOption to Alert : almost. Look a confirmation request JOption
 
 On doit supprimer l'attribut ean_18 du supplyPoint ou retirer la contrainte d'unicité (ce qui a ete fait). En effet, tout les supplyPoint d'un point de fourniture on le meme ean_18

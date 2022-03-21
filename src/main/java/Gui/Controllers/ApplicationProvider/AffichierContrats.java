@@ -122,9 +122,10 @@ public class AffichierContrats {
                     contrats.add(new AllContract(client,contract_supply.getJSONObject(i)));
                     table_contrat.getItems().add(new AllContract(client,contract_supply.getJSONObject(i)));}
             }
-            System.out.println("remplissage termine");
+
+            generalMethods.log(this.getClass().getName(), "remplissage termine");
         }else{
-            System.out.println("Ce provider n'a pas de contracts");
+            generalMethods.log(this.getClass().getName(), "Ce provider n'a pas de contracts.");
         }
     }
 
@@ -132,7 +133,8 @@ public class AffichierContrats {
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
         String identifiant = contract_supply_point.getString("client");
-        System.out.println("identifiant" + identifiant);
+        generalMethods.log(this.getClass().getName(), "identifiant" + identifiant);
+        
         client = generalMethods.findUnique("user/identifiant/"+identifiant);
         return client;
     }
