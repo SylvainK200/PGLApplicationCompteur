@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import static Gui.FacilitatorProviderLinkClient.currentClient;
 
 public class AfficherContrats {
-    GeneralMethodsImpl generalMethods = new GeneralMethodsImpl();
+    GeneralMethods generalMethods = new GeneralMethodsImpl();
 
     @FXML
     private TableView<AllContract> table_contrat;

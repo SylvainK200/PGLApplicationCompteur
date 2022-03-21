@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 public class NewContractTable {
     public String nom_client;
@@ -40,7 +39,7 @@ public class NewContractTable {
 
     }
     public static String getEtat_compteur(JSONObject contract_supply_point){
-        
+
         Object json = null;
         if (contract_supply_point.has("wallet"))
         {

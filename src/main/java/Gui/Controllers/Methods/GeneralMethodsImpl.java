@@ -275,9 +275,9 @@ public class GeneralMethodsImpl implements GeneralMethods{
         }
         try {
             if(ean.length()==18){
-                Integer d = Integer.parseInt(ean.substring(0, 6));
-                d = Integer.parseInt(ean.substring(6, 12));
-                d = Integer.parseInt(ean.substring(12, 18));
+                Integer.parseInt(ean.substring(0, 6));
+                Integer.parseInt(ean.substring(6, 12));
+                Integer.parseInt(ean.substring(12, 18));
                 return true;
             }else{
                return false ;
