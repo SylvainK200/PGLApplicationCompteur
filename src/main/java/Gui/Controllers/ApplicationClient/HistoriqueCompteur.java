@@ -62,7 +62,7 @@ public class HistoriqueCompteur {
     private FilteredList<HistoriqueTable> filteredList;
 
     public void initialize(){
-        colEAN.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("ean"));
+        colEAN.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("name"));
         type_energy.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("type_energy"));
         dateConsommation.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("date"));
         fournisseur.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("fournisseur"));
@@ -71,11 +71,11 @@ public class HistoriqueCompteur {
         for(int i = 0; i<suppliesPoint.length();i++){
             JSONObject currentObject = suppliesPoint.getJSONObject(i);
             JSONArray consommationSupplyPoint = generalMethods.find("historicalValue/historiqueRecent/"+currentObject.getLong("id"));
-            combEAN.getItems().add(currentObject.getString("ean_18"));
-            ean_exporter.getItems().add(currentObject.getString("ean_18"));
+            combEAN.getItems().add(currentObject.getString("name"));
+            ean_exporter.getItems().add(currentObject.getString("name"));
             for (int j =0;j<consommationSupplyPoint.length();j++){
                 JSONObject current_consommation = consommationSupplyPoint.getJSONObject(j);
-                JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("ean_18"));
+                JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("name"));
 
                 table.getItems().add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
                 //listPrincipal.add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
@@ -91,7 +91,7 @@ public class HistoriqueCompteur {
                         if (newValue == null||newValue.isEmpty()){
                             return true;
                         }
-                        if (contrat.getEan().toLowerCase().contains(newValue.toLowerCase())
+                        if (contrat.getName().toLowerCase().contains(newValue.toLowerCase())
                         ){
                             return true;
                         }
@@ -116,7 +116,7 @@ public class HistoriqueCompteur {
         String ean = ean_exporter.getValue();
 
         if(ean==null || ean.isEmpty() || ean.isBlank()){
-            generalMethods.afficherAlert("Veuillez selectionner l'EAN à exporter");
+            generalMethods.afficherAlert("Veuillez selectionner le Compteur à exporter");
             return;
         }
 
@@ -128,7 +128,7 @@ public class HistoriqueCompteur {
         String date_deb = date_debut_importation.getValue() + "";
         String date_fin = date_maximale.getValue() + "";
 
-        JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/" + ean);
+        JSONObject supply = generalMethods.findUnique("supplyPoint/name/" + ean);
         JSONArray consommations = generalMethods.find("/historicalValue/consommations/" + supply.getLong("id") +
                 "/" + date_deb + "/" + date_fin);
         final String DELIMITER = ";";
@@ -147,7 +147,7 @@ public class HistoriqueCompteur {
                 for (int i = 0; i < consommations.length(); i++) {
                     JSONObject elt = consommations.getJSONObject(i);
 
-                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("ean_18"));
+                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("name"));
                     fileWriter.append(DELIMITER);
                     fileWriter.append("" + elt.getJSONObject("supplyPoint").getString("energy"));
                     fileWriter.append(DELIMITER);

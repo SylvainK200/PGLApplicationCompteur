@@ -65,7 +65,7 @@ public class CreerCompte {
     JSONObject fabriquerJson(){
         JSONObject json = new JSONObject();
         json.put("address_mail", adresse_mail.getText());
-        json.put("password", mot_de_passe.getText())
+        json.put("password", FacilitatorProviderLinkClient.generateHash(mot_de_passe.getText()))
                 .put("question_secrete",question_secrete.getText())
                 .put("reponse_secrete",reponse_question_secrete.getText())
                 .put("identifiant",identifiant.getText())
@@ -84,14 +84,15 @@ public class CreerCompte {
             if (this.type_utilisateur.getValue() !=null){
                 boolean response = generalMethods.signup(nom.getText(), 
                                                   identifiant.getText(), 
-                                                  mot_de_passe.getText(),
+                                                  FacilitatorProviderLinkClient.generateHash(mot_de_passe.getText()),
                                                   adresse_mail.getText(),
                                                   question_secrete.getText(),
                                                   reponse_question_secrete.getText(),
                                                   street.getText(),
                                                   number.getText(),
                                                   city.getText(),
-                                                  postal_code.getText(), type_utilisateur.getValue().equals("Fournisseur"));
+                                                  postal_code.getText(),
+                                                  type_utilisateur.getValue().equals("Fournisseur"));
                                                   
                 if (response){
                     FacilitatorProviderLinkClient.stage.close();

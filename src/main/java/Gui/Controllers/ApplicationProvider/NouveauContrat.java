@@ -206,17 +206,8 @@ public class NouveauContrat {
         });
 
         combEAN.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            if( newValue!=null && newValue.isBlank()){
-                JSONArray supplyPointList = generalMethods.find("/supplyPoint/free/pointFourniture/ean/"+newValue);
-
-                if(supplyPointList == null || supplyPointList.length() <= 0){
-                    generalMethods.afficherAlert("Aucun compteur associé à ce point de fourniture. Vous pouvez en créer un.");
-                }else{
-                    compteur.getItems().clear();
-                    for(int i=0; i<supplyPointList.length();i++){
-                        compteur.getItems().add( supplyPointList.getJSONObject(i).optString("ean_18"));
-                    }
-                }
+            if( newValue!=null && !newValue.isBlank()){
+                updateCompteurComboBox(newValue);
             }else{
 
             }
@@ -230,7 +221,23 @@ public class NouveauContrat {
 
         generalMethods.redefineDatePickerDateFormat(date_debut);
         generalMethods.redefineDatePickerDateFormat(date_fin);
+
+        //initTable();
     }
+
+    void updateCompteurComboBox(String newValue){
+        JSONArray supplyPointList = generalMethods.find("/supplyPoint/free/pointFourniture/ean/"+newValue);
+
+        if(supplyPointList == null || supplyPointList.length() <= 0){
+            generalMethods.afficherAlert("Aucun compteur associé à ce point de fourniture. Vous pouvez en créer un.");
+        }else{
+            compteur.getItems().clear();
+            for(int i=0; i<supplyPointList.length();i++){
+                compteur.getItems().add( supplyPointList.getJSONObject(i).optString("name"));
+            }
+        }
+    }
+
     void initTable(){
         colCompteur.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("compteur"));
         colDebutContrat.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("debut_contrat"));
@@ -245,15 +252,9 @@ public class NouveauContrat {
 
         for (int i =0;i<contract_supply.length();i++){
             JSONObject current = contract_supply.getJSONObject(i);
-
-            if(current.has("contract")){
-                if (current.get("contract") instanceof JSONObject){
-                    if (((JSONObject) current.get("contract")).getString("client").equals(client.getString("identifiant"))){
-                        table.getItems().add(new NewContractTable(client,contract_supply.getJSONObject(i)));
-                    }
-                }
+            if ( current.getString("client").equalsIgnoreCase(client.getString("identifiant")) ){
+                table.getItems().add(new NewContractTable(client,current));
             }
-
         }
     }
 
@@ -269,28 +270,40 @@ public class NouveauContrat {
             if(date_fin.getValue().isAfter(date_debut.getValue())){
                 String aleatoire = ""+ System.currentTimeMillis() + (char)( (int)(Math.random()*10) );
                 JSONObject contract_supply = new JSONObject();
-                JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
-                JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/ean_18/"+combEAN.getValue());
 
-                supplyPoint = new JSONObject(supplyPoint, "id");
-                wallet = new JSONObject(wallet, "id");
+                try{
+                    JSONObject wallet = generalMethods.findUnique("wallet/name/"+portefeuille.getValue());
+                    JSONObject supplyPoint = generalMethods.findUnique("supplyPoint/name/"+compteur.getValue());
 
-                contract_supply.put("date_begin",date_debut.getValue());
-                contract_supply.put("date_end",date_fin.getValue());
-                contract_supply.put("numero_contract","num"+aleatoire);
-                contract_supply.put("client",NumeroClient.getValue());
-                contract_supply.put("provider",currentprovider);
-                contract_supply.put("meter_type",meter_type.getValue());
-                contract_supply.put("meter_rate",meter_rate.getText());
-                contract_supply.put("supplyPoint",supplyPoint);
-                contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
-                contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
-                contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
-                contract_supply.put("wallet",wallet);
+                    supplyPoint = new JSONObject(supplyPoint, "id");
+                    wallet = new JSONObject(wallet, "id");
 
-                JSONObject client  = this.findUserByIdentifiant(NumeroClient.getValue());
-                generalMethods.createObject(contract_supply,"contractSupplyPoint");
-                table.getItems().add(new NewContractTable(client,contract_supply));
+                    contract_supply.put("date_begin",date_debut.getValue());
+                    contract_supply.put("date_end",date_fin.getValue());
+                    contract_supply.put("numero_contract","num"+aleatoire);
+                    contract_supply.put("client",NumeroClient.getValue());
+                    contract_supply.put("provider",currentprovider);
+                    contract_supply.put("meter_type",meter_type.getValue());
+                    contract_supply.put("meter_rate",meter_rate.getText());
+                    contract_supply.put("supplyPoint",supplyPoint);
+                    contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
+                    contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
+                    contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
+                    contract_supply.put("wallet",wallet);
+                    generalMethods.createObject(contract_supply,"contractSupplyPoint");
+                    //table.getItems().add(new NewContractTable(client,contract_supply));
+                    initTable();
+
+                    meter_rate.clear();
+                    network_manager_cost.clear();
+                    over_tax_rate.clear();
+                    tax_rate.clear();
+                    compteur.getItems().clear();
+                    
+                    generalMethods.afficherAlert("Contract créé avec succès.");
+                }catch(Exception e){
+                    generalMethods.afficherAlert("La creation du contract a échoué. Regardez les logs.");
+                }
             }else{
                 generalMethods.afficherAlert("La date de fin doit venir après celle de début.");
             }
@@ -299,40 +312,45 @@ public class NouveauContrat {
    
     @FXML
     void creerCompteur(ActionEvent event){
-        if( newEnergy.getValue()==null || newCompteurName.getText() == "" ){
+        String ean = combEAN.getValue();
+        if(ean == null || ean.isBlank()){
+            generalMethods.afficherAlert("Selectionnez l'EAN du point de fourniture.");
+            return;
+        }
+
+        if( newEnergy.getValue()==null || newCompteurName.getText() == "" || budget.getText().isBlank() || budgetType.getText().isBlank()){
             generalMethods.afficherAlert("Remplissez tous les champs.");
         }else{
 
-            if( ! generalMethods.checkEanValue(newCompteurName.getText())){
+            /*if( ! generalMethods.checkEanValue(newCompteurName.getText())){
                 generalMethods.afficherAlert("L'ean doit être composé de 18 chiffres");
                 return;
             }
+            */
 
             JSONObject compteur = new JSONObject();
-            JSONObject pointFourniture = new JSONObject();
+            JSONObject pointFourniture = generalMethods.findUnique("/pointFourniture/ean/"+ean);
 
-            compteur.put("ean_18",newCompteurName.getText());
+            pointFourniture = new JSONObject(pointFourniture,"id");
+
+            compteur.put("ean_18",ean);
             compteur.put("energy",newEnergy.getValue());
-            compteur.put("name", newCompteurName.getText() + '_' + currentprovider.getString("company_name"));
-
-            pointFourniture.put("ean_18",newCompteurName.getText());
-            pointFourniture.put("energy",newEnergy.getValue());
-            pointFourniture.put("name", newCompteurName.getText() + '_' + currentprovider.getString("company_name"));
-            pointFourniture.put("provider",currentprovider);
-
+            compteur.put("name", newCompteurName.getText() );
             compteur.put("pointFourniture", pointFourniture);
 
             try{
                 generalMethods.createObject(compteur,"/supplyPoint");
                 
-                combEAN.getItems().add(newCompteurName.getText());
+                updateCompteurComboBox(ean);
 
                 generalMethods.afficherAlert("La creation du compteur terminee.");
 
-                newCompteurName.setText("");
+                newCompteurName.clear();
                 newEnergy.setValue("");
-                budget.setText("");
-                budgetType.setText("");
+                
+                budget.clear();
+                budgetType.clear();
+
             }catch (Exception e) {
                 generalMethods.afficherAlert("La creation du compteur a echoué.");
                 generalMethods.log(this.getClass().getName(), "Creating new compteur failed NouveauContract.java -> creerCompteur");

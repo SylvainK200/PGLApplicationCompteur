@@ -269,6 +269,12 @@ public class MenuPrincipale  implements Initializable{
     }
 
     @FXML
+    void goToPointFourniture() {
+        FacilitatorProviderLinkClient.stage.close();
+        FacilitatorProviderLinkClient.showPages("PointFourniture.fxml");
+    }
+
+    @FXML
     public void goToSupprimerDonnee(){
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("SupprimerDonnes.fxml");

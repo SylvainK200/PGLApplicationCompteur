@@ -3,7 +3,7 @@ package Gui.ModelTabs;
 import org.json.JSONObject;
 
 public class HistoriqueTable {
-    private String ean;
+    private String name;
     private String type_energy;
     private String date;
     private String consommation;
@@ -12,22 +12,22 @@ public class HistoriqueTable {
     public HistoriqueTable (JSONObject consommationelt, String fournis){
         Object supply_point = consommationelt.get("supplyPoint");
         if (supply_point instanceof JSONObject) {
-            ean = consommationelt.getJSONObject("supplyPoint").getString("ean_18");
+            name = consommationelt.getJSONObject("supplyPoint").getString("name");
             type_energy = consommationelt.getJSONObject("supplyPoint").getString("energy");
         } else {
-            ean = "non defini";
+            name = "non defini";
             type_energy = "non defini";
         }
         date = consommationelt.getString("date").split("T")[0];
         consommation = consommationelt.getLong("consommation")+"";
         fournisseur = fournis;
     }
-    public String getEan() {
-        return ean;
+    public String getName() {
+        return name;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType_energy() {

@@ -54,7 +54,7 @@ public class Login {
 
             try {
 
-                JSONObject user = generalMethods.signin(username, password, !type_utilisateur.getValue().equals("Consommateur"));
+                JSONObject user = generalMethods.signin(username, FacilitatorProviderLinkClient.generateHash(password), !type_utilisateur.getValue().equals("Consommateur"));
                 
                 if ( user!=null  && !user.isEmpty()) {
                     FacilitatorProviderLinkClient.stage.close();
@@ -92,11 +92,8 @@ public class Login {
 
     @FXML
     void retrouverCompte(MouseEvent event) {
-        /*
         FacilitatorProviderLinkClient.stage.close();
-        FacilitatorProviderLinkClient.showPages("retrouverCompte.fxml");
-        */
-        generalMethods.afficherAlert("Désolé, fonctionnalité pas prise en compte.");
+        FacilitatorProviderLinkClient.showPages("recover_password.fxml");
     }
 
 }

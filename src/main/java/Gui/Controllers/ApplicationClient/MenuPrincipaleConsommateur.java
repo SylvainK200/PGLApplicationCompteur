@@ -151,32 +151,38 @@ public class MenuPrincipaleConsommateur{
     }
     
     void initConsommation(){
+        ean_18.getItems().clear();
+        ean_exporter.getItems().clear();
         JSONArray supply_points = generalMethods.find("supplyPoint/client/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        
         for(int i = 0 ; i<supply_points.length();i++){
-            ean_18.getItems().add(supply_points.getJSONObject(i).getString("ean_18"));
-            ean_exporter.getItems().add(supply_points.getJSONObject(i).getString("ean_18"));
+            ean_18.getItems().add(supply_points.getJSONObject(i).getString("name"));
+            ean_exporter.getItems().add(supply_points.getJSONObject(i).getString("name"));
         }
+        
         ean_18.valueProperty().addListener((ObservableValue<?extends String>observable,String oldValue,String newValue)->{
-            JSONObject currentSupp = generalMethods.findUnique("supplyPoint/ean_18/"+newValue);
-            currentSupplyPoint = currentSupp;
-            JSONArray historique = generalMethods.find("historicalValue/historiqueRecent/"+currentSupp.getLong("id"));
-            if (historique.length()>0){
-                int consommationTotal = 0;
-                for(int i=0; i< historique.length();i++){
-                    consommationTotal += historique.getJSONObject(i).getDouble("consommation");
+            if(newValue!=null && !newValue.isBlank()){
+                JSONObject currentSupp = generalMethods.findUnique("supplyPoint/name/"+newValue);
+                currentSupplyPoint = currentSupp;
+                JSONArray historique = generalMethods.find("historicalValue/historiqueRecent/"+currentSupp.getLong("id"));
+                if (historique.length()>0){
+                    int consommationTotal = 0;
+                    for(int i=0; i< historique.length();i++){
+                        consommationTotal += historique.getJSONObject(i).getDouble("consommation");
+                    }
+                    consommation_recente.setText(consommationTotal+"");
+                    date_recente.setText("Jusqu'a aujourd'hui");
+                }else {
+                    consommation_recente.setText("0");
+                    date_recente.setText("Jusqu'a aujourd'hui");
                 }
-                consommation_recente.setText(consommationTotal+"");
-                date_recente.setText("Jusqu'a aujourd'hui");
-            }else {
-                consommation_recente.setText("0");
-                date_recente.setText("Jusqu'a aujourd'hui");
             }
         });
     }
     
     void initTable(){
         cloture.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("cloture"));
-        ean.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("ean_18"));
+        ean.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("name"));
         type_energie.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("type_energie"));
         type_compteur.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("type_compteur"));
         date_affectation.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("date_affectation"));
@@ -187,6 +193,11 @@ public class MenuPrincipaleConsommateur{
         generalMethods.log(this.getClass().getName(),FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
         
         JSONArray contract_supply_points = generalMethods.find("contractSupplyPoint/wallet/identifiant/"+FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
+        
+        researchList.clear();
+        table.getItems().clear();
+        listPrincipal.clear();
+
         for (int i = 0;i<contract_supply_points.length();i++){
             JSONObject contract_supply_point = contract_supply_points.getJSONObject(i);
             table.getItems().add(new MenuPrincipalConsommateurTable(contract_supply_point));
@@ -200,7 +211,7 @@ public class MenuPrincipaleConsommateur{
                         if (newValue == null||newValue.isEmpty()){
                             return true;
                         }
-                        if (contrat.getEan_18().toLowerCase().contains(newValue.toLowerCase()) ||
+                        if (contrat.getName().toLowerCase().contains(newValue.toLowerCase()) ||
                                 contrat.getFournisseur().toLowerCase().contains(newValue.toLowerCase())||
                                 contrat.getType_energie().toLowerCase().contains(newValue.toLowerCase())
 
@@ -259,7 +270,8 @@ public class MenuPrincipaleConsommateur{
                 generalMethods.afficherAlert("Enregistrement reussi de la nouvelle consommation.");
                 // Update table
                 initTable();
-                initConsommation();
+                //initConsommation();
+                ean_18.setValue(ean_18.getValue());
             }
         }
 
@@ -290,13 +302,13 @@ public class MenuPrincipaleConsommateur{
         String date_deb = date_debut_importation.getValue()+"";
         String date_fin = date_maximale.getValue()+"";
 
-        JSONObject supply = generalMethods.findUnique("supplyPoint/ean_18/"+ean);
+        JSONObject supply = generalMethods.findUnique("supplyPoint/name/"+ean);
         JSONArray consommations = generalMethods.find("/historicalValue/consommations/"+supply.getLong("id")+
                 "/"+date_deb+"/"+date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
         final String HEADER = "EAN;type energie;date lecture;consommation;fournisseur;";
-        final String FOURNISSEUR = generalMethods.findUnique("provider/ean/"+ean).getString("company_name");
+        final String FOURNISSEUR = supply.getJSONObject("pointFourniture").getJSONObject("provider").getString("identifiant");
         FileChooser js = generalMethods.getFileChooser();
         
         js.setTitle("Export to");
@@ -311,7 +323,7 @@ public class MenuPrincipaleConsommateur{
                 for (int i = 0 ; i<consommations.length();i++){
                     JSONObject elt  = consommations.getJSONObject(i);
 
-                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("ean_18"));
+                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("name"));
                     fileWriter.append(DELIMITER);
                     fileWriter.append(""+elt.getJSONObject("supplyPoint").getString("energy"));
                     fileWriter.append(DELIMITER);

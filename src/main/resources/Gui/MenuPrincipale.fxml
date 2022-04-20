@@ -44,6 +44,11 @@
                         <MenuItem fx:id="exporter" mnemonicParsing="false" onAction="#goToExporter" text="Exportation" />
                     </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Gestion point de fourniture">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#goToPointFourniture" text="Gerer Point de Fourniture" />
+              </items>
+            </Menu>
                 <Menu fx:id="manage_contract" mnemonicParsing="false" text="Gestion Contrat">
                     <items>
                         <MenuItem fx:id="afficher_contrat" mnemonicParsing="false" onAction="#goToAfficherContrat" text="Afficher Les  Contrats" />

@@ -9,7 +9,7 @@ import Gui.Controllers.Methods.GeneralMethods;
 import Gui.Controllers.Methods.GeneralMethodsImpl;
 
 public class MenuPrincipalConsommateurTable {
-    public String ean_18;
+    public String name;
     public String type_energie;
     public String type_compteur;
     public String Fournisseur;
@@ -28,7 +28,7 @@ public class MenuPrincipalConsommateurTable {
         }else {
             cloture = "non defini";
         }
-        ean_18 = contract_supply_point.getJSONObject("supplyPoint").getString("ean_18");
+        name = contract_supply_point.getJSONObject("supplyPoint").getString("name");
         type_energie = contract_supply_point.getJSONObject("supplyPoint").getString("energy");
         type_compteur = contract_supply_point.getString("meter_type");
         Fournisseur = contract_supply_point.getJSONObject("provider").getString("company_name");
@@ -67,12 +67,12 @@ public class MenuPrincipalConsommateurTable {
     public String getWallet(){
         return wallet;
     }
-    public String getEan_18() {
-        return ean_18;
+    public String getName() {
+        return name;
     }
 
-    public void setEan_18(String ean_18) {
-        this.ean_18 = ean_18;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType_energie() {

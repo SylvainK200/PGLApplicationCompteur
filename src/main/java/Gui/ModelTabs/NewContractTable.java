@@ -23,16 +23,19 @@ public class NewContractTable {
         nom_client = client.getString("identifiant");
         num_contrat = contract_supply_point.getString("numero_contract");
 
-        String deb = df.format( contract_supply_point.get("date_begin"));
-        String fin = df.format( contract_supply_point.get("date_end"));
-
-        debut_contrat = deb;
-        fin_contrat = fin;
+        try {
+            debut_contrat = df.format( contract_supply_point.get("date_begin"));
+            fin_contrat = df.format( contract_supply_point.get("date_end"));
+        }catch(Exception e){
+            debut_contrat = contract_supply_point.getString("date_begin");
+            fin_contrat = contract_supply_point.getString("date_end");
+            
+        }
 
         Object json  = contract_supply_point.get("supplyPoint");
         if (json instanceof  JSONObject){
             
-            compteur = ((((JSONObject) json).getString("ean_18")));
+            compteur = ((((JSONObject) json).getString("name")));
             typeEnergie = ((JSONObject)json).getString("energy");
             etat_compteur = getEtat_compteur(contract_supply_point);
         }

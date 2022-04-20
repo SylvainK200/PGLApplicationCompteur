@@ -6,10 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="23.0" layoutY="68.0" prefHeight="17.0" prefWidth="94.0" text="EAN :" />
+      <Label layoutX="23.0" layoutY="68.0" prefHeight="17.0" prefWidth="94.0" text="Compteur :" />
       <Label layoutX="23.0" layoutY="129.0" text="Consommation :" />
       <ComboBox id="ComboBoxEAN" layoutX="181.0" layoutY="64.0" prefWidth="150.0" />
       <TextField id="TextConsommation" layoutX="181.0" layoutY="125.0" />

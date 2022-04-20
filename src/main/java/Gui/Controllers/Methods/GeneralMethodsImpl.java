@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 
 public class GeneralMethodsImpl implements GeneralMethods{
     public  static String API_URL = "http://localhost:8085/energy-management";
+    //public  static String API_URL = "https://energy-management-be.herokuapp.com/energy-management";
 
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
@@ -64,7 +65,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()){
-                this.afficherAlert("Operation d'enregistrement reussie.");
+                this.log(this.getClass().getName(),"Operation d'enregistrement reussie.");
                 return new JSONObject(response.body().string());
             }
             response.close();
@@ -142,6 +143,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
 
     @Override
     public JSONObject signin(String identifiant, String password, Boolean isProvider) {
+        password = password.replace("/", "-");
         String url = "" ;
         if (isProvider){
         url = API_URL+"/provider/identifiant/"+identifiant+"/"+password;

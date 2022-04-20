@@ -50,7 +50,7 @@
          <Font name="Algerian" size="18.0" />
       </font>
    </Text>
-   <TextField fx:id="newEAN" layoutX="883.0" layoutY="514.0" prefHeight="24.0" prefWidth="160.0" promptText="Nom" />
+   <TextField fx:id="newCompteurName" layoutX="883.0" layoutY="514.0" prefHeight="24.0" prefWidth="160.0" promptText="Nom" />
    <ComboBox fx:id="newEnergy" layoutX="883.0" layoutY="559.0" prefHeight="24.0" prefWidth="160.0" promptText="type energie" />
    <TextField fx:id="budget" layoutX="884.0" layoutY="606.0" prefHeight="24.0" prefWidth="160.0" promptText="budget" />
    <TextField fx:id="budgetType" layoutX="883.0" layoutY="651.0" prefHeight="24.0" prefWidth="160.0" promptText="Type budget" />

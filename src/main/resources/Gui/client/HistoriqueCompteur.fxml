@@ -12,11 +12,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="919.0" stylesheets="@../styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controllers.ApplicationClient.HistoriqueCompteur">
    <children>
-      <Label layoutX="472.0" layoutY="76.0" prefHeight="17.0" prefWidth="57.0" text="EAN : " />
+      <Label layoutX="451.0" layoutY="76.0" prefHeight="17.0" prefWidth="78.0" text="Compteur :" />
       <ComboBox id="ComboBoxEAN" fx:id="combEAN" layoutX="529.0" layoutY="72.0" prefHeight="26.0" prefWidth="197.0" promptText="afficher information  EAN" />
       <TableView fx:id="table" layoutX="14.0" layoutY="116.0" prefHeight="322.0" prefWidth="631.0">
         <columns>
-            <TableColumn fx:id="colEAN" prefWidth="120.79998207092285" text="EAN" />
+            <TableColumn fx:id="colEAN" prefWidth="120.79998207092285" text="Compteur" />
             <TableColumn fx:id="type_energy" prefWidth="136.00003051757812" text="Type d'énergie" />
           <TableColumn fx:id="dateConsommation" prefWidth="114.4000244140625" text="Date" />
           <TableColumn fx:id="consommation" prefWidth="129.60006713867188" text="consommation" />
@@ -32,7 +32,7 @@
                   <Font name="Algerian" size="19.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ean_exporter" layoutX="15.0" layoutY="62.0" prefHeight="26.0" prefWidth="200.0" promptText="Choisir EAN" />
+            <ComboBox fx:id="ean_exporter" layoutX="15.0" layoutY="62.0" prefHeight="26.0" prefWidth="200.0" promptText="Choisir Compteur" />
             <DatePicker fx:id="date_debut_importation" layoutX="16.0" layoutY="101.0" prefHeight="26.0" prefWidth="200.0" promptText="date minimale" />
             <DatePicker fx:id="date_maximale" layoutX="16.0" layoutY="140.0" prefHeight="26.0" prefWidth="200.0" promptText="date maximale" />
             <Button fx:id="exporter_button" layoutX="7.0" layoutY="188.0" mnemonicParsing="false" onAction="#exporterDonnee" prefHeight="26.0" prefWidth="100.0" styleClass="connect" text="Exporter" />
