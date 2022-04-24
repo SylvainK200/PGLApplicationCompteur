@@ -21,7 +21,9 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
+/**
+ * Gestion de la creation de nouveaux contrats.
+ */
 public class NouveauContrat {
     public enum MeterType {
         MONOHORARY, BIHORARY, EXCLUSIVENIGHT
@@ -108,6 +110,11 @@ public class NouveauContrat {
 
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 
+    /**
+     * Recupere tous les informations liées à un consommateur ayant cette identifiant.
+     * @param identifiant
+     * @return
+     */
     public JSONObject findUserByIdentifiant(String identifiant){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -129,6 +136,10 @@ public class NouveauContrat {
         return result;
     }
 
+    /**
+     * Recupere la liste de tous les consommateurs.
+     * @return
+     */
     public JSONArray findUsers(){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -153,6 +164,9 @@ public class NouveauContrat {
 
     JSONArray list_portefeuilles;
 
+    /**
+     * Initialise les champs de l'interface et configure les listerners pour le filtrage.
+     */
     public void initialize(){
         meter_type.getItems().addAll(MeterType.MONOHORARY.toString(),
                 MeterType.BIHORARY.toString(),MeterType.EXCLUSIVENIGHT.toString());
@@ -225,8 +239,12 @@ public class NouveauContrat {
         //initTable();
     }
 
+    /**
+     * Charge la liste des compteurs liés au nouveau point de fourniture et met à jour le combobox de selection.
+     * @param newValue
+     */
     void updateCompteurComboBox(String newValue){
-        JSONArray supplyPointList = generalMethods.find("/supplyPoint/free/pointFourniture/ean/"+newValue);
+        JSONArray supplyPointList = generalMethods.find("supplyPoint/free/pointFourniture/ean/"+newValue);
 
         if(supplyPointList == null || supplyPointList.length() <= 0){
             generalMethods.afficherAlert("Aucun compteur associé à ce point de fourniture. Vous pouvez en créer un.");
@@ -238,6 +256,9 @@ public class NouveauContrat {
         }
     }
 
+    /**
+     * Charge la liste des contrats liés à ce fournisseur.
+     */
     void initTable(){
         colCompteur.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("compteur"));
         colDebutContrat.setCellValueFactory(new PropertyValueFactory<NewContractTable,String>("debut_contrat"));
@@ -258,14 +279,18 @@ public class NouveauContrat {
         }
     }
 
-
+    /**
+     * Creation d'un nouveau contrat.
+     * Tous les champs doivent être remplis.
+     * @param event
+     */
     @FXML
     void confirmerAjout(ActionEvent event) {
 
-        if(date_debut.getValue()==null || date_fin.getValue()==null || portefeuille.getValue() ==null || meter_type.getValue()==null || 
+        if(date_debut.getValue()==null || date_fin.getValue()==null || compteur.getValue() ==null || meter_type.getValue()==null || 
            meter_rate.getText().isEmpty() || network_manager_cost.getText().isEmpty() || over_tax_rate.getText().isEmpty() || 
            tax_rate.getText().isEmpty()){
-            generalMethods.afficherAlert("Remplissez tous les champs.");
+            generalMethods.afficherAlert("Remplissez tous les champs et verifiez que vous avez selectionné un compteur. S'il n'en existe pas, vous pouvez en créer un à la section 'Création compteur");
         }else{
             if(date_fin.getValue().isAfter(date_debut.getValue())){
                 String aleatoire = ""+ System.currentTimeMillis() + (char)( (int)(Math.random()*10) );
@@ -310,6 +335,11 @@ public class NouveauContrat {
         }
     }
    
+    /**
+     * Creation d'un nouveau compteur.
+     * Le point de fourniture doit être selectionné et tous les champs du formulaire rempli.
+     * @param event
+     */
     @FXML
     void creerCompteur(ActionEvent event){
         String ean = combEAN.getValue();
@@ -329,7 +359,7 @@ public class NouveauContrat {
             */
 
             JSONObject compteur = new JSONObject();
-            JSONObject pointFourniture = generalMethods.findUnique("/pointFourniture/ean/"+ean);
+            JSONObject pointFourniture = generalMethods.findUnique("pointFourniture/ean/"+ean);
 
             pointFourniture = new JSONObject(pointFourniture,"id");
 
@@ -339,11 +369,12 @@ public class NouveauContrat {
             compteur.put("pointFourniture", pointFourniture);
 
             try{
-                generalMethods.createObject(compteur,"/supplyPoint");
+                generalMethods.createObject(compteur,"supplyPoint");
+
+                generalMethods.afficherAlert("La creation du compteur terminee.");
                 
                 updateCompteurComboBox(ean);
 
-                generalMethods.afficherAlert("La creation du compteur terminee.");
 
                 newCompteurName.clear();
                 newEnergy.setValue("");
@@ -358,6 +389,10 @@ public class NouveauContrat {
         }
     }
 
+    /**
+     * Ferme la page et charge l'interface principale.
+     * @param event
+     */
     @FXML
     void quitterpage(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();

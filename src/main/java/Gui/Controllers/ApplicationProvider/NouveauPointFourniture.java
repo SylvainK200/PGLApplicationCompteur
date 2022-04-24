@@ -21,6 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+/**
+ * Gestion des points de fourniture du fournisseur.
+ */
 public class NouveauPointFourniture  implements Initializable{
 
     @FXML
@@ -55,6 +59,11 @@ public class NouveauPointFourniture  implements Initializable{
 
     PointFourniture current = null;
     
+    /**
+     * Creation d'un nouveau point de fourniture.
+     * Tous les champs doivent être remplis.
+     * @param event
+     */
     @FXML
     void creer(ActionEvent event) {
         String ean = newEan.getText();
@@ -104,6 +113,11 @@ public class NouveauPointFourniture  implements Initializable{
         }
     }
 
+    /**
+     * Modification d'un point de fourniture.
+     * Le point de fourniture doit au préalable être sélectionné dans la liste des points de fournitures.
+     * @param event
+     */
     @FXML
     void modifier(ActionEvent event) {
         current = table.getSelectionModel().getSelectedItem();
@@ -119,7 +133,11 @@ public class NouveauPointFourniture  implements Initializable{
         creerButton.setText("Modifier");
     }
 
-    
+    /**
+     * Suppression d'un point de fourniture.
+     * Le point de fourniture doit au préalable être sélectionné dans la liste des points de fournitures.
+     * @param event
+     */
     @FXML
     void delete(ActionEvent event) {
         current = table.getSelectionModel().getSelectedItem();
@@ -137,6 +155,10 @@ public class NouveauPointFourniture  implements Initializable{
 
     }
 
+    /**
+     * Ferme la page et charge l'interface principale.
+     * @param event
+     */
     @FXML
     void quitter(ActionEvent event) {        
         FacilitatorProviderLinkClient.stage.close();
@@ -150,11 +172,17 @@ public class NouveauPointFourniture  implements Initializable{
         this.initialize();
     }
 
+    /**
+     * Initialie les champs de l'interface
+     */
     public void initialize() {
         newEnergy.getItems().addAll("ELECTRICITE", "GAZ","EAU");
         initTable();
     }
 
+    /**
+     * Charge la liste des points de fourniture.
+     */
     public void initTable(){
         eanCol.setCellValueFactory(new PropertyValueFactory<PointFourniture,String>("ean"));
         energyCol.setCellValueFactory(new PropertyValueFactory<PointFourniture,String>("energy"));

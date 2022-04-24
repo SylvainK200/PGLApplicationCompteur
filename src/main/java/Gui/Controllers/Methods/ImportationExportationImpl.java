@@ -10,6 +10,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Implementation des interfaces de gestion des importations/exportations des données.
+ */
 public class ImportationExportationImpl implements ImportationExportation{
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 

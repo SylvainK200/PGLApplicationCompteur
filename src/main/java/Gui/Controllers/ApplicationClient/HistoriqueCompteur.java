@@ -2,6 +2,7 @@ package Gui.Controllers.ApplicationClient;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +24,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
+/**
+ * Gestion de l'historique de consommation du client.
+ */
 public class HistoriqueCompteur {
 
     GeneralMethods generalMethods = new GeneralMethodsImpl();
@@ -61,6 +65,9 @@ public class HistoriqueCompteur {
     private ObservableList<HistoriqueTable> researchList = FXCollections.observableArrayList();
     private FilteredList<HistoriqueTable> filteredList;
 
+    /**
+     * On charge la liste des consommations du client.
+     */
     public void initialize(){
         colEAN.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("name"));
         type_energy.setCellValueFactory(new PropertyValueFactory<HistoriqueTable,String>("type_energy"));
@@ -75,7 +82,7 @@ public class HistoriqueCompteur {
             ean_exporter.getItems().add(currentObject.getString("name"));
             for (int j =0;j<consommationSupplyPoint.length();j++){
                 JSONObject current_consommation = consommationSupplyPoint.getJSONObject(j);
-                JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("name"));
+                JSONObject provider = generalMethods.findUnique("provider/ean/"+currentObject.getString("ean_18"));
 
                 table.getItems().add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
                 //listPrincipal.add(new HistoriqueTable(current_consommation,provider.getString("company_name")));
@@ -111,6 +118,12 @@ public class HistoriqueCompteur {
         ean_exporter.setValue(null);
     }
 
+    /**
+     * Fonction permettant l'exportation des données de consommation du client.
+     * L'utilisateur doit OBLIGATOIREMENT specifier la date minimale d'exportation.
+     * Par contre, il peut ne pas specifier la date maximale. Dans ce cas, on utilise la date du jour courant.
+     * @param event
+     */
     @FXML
     void exporterDonnee(ActionEvent event) {
         String ean = ean_exporter.getValue();
@@ -120,21 +133,34 @@ public class HistoriqueCompteur {
             return;
         }
 
-        if( date_debut_importation.getValue().isAfter(date_maximale.getValue())){
+        LocalDate d_debut = date_debut_importation.getValue();
+        LocalDate d_fin = date_maximale.getValue();
+
+        if(d_debut == null){
+            generalMethods.afficherAlert("Veuillez selectionner la date minimale d'exportation");
+            return;
+        }
+
+        if(d_fin == null){
+            d_fin = LocalDate.now();
+            generalMethods.afficherAlert("La date maximale n'est pas specifiée. Nous utiliserons la date d'aujourd'hui. Soit : " + d_fin.toString());
+        }
+
+        if( d_debut.isAfter(d_fin)){
             generalMethods.afficherAlert("La date de debut doit être avant celle de fin.");
             return;
         }
 
-        String date_deb = date_debut_importation.getValue() + "";
-        String date_fin = date_maximale.getValue() + "";
+        String date_deb = d_debut.toString();
+        String date_fin = d_fin.toString();
 
         JSONObject supply = generalMethods.findUnique("supplyPoint/name/" + ean);
-        JSONArray consommations = generalMethods.find("/historicalValue/consommations/" + supply.getLong("id") +
+        JSONArray consommations = generalMethods.find("historicalValue/consommations/" + supply.getLong("id") +
                 "/" + date_deb + "/" + date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
         final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur";
-        final String FOURNISSEUR = generalMethods.findUnique("provider/ean/" + ean).getString("company_name");
+        final String FOURNISSEUR = generalMethods.findUnique("provider/ean/" + supply.getString("ean_18")).getString("company_name");
         FileChooser js = generalMethods.getFileChooser();
         js.setTitle("Export to ");
         File file = js.showSaveDialog(null);
@@ -167,7 +193,10 @@ public class HistoriqueCompteur {
             }
         }
     }
-    
+    /**
+     * On ferme l'interface et on charge l'interface principale.
+     * @param event
+     */
     @FXML
     void retour(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();

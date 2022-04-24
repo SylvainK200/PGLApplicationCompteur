@@ -19,6 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+/**
+ * Renitialisation du mot de passe.
+ * Processus :
+ *  1. L'utilisateur entre son identifiant et selectionne son type ( Consommateur/Fournisseur)
+ *  2. Si un compte est trouvé, on affiche sa question secrète et on lui demande la réponse
+ *  3. Si la reponse fournie est égale ( en ignorant la casse ), on lui demande de spécifier un nouveau mot de passe
+ *  4. On enregistre le nouveau mot de passe et on charge la page de login.
+ */
 public class InitPassword implements Initializable {
     @FXML
     private Text login;

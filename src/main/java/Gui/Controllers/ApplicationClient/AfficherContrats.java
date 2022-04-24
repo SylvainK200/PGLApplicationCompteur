@@ -19,6 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import static Gui.FacilitatorProviderLinkClient.currentClient;
 
+/***
+ * Gestion des contrats côté client.
+ */
 public class AfficherContrats {
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 
@@ -64,14 +67,22 @@ public class AfficherContrats {
 
     @FXML
     private Button quitter;
+
     private ObservableList<AllContract> contrats = FXCollections.observableArrayList();
     private FilteredList<AllContract> contratsList;
+
+    /**
+     * Ferme l'interface et charge l'interface principale.
+     */
     @FXML
     void quitterPage(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("client/MenuPrincipaleConsommateur.fxml");
     }
 
+    /**
+     * Initialise les champs de l'interface.
+     */
     public void initialize(){
         initTable();
         contratsList = new FilteredList<AllContract>(contrats,p->true);
@@ -94,6 +105,9 @@ public class AfficherContrats {
         });
 
     }
+    /**
+     * On recupere tous les contrats dont l'identifiant du portefeuille est celui du client actuel et les charges dans un tableau.
+     */
     void initTable(){
         colCompteur.setCellValueFactory(new PropertyValueFactory<AllContract,String>("compteur"));
         colDebutContrat.setCellValueFactory(new PropertyValueFactory<AllContract,String>("debut_contrat"));
@@ -117,7 +131,9 @@ public class AfficherContrats {
         }
     }
 
-    // recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
+    /**
+     * Recherche un client en fontion du nom contenu dans le contrat pour un supply point contract.
+     */
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
         String identifiant = contract_supply_point.getString("client");

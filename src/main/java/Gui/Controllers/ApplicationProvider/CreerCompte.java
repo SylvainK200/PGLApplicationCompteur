@@ -12,6 +12,9 @@ import okhttp3.MediaType;
 
 import org.json.JSONObject;
 
+/**
+ * Creation de compte
+ */
 public class CreerCompte {
     @FXML
     private TextField street;
@@ -77,6 +80,11 @@ public class CreerCompte {
         return json;
     }
 
+    /**
+     * Creation d'un nouveau compte.
+     * Pas de contraintes sur les champs
+     * @param event
+     */
     @FXML
     void creerCompte(ActionEvent event) {
         if (confirmation_mot_de_passe.getText().equals(mot_de_passe.getText())) { 

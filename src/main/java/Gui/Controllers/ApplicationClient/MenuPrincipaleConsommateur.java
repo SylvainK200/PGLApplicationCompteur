@@ -31,6 +31,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
+/**
+ * Interface principale d'un consommateur.
+ */
 public class MenuPrincipaleConsommateur{
 
     @FXML
@@ -130,6 +133,9 @@ public class MenuPrincipaleConsommateur{
     
     GeneralMethods generalMethods = new GeneralMethodsImpl();
 
+    /**
+     * Initialise tous les champs.
+     */
     public void initialize(){
         etat_compteur.getItems().addAll("cloture","ouvert");
         utilisateur.setText(FacilitatorProviderLinkClient.currentClient.getString("identifiant"));
@@ -150,6 +156,9 @@ public class MenuPrincipaleConsommateur{
         generalMethods.redefineDatePickerDateFormat(date_debut_importation); 
     }
     
+    /**
+     * Met à jour tous les champs liés à la consommation
+     */
     void initConsommation(){
         ean_18.getItems().clear();
         ean_exporter.getItems().clear();
@@ -180,6 +189,10 @@ public class MenuPrincipaleConsommateur{
         });
     }
     
+    /**
+     * Charge la liste des contracts qui lie un portefeuille de l'utilisateur.
+     * Configure les listeners pour le filtrage sur le tableau.
+     */
     void initTable(){
         cloture.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("cloture"));
         ean.setCellValueFactory(new PropertyValueFactory<MenuPrincipalConsommateurTable,String>("name"));
@@ -246,6 +259,12 @@ public class MenuPrincipaleConsommateur{
         });
     }
 
+    /**
+     * Ajout d'une nouvelle consommation.
+     * Notons que l'utilisateur doit obligatoirement remplir tous les champs.
+     * La date de lecture doit être inferieur ou éagle à celle du jour courant.
+     * @param event
+     */
     @FXML
     public void registerConsommation(ActionEvent event){
         LocalDate date_lect = date_lecture.getValue();
@@ -276,6 +295,11 @@ public class MenuPrincipaleConsommateur{
         }
 
     }
+
+    /**
+     * Reinitialise les champs à remplir pour exporter les données du l'utilisateur.
+     * @param event
+     */
     
     @FXML
     void annuler_button(ActionEvent event) {
@@ -284,6 +308,12 @@ public class MenuPrincipaleConsommateur{
         ean_exporter.setValue(null);
     }
 
+    /**
+     * Exportation des données du client. 
+     * L'utilisateur doit OBLIGATOIREMENT specifier la date minimale d'exportation.
+     * Par contre, il peut ne pas specifier la date maximale. Dans ce cas, on utilise la date du jour courant.
+     * @param event
+     */
     @FXML
     void exporterDonnee(ActionEvent event) {
         String ean = ean_exporter.getValue();
@@ -293,17 +323,29 @@ public class MenuPrincipaleConsommateur{
             return;
         }
 
-        if( date_debut_importation.getValue().isAfter(date_maximale.getValue())){
+        LocalDate d_debut = date_debut_importation.getValue();
+        LocalDate d_fin = date_maximale.getValue();
+
+        if(d_debut == null){
+            generalMethods.afficherAlert("Veuillez selectionner la date minimale d'exportation");
+            return;
+        }
+
+        if(d_fin == null){
+            d_fin = LocalDate.now();
+            generalMethods.afficherAlert("La date maximale n'est pas specifiée. Nous utiliserons la date d'aujourd'hui. Soit : " + d_fin.toString());
+        }
+
+        if( d_debut.isAfter(d_fin)){
             generalMethods.afficherAlert("La date de debut doit être avant celle de fin.");
             return;
         }
 
-
-        String date_deb = date_debut_importation.getValue()+"";
-        String date_fin = date_maximale.getValue()+"";
+        String date_deb = d_debut.toString();
+        String date_fin = d_fin.toString();
 
         JSONObject supply = generalMethods.findUnique("supplyPoint/name/"+ean);
-        JSONArray consommations = generalMethods.find("/historicalValue/consommations/"+supply.getLong("id")+
+        JSONArray consommations = generalMethods.find("historicalValue/consommations/"+supply.getLong("id")+
                 "/"+date_deb+"/"+date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
@@ -344,18 +386,30 @@ public class MenuPrincipaleConsommateur{
         }
     }
 
+    /**
+     * Deconnecte l'utilisateur et charge l'interface de login.
+     * @param event
+     */
     @FXML
     void deconnecter(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("login.fxml");
     }
 
+    /**
+     * Charge l'interface de la liste des contrats du consommateur.
+     * @param event
+     */
     @FXML
     void goToContrats(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("client/AffichierContratsConsommateur.fxml");
     }
 
+    /**
+     * Charge l'interface de gestion de l'historique des consommations.
+     * @param event
+     */
     @FXML
     void goToHistorique(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();

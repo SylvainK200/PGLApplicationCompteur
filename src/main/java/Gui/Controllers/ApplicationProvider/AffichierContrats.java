@@ -19,6 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import static Gui.FacilitatorProviderLinkClient.currentprovider;
 
+/**
+ * Liste des contrats du fournisseur
+ */
 public class AffichierContrats {
     @FXML
     private TableView<AllContract> table_contrat;
@@ -57,21 +60,34 @@ public class AffichierContrats {
 
     @FXML
     private TableColumn<AllContract, Integer> col_over_tax_rate;
+
     @FXML
     private TextField recherche;
 
-
     @FXML
     private Button quitter;
+
+
     private ObservableList<AllContract> contrats = FXCollections.observableArrayList();
     private FilteredList<AllContract> contratsList;
+
+    
     GeneralMethods generalMethods = new GeneralMethodsImpl();
+
+    /**
+     * Ferme la page et charge l'interface principale du fournisseur.
+     * @param event
+     */
     @FXML
     void quitterPage(ActionEvent event) {
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("MenuPrincipale.fxml");
     }
 
+
+    /**
+     * Initialise les champs de l'interface.
+     */
     public void initialize(){
         initTable();
         contratsList = new FilteredList<>(contrats,p->true);
@@ -99,6 +115,10 @@ public class AffichierContrats {
         });
 
     }
+
+    /**
+     * Charge la liste des contrats liés au fournisseur et configure les listeners pour le filtrage.
+     */
     void initTable(){
         colCompteur.setCellValueFactory(new PropertyValueFactory<AllContract,String>("compteur"));
         colDebutContrat.setCellValueFactory(new PropertyValueFactory<AllContract,String>("debut_contrat"));
@@ -129,7 +149,9 @@ public class AffichierContrats {
         }
     }
 
-    // recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
+    /**
+     * Recherche un client en fontion du nom contenu dans le contrat pour un supply point contract
+     */ 
     private  JSONObject findClientOfContract(JSONObject contract_supply_point){
         JSONObject client = new JSONObject();
         String identifiant = contract_supply_point.getString("client");

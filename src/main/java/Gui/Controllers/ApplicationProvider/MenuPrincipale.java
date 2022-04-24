@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * Interface principale d'un fournisseur.
+ */
 public class MenuPrincipale  implements Initializable{
     ImportationExportation importationExportation = new ImportationExportationImpl();
     GeneralMethods generalMethods  = new GeneralMethodsImpl();
@@ -137,8 +140,6 @@ public class MenuPrincipale  implements Initializable{
             }
         }
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -263,7 +264,7 @@ public class MenuPrincipale  implements Initializable{
             generalMethods.afficherAlert("Veuillez choisir le compteur à importer");
             return;
         }
-        current_supply_point = generalMethods.findUnique("supplyPoint/ean_18/"+compteur_importer.getValue());
+        current_supply_point = generalMethods.find("supplyPoint/ean_18/"+compteur_importer.getValue()).getJSONObject(0);
         FacilitatorProviderLinkClient.stage.close();
         FacilitatorProviderLinkClient.showPages("ModificationDonnees.fxml");
     }

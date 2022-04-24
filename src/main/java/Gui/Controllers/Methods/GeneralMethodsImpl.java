@@ -22,9 +22,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Implementation des methodes de communication avec le backend.
+ */
 public class GeneralMethodsImpl implements GeneralMethods{
-    public  static String API_URL = "http://localhost:8085/energy-management";
-    //public  static String API_URL = "https://energy-management-be.herokuapp.com/energy-management";
+    //public  static String API_URL = "http://localhost:8085/energy-management";
+
+    public  static String API_URL = "https://energy-management-be.herokuapp.com/energy-management";
 
     @Override
     public JSONObject createObject(JSONObject contract, String url) {

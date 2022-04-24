@@ -14,14 +14,36 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
+/**
+ * Gestion du cryptage du mot de passe avant son envoi sur le backend
+ * 
+ */
 public class Encryption {
+    /**
+     * Creation de la clés de cryptage
+     * @param password
+     * @param salt
+     * @param iterationCount
+     * @param keyLength
+     * @return
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     */
     public static SecretKeySpec createSecretKey(char[] password, byte[] salt, int iterationCount, int keyLength) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
         PBEKeySpec keySpec = new PBEKeySpec(password, salt, iterationCount, keyLength);
         SecretKey keyTmp = keyFactory.generateSecret(keySpec);
         return new SecretKeySpec(keyTmp.getEncoded(), "AES");
     }
-
+    
+    /**
+     * Cryptage du mot de passe
+     * @param dataToEncrypt
+     * @param key
+     * @return mot de passe crypté
+     * @throws GeneralSecurityException
+     * @throws UnsupportedEncodingException
+     */
     public static String encrypt(String dataToEncrypt, SecretKeySpec key) throws GeneralSecurityException, UnsupportedEncodingException {
         Cipher pbeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         pbeCipher.init(Cipher.ENCRYPT_MODE, key);
@@ -36,6 +58,14 @@ public class Encryption {
         return Base64.getEncoder().encodeToString(bytes);
     }
 
+    /**
+     * Decryptage du mot de passe.
+     * @param string
+     * @param key
+     * @return
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static String decrypt(String string, SecretKeySpec key) throws GeneralSecurityException, IOException {
         String iv = string.split(":")[0];
         String property = string.split(":")[1];
