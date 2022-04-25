@@ -12,14 +12,14 @@
     <TableView fx:id="table_contrat" layoutX="10" layoutY="90.0" prefHeight="550.0" prefWidth="1218.0">
         <columns>
             <TableColumn fx:id="colNomClient" prefWidth="83.19997882843018" text="Client" />
-            <TableColumn fx:id="colNumeroContrat" prefWidth="100.80001831054688" text="Contrat" />
+            <TableColumn fx:id="colNumeroContrat" prefWidth="100.80001831054688" text="Numéro Contrat" />
             <TableColumn fx:id="colTypeContart" prefWidth="91.19999694824219" text="Type Contrat" />
             <TableColumn fx:id="colDebutContrat" prefWidth="108.0" text="Début Contrat" />
             <TableColumn fx:id="colFinContrat" prefWidth="107.2000732421875" text="Fin Contrat" />
             <TableColumn fx:id="colCompteur" prefWidth="84.0" text=" Compteur" />
             <TableColumn fx:id="colTypeEnergie" prefWidth="106.39996337890625" text="Type D'energie" />
             <TableColumn fx:id="colEtatCompteur" prefWidth="91.20001220703125" text="Etat Compteur" />
-         <TableColumn fx:id="col_meter_type" prefWidth="106.39996337890625" text="type compteur" />
+         <TableColumn fx:id="col_meter_type" prefWidth="106.39996337890625" text="Tarif au mètre" />
          <TableColumn fx:id="col_network_manager_cost" prefWidth="106.39996337890625" text="cout" />
          <TableColumn fx:id="col_tax_rate" prefWidth="106.39996337890625" text="taxe" />
          <TableColumn fx:id="col_over_tax_rate" prefWidth="123.99997558593759" text="taxe supplementaire" />

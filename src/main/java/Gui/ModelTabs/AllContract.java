@@ -22,6 +22,7 @@ public class AllContract {
         type_contrat = contract_supply_point.getString("meter_type");
         network_manager_cost = contract_supply_point.getDouble("network_manager_cost");
         tax_rate = contract_supply_point.getDouble("tax_rate");
+        over_tax_rate = contract_supply_point.getDouble("over_tax");
         num_contrat = contract_supply_point.getString("numero_contract");
         String deb = contract_supply_point.getString("date_begin").split("T")[0];
         String fin = contract_supply_point.getString("date_end").split("T")[0];

@@ -33,7 +33,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
     @Override
     public JSONObject createObject(JSONObject contract, String url) {
 
-        this.log(this.getClass().getName(), "Creating "+url + " : " + contract);
+        //this.log(this.getClass().getName(), "Creating "+url + " : " + contract);
 
         JSONObject resp = new JSONObject();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -52,7 +52,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         catch (Exception e){
             e.printStackTrace();
         }
-        this.log(this.getClass().getName(), "Responding : "+resp);
+        //this.log(this.getClass().getName(), "Responding : "+resp);
 
         return resp;
     }
@@ -69,7 +69,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()){
-                this.log(this.getClass().getName(),"Operation d'enregistrement reussie.");
+                //this.log(this.getClass().getName(),"Operation d'enregistrement reussie.");
                 return new JSONObject(response.body().string());
             }
             response.close();
@@ -107,7 +107,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            this.log(this.getClass().getName(), "this is the result for method find unique /"+url+" : "+res);
+            //this.log(this.getClass().getName(), "this is the result for method find unique /"+url+" : "+res);
 
             if (response.isSuccessful())
             {
@@ -132,7 +132,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            this.log(this.getClass().getName(), "this is the result for method find /"+url+" : "+res);
+            //this.log(this.getClass().getName(), "this is the result for method find /"+url+" : "+res);
             if (res !=null)
             {
                 result= new JSONArray(res);
@@ -169,8 +169,8 @@ public class GeneralMethodsImpl implements GeneralMethods{
             response.close();
             return user;
         } catch (JSONException e) {
-            this.afficherAlert("Vos identifiants semblent incorrets! Verifiez les et reessayer.");
-            this.log(this.getClass().getName(), "GeneralMethodsImpl.java -> login()");
+            //this.afficherAlert("Vos identifiants semblent incorrets! Verifiez les et reessayer.");
+            //this.log(this.getClass().getName(), "GeneralMethodsImpl.java -> login()");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -216,7 +216,7 @@ public class GeneralMethodsImpl implements GeneralMethods{
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()){
                 response.close();
-                this.log(this.getClass().getName(), "Enregistrement termine");
+                //this.log(this.getClass().getName(), "Enregistrement termine");
                 return true;
 
             }

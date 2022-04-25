@@ -312,7 +312,7 @@ public class NouveauContrat {
                     contract_supply.put("meter_rate",meter_rate.getText());
                     contract_supply.put("supplyPoint",supplyPoint);
                     contract_supply.put("network_manager_cost",Double.parseDouble(network_manager_cost.getText()));
-                    contract_supply.put("over_tax_rate",Double.parseDouble(over_tax_rate.getText()));
+                    contract_supply.put("over_tax",Double.parseDouble(over_tax_rate.getText()));
                     contract_supply.put("tax_rate",Double.parseDouble(tax_rate.getText()));
                     contract_supply.put("wallet",wallet);
                     generalMethods.createObject(contract_supply,"contractSupplyPoint");

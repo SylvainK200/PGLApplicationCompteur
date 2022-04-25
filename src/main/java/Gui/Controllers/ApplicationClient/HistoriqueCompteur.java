@@ -159,7 +159,7 @@ public class HistoriqueCompteur {
                 "/" + date_deb + "/" + date_fin);
         final String DELIMITER = ";";
         final String SEPARATOR = "\n";
-        final String HEADER = "EAN;type energie;cout;date lecture;consommation;fournisseur";
+        final String HEADER = "EAN Compteur; Nom Compteur; type energie;date lecture;consommation;fournisseur";
         final String FOURNISSEUR = generalMethods.findUnique("provider/ean/" + supply.getString("ean_18")).getString("company_name");
         FileChooser js = generalMethods.getFileChooser();
         js.setTitle("Export to ");
@@ -173,6 +173,8 @@ public class HistoriqueCompteur {
                 for (int i = 0; i < consommations.length(); i++) {
                     JSONObject elt = consommations.getJSONObject(i);
 
+                    fileWriter.append(elt.getJSONObject("supplyPoint").getString("ean_18"));
+                    fileWriter.append(DELIMITER);
                     fileWriter.append(elt.getJSONObject("supplyPoint").getString("name"));
                     fileWriter.append(DELIMITER);
                     fileWriter.append("" + elt.getJSONObject("supplyPoint").getString("energy"));

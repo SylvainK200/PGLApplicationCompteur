@@ -43,7 +43,7 @@ public class ModificationDonnees {
     public void initialize(){
         try{
             current = current_supply_point;
-            JSONArray consommationsValues =  generalMethods.find("supplyPoint");
+            JSONArray consommationsValues =  generalMethods.find("historicalValue");
             List<JSONObject> consommations = extractConsommations(consommationsValues,current.getLong("id"));
             if (consommations.size()>0){
                 consommation = consommations.get(consommations.size()-1);
@@ -76,6 +76,7 @@ public class ModificationDonnees {
                     consommation.remove("consommation");
                     consommation.put("consommation",Double.parseDouble(textConsommationCorriges.getText()));
                     generalMethods.updateObject(consommation,"historicalValue");
+                    generalMethods.afficherAlert("Consommation mise à jour.");
                 }
         }
     }

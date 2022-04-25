@@ -71,7 +71,9 @@ public class FacilitatorProviderLinkClient extends Application {
     public static ArrayList<JSONObject> extractConsommations(JSONArray consommationValue, long idSupplyPoint)
     {
         ArrayList<JSONObject> consommations = new ArrayList<>();
-        for (JSONObject obj : consommations){
+
+        for (int i =0; i< consommationValue.length(); i++){
+            JSONObject obj = consommationValue.getJSONObject(i);
             if (obj.getJSONObject("supplyPoint").getLong("id")==idSupplyPoint){
                 consommations.add(obj);
             }

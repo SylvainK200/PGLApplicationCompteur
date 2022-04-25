@@ -14,7 +14,7 @@
     <Button fx:id="cloturerCompteur" layoutX="71.0" layoutY="150.0" mnemonicParsing="false" onAction="#cloturerCompteurDonnee" prefWidth="400" styleClass="connect" text="Clôturer Compteur" />
     <Label fx:id="lblNotification" layoutX="71.0" layoutY="200.0" text="Notification :   " />
    <TextArea fx:id="notification_suppression" layoutX="71.0" layoutY="230.0" prefHeight="100.0" prefWidth="400.0" />
-    <Button fx:id="supprimer_historique_button" layoutX="73.0" layoutY="356.0" mnemonicParsing="false" onAction="#supprimerHistorique" prefHeight="26.0" prefWidth="186.0" styleClass="connect" text="Supprimer Historiques" />
+    <Button fx:id="supprimer_historique_button" layoutX="73.0" layoutY="356.0" mnemonicParsing="false" onAction="#supprimerHistorique" prefHeight="26.0" prefWidth="186.0" styleClass="connect" text="Supprimer Historique" />
    <Text layoutX="9.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bienvenu" text="Supprimer les données" textAlignment="CENTER" wrappingWidth="534.0">
       <font>
          <Font size="28.0" />

@@ -43,6 +43,7 @@ public class SupprimerDonnees {
 
     public void initialize(){
         JSONArray compteurs = generalMethods.find("supplyPoint");
+        compteur.getItems().clear();
         if (Objects.nonNull(compteurs))
         {
             for (int i = 0 ; i<compteurs.length();i++){
@@ -57,7 +58,7 @@ public class SupprimerDonnees {
     void cloturerCompteurDonnee(ActionEvent event) {
         String compteurToClose = compteur.getValue();
         if( compteurToClose!=null && (!compteurToClose.isBlank() )){
-            selectedCompteur = generalMethods.findUnique("supplyPoint/ean_18/"+compteurToClose);
+            selectedCompteur = generalMethods.find("supplyPoint/ean_18/"+compteurToClose).getJSONObject(0);
             JSONObject currentContract = generalMethods.findUnique("contractSuppyPoint/currentcontract/ean/"+selectedCompteur.getString("ean_18"));
             
             currentContract.remove("dateCloture");
@@ -82,16 +83,16 @@ public class SupprimerDonnees {
         String compteurToClose = compteur.getValue();
         if( compteurToClose!=null && (!compteurToClose.isBlank() )){
             JSONObject notification  = new JSONObject();
-            JSONObject selected = generalMethods.findUnique("supplyPoint/ean_18/"+compteurToClose);
+            JSONObject selected = generalMethods.find("supplyPoint/ean_18/"+compteurToClose).getJSONObject(0);
             long idSupplyPoint = selected.getLong("id");
-            JSONArray arrays = generalMethods.find("consommationValue");
+            JSONArray arrays = generalMethods.find("historicalValue");
             for (int i = 0 ; i < arrays.length();i++){
                 JSONObject o = arrays.getJSONObject(i).getJSONObject("supplyPoint");
                 long idCons = arrays.getJSONObject(i).getLong("id");
                 long id = o.getLong("id");
                 if (id == idSupplyPoint )
                 {
-                    generalMethods.deleteObject("consommationValue/"+idCons);
+                    generalMethods.deleteObject("historicalValue/"+idCons);
                 }
 
             }

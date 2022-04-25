@@ -45,7 +45,7 @@ public class MenuPrincipalTable {
         nameWallet = "";
         try {
             Object json = contract_supply.get("wallet");
-            generalMethods.log(this.getClass().getName(), "Wallet is null ? " + Objects.isNull(json));
+            //generalMethods.log(this.getClass().getName(), "Wallet is null ? " + Objects.isNull(json));
             
             if (!Objects.isNull(json)){
                 nameWallet = contract_supply.getJSONObject("wallet").getString("name");
@@ -54,12 +54,14 @@ public class MenuPrincipalTable {
 
         }
         
-        JSONArray consommationValues = generalMethods.find("supplyPoint");
+        JSONArray consommationValues = generalMethods.find("historicalValue");
         if (contract_supply.get("supplyPoint") instanceof  JSONObject)
         {
             ArrayList<JSONObject> consommations = extractConsommations(consommationValues,contract_supply.getJSONObject("supplyPoint").getLong("id")) ;
-            if (consommations.size()>0){
-                consommation = consommations.get(consommations.size()-1).getDouble("consommation");
+            
+            consommation = 0;
+            for (int i=0; i< consommations.size(); i++){
+                consommation += consommations.get(i).getDouble("consommation");
             }
             ean_18 = contract_supply.getJSONObject("supplyPoint").getString("ean_18");
 

@@ -54,7 +54,7 @@
                   <TableColumn fx:id="fournisseur" minWidth="0.0" prefWidth="86.4000244140625" text="Fournisseur" />
                   <TableColumn fx:id="date_affectation" minWidth="0.0" prefWidth="99.2000732421875" text="Date affectation" />
                   <TableColumn fx:id="date_cloture" minWidth="0.0" prefWidth="103.20001220703125" text="Date fin" />
-                     <TableColumn fx:id="cloture" minWidth="0.0" prefWidth="112.0" text="cloture" />
+                     <TableColumn fx:id="cloture" minWidth="0.0" prefWidth="112.0" text="Date cloture" />
                </columns>
             </TableView>
                <GridPane layoutX="15.0" layoutY="78.0">

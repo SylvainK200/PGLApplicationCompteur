@@ -121,23 +121,34 @@ public class MenuPrincipale  implements Initializable{
 
     public void onclickrechercher(){
         if(!textEAN.getText().isBlank()){
-            // findSupplyPointByUserByEan_18()
-            JSONObject result = generalMethods.findUnique("supplyPoint/ean_18/"+textEAN.getText());
+            JSONArray tmp = generalMethods.find("supplyPoint/ean_18/"+textEAN.getText());
+            if(tmp.length() == 0){
+                generalMethods.afficherAlert("Aucun element trouvé.");
+                return;
+            }
+            
+            JSONObject result = tmp.getJSONObject(0);
 
-            // findContractByUserByEan_18()
-            JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
+            try{
+                JSONObject contract = generalMethods.findUnique("contract/ean/"+result.getInt("id"));
+                resultConsommateur.setText(contract.getString("client"));
+            }catch(Exception e){}
 
-            //findSupplyPointByUser();
-            JSONArray consommations = generalMethods.find("supplyPoint");
+            JSONArray consommations = generalMethods.find("historicalValue");
 
             resultEAN.setText(result.getString("ean_18"));
-            resultConsommateur.setText(contract.getString("client"));
+
             ArrayList<JSONObject> consommationValues = extractConsommations(consommations,result.getLong("id"));
-            if (consommationValues.size()>1)
-            {
-                JSONObject derniereConsommation = consommationValues.get(consommationValues.size()-1);
-                resultConsommation.setText(derniereConsommation.getString("value"));
+
+            double consommation = 0;
+
+            for (int i=0; i< consommationValues.size(); i++){
+                consommation += consommationValues.get(i).getDouble("consommation");
             }
+
+            resultConsommation.setText(consommation+"");
+        }else{
+            generalMethods.afficherAlert("Specifiez la valeur de l'EAN");
         }
     }
 
@@ -185,7 +196,7 @@ public class MenuPrincipale  implements Initializable{
 
         combClient.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
             
-            generalMethods.log(this.getClass().getName(), "Client modifié");
+            //generalMethods.log(this.getClass().getName(), "Client modifié");
             if (newValue!=null)
             {
                 initTable();
@@ -200,7 +211,7 @@ public class MenuPrincipale  implements Initializable{
         combPortefeuille.valueProperty().addListener((ObservableValue<? extends  String> observable, String oldvalue, String newValue)->{
             if (newValue!=null && newValue!="")
             {
-                generalMethods.log(this.getClass().getName(), "Execution de la fonction de filtre combPortefeuille");
+                //generalMethods.log(this.getClass().getName(), "Execution de la fonction de filtre combPortefeuille");
 
                 table.getItems().clear();
                 currentList.clear();
